@@ -6,6 +6,11 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
+import me.alpho320.fabulous.farm.data.Cache;
+import me.alpho320.fabulous.farm.hook.Hooks;
+import me.alpho320.fabulous.farm.log.LogHandler;
+import me.alpho320.fabulous.farm.provider.Provider;
+import me.alpho320.fabulous.farm.provider.ProviderManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,7 +43,6 @@ public class FarmPlugin extends JavaPlugin {
         isDisabled = false;
 
         ProviderManager.register(
-                new MySQLProvider(this),
                 new YAMLProvider(this)
         );
 
@@ -63,7 +67,7 @@ public class FarmPlugin extends JavaPlugin {
         this.inventory = new BasicSmartInventory(this);
         this.inventory.init();
 
-        this.farmCommand = new RealmCommand(this);
+        this.farmCommand = new FarmCommand(this);
 
         FarmAPI.registerListeners(
                 this,
@@ -76,7 +80,7 @@ public class FarmPlugin extends JavaPlugin {
         LogHandler.init(this);
 
         getLogger().info(" | You're running on " + versionInt);
-        realmCommand().setup();
+        farmCommand().setup();
 
         if (getConfig().getBoolean("Hooks.itemsadder", false)) {
             getLogger().info(" | Found hook of ItemsAdder, waiting for ItemsadderReadyEvent...");
@@ -88,7 +92,7 @@ public class FarmPlugin extends JavaPlugin {
                     Hooks.get("PlaceholderAPI").setEnabled(getConfig().getBoolean("Hooks.placeholderapi", true));
                     Hooks.get("MythicMobs").setEnabled(getConfig().getBoolean("Hooks.mythicmobs", false));
 
-                    Hooks.initAll();
+                    Hooks.initAll(this);
 
 
                     Debug.debug(0, "");
