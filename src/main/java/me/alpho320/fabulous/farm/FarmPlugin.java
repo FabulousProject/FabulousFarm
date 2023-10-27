@@ -6,8 +6,12 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
+import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import me.alpho320.fabulous.farm.data.Cache;
 import me.alpho320.fabulous.farm.hook.Hooks;
+import me.alpho320.fabulous.farm.listener.ItemsAdderLoadListener;
+import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
+import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
@@ -72,7 +76,7 @@ public class FarmPlugin extends JavaPlugin {
         FarmAPI.registerListeners(
                 this,
                 new PlayerJoinListener(this),
-                new PlayerQuitListener(),
+                new PlayerQuitListener(this)
         );
 
         setConfigurationManager(new ConfigurationManager(this));
@@ -125,16 +129,15 @@ public class FarmPlugin extends JavaPlugin {
         long now = System.currentTimeMillis();
         Provider provider = ProviderManager.get();
 
-        if (cache().isDataServer) {
-            provider.saveAllData(false, state -> {
-                if (state) {
-                    Debug.debug(0, " | All data successfully saved (" + FarmAPI.took(now) + ")");
-                } else {
-                    Debug.debug(1, " | Failed to save all data!");
-                }
-                provider.close(null);
-            });
-        }
+        provider.saveAllData(false, state -> {
+            if (state) {
+                Debug.debug(0, " | All data successfully saved (" + FarmAPI.took(now) + ")");
+            } else {
+                Debug.debug(1, " | Failed to save all data!");
+            }
+            provider.close(null);
+        });
+
 
         CommandAPI.onDisable();
 

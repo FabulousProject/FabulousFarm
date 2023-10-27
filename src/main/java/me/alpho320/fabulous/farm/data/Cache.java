@@ -5,6 +5,7 @@ import me.alpho320.fabulous.core.api.manager.impl.sign.SignGUI;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.manager.impl.message.BukkitMessageManager;
 import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
+import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
