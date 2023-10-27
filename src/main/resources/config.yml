@@ -1,0 +1,44 @@
+Main:
+  prefix: '&6Luser&bRealms &c|'
+  debug: true
+  backup-interval: 1800 #seconds
+  log-save-interval: 120 #seconds
+  load-max-ms-per-tick: 10
+  save-max-ms-per-tick: 10
+
+Data:
+  provider: 'yaml' # yaml
+  ip: 'localhost'
+  port: '3306'
+  database: 'db_name'
+  username: 'root'
+  password: 'myawsomerootpass'
+
+Hooks:
+  placeholderapi: true
+  itemsadder: false
+  mythicmobs: false
+
+Time:
+  second: 'saniye'
+  minute: 'dakika'
+  hour: 'saat'
+  day: 'gün'
+  week: 'hafta'
+  month: 'ay'
+  year: 'yıl'
+
+Numbers:
+  decimal: true # 281.123...
+  formats:
+    enabled: true
+    thousand: "K"
+    million: "M"
+    billion: "B"
+    trillion: "T"
+    quadrillion: "Q"
+
+Sound:
+  success: 'ENTITY_PLAYER_LEVELUP'
+  fail: 'ENTITY_VILLAGER_HURT'
+  reload: 'ENTITY_PLAYER_LEVELUP'

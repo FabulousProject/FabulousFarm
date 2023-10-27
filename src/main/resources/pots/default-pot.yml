@@ -1,0 +1,8 @@
+Pot:
+  name: '&7Sıradan Tarım Kasası'
+  max-water: 5
+
+  model:
+    dry: 'GRASS_BLOCK'
+    wet: 'DIAMOND_BLOCK'
+
