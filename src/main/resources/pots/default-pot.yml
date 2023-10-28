@@ -1,8 +1,14 @@
 Pot:
   name: '&7Sıradan Tarım Kasası'
-  max-water: 5
+  max-water: 5 # amount of water that pot can hold
 
   model:
     dry: 'GRASS_BLOCK'
     wet: 'DIAMOND_BLOCK'
+
+  crops:
+    mode: 'BLACKLIST' # BLACKLIST or WHITELIST
+    list:
+      - 'BANANA'
+
 

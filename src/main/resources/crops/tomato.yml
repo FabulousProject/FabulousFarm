@@ -1,0 +1,86 @@
+Crop:
+  seed-item:
+    name: '&cDomates'
+    material: 'WHEAT_SEEDS'
+
+  max-grow-stage: 3
+  death-model: 'DIRT'
+
+  actions:
+    on-plant:
+      play-sound:
+        value: 'ITEM_HOE_TILL'
+    on-break:
+      play-sound:
+        value: 'BLOCK_GRASS_BREAK'
+    on-grow:
+      play-sound:
+        value: 'BLOCK_GRASS_BREAK'
+        volume: 1
+        pitch: 1
+      play-effect:
+        value: 'VILLAGER_HAPPY'
+
+  grow-conditions:
+    season:
+      value:
+        - 'SUMMER'
+        - 'AUTUMN'
+    water:
+      value: 1
+
+  stages:
+    '1': # must be start with 1
+      model: 'WITHER_ROSE'
+      events:
+        on-break:
+          play-effect: # overrides base action
+            value: 'VILLAGER_ANGRY'
+        on-place:
+            play-effect:
+              value: 'BLOCK_DUST'
+    '2':
+      model: 'WITHER_ROSE'
+      events:
+        on-break:
+          play-effect: # overrides base action
+            value: 'VILLAGER_ANGRY'
+          drop-item:
+            material: 'WHEAT_SEEDS'
+            amount: 1
+            chance: 45.0
+            location: 'BLOCK'
+    '3': # this stage is final stage, so it can't grow anymore, have to harvest
+      model: 'POTTED_WITHER_ROSE'
+      events:
+        on-break:
+          drop-item:
+            material: 'DIAMOND'
+            amount: '1-3'
+          drop-item2:
+            material: 'WHEAT_SEEDS'
+            amount: 1
+            chance: 45.0
+          replant:
+            crop: 'tomato'
+            chance: 10.0
+        on-grow:
+          change-stage:
+            value: 4
+            chance: 10.0
+    '4':
+      model: 'HAY_BLOCK'
+      events:
+        on-break:
+          drop-item:
+            material: 'DIAMOND_BLOCK'
+            amount: '1-3'
+          drop-item2:
+            material: 'WHEAT_SEEDS'
+            amount: 1
+            chance: 45.0
+          replant:
+            crop: 'tomato'
+            chance: 10.0
+
+
