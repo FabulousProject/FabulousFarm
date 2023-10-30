@@ -1,0 +1,32 @@
+Can:
+  name: '&7Sıradan Su Kabı'
+  item:
+    material: 'BUCKET'
+    amount: 1
+    lore:
+      - ''
+      - '&7Su doldurmak için kullanılır.'
+      - ''
+      - '%water-status%'
+      - ''
+  max-water: 5 # amount of water that can can hold
+  range-width: 1
+  range-height: 1
+
+  pots:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+      - 'default-pot'
+  sprinklers:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+      - 'default-sprinkler'
+
+  events:
+    on-fill:
+      play-sound:
+        value: 'BLOCK_WATER_AMBIENT'
+      play-effect:
+        value: 'FALLING_DRIPSTONE_WATER'
+        amount: 2
+

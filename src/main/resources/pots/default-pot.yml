@@ -1,6 +1,6 @@
 Pot:
   name: '&7Sıradan Tarım Kasası'
-  max-water: 5 # amount of water that pot can hold
+  max-water: 1 # amount of water that pot can hold
 
   model:
     dry: 'GRASS_BLOCK'
@@ -11,4 +11,8 @@ Pot:
     list:
       - 'BANANA'
 
+  crows:
+    enabled: true
+    chance: 0.1
+    model: 'BAT'
 

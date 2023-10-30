@@ -6,6 +6,18 @@ Main:
   load-max-ms-per-tick: 10
   save-max-ms-per-tick: 10
 
+  world-blacklist:
+    - 'someworld'
+
+  scarecrow:
+    enabled: true
+    block:
+      name: '&cKorkuluk'
+      material: 'IRON_BLOCK'
+
+  schedule:
+
+
 Data:
   provider: 'yaml' # yaml
   ip: 'localhost'

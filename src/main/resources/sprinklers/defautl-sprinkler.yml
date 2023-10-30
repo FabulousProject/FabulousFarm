@@ -1,0 +1,33 @@
+Sprinkler:
+  name: '&7Sıradan Fıskiye'
+  range: 2 # squared
+  max-water: 5 # amount of water that sprinkler can hold
+  item:
+    material: ''
+
+  pots:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+      - 'default-pot'
+
+  events:
+    on-place:
+      play-sound:
+        value: 'BONE_BLOCK_PLACE'
+        pitch: 1
+        volume: 1
+    on-break:
+      play-sound:
+        value: 'ANVIL_LAND'
+        pitch: 1
+        volume: 1
+    on-fill:
+      play-sound:
+        value: 'BLOCK_WATER_AMBIENT'
+      play-effect:
+        value: 'FALLING_DRIPSTONE_WATER'
+        amount: 2
+
+  animation: # WORK IN PROGRESS
+    enabled: true
+
