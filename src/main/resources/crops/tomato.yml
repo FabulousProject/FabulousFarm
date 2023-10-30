@@ -57,10 +57,7 @@ Crop:
           drop-item:
             material: 'DIAMOND'
             amount: '1-3'
-          drop-item2:
-            material: 'WHEAT_SEEDS'
-            amount: 1
-            chance: 45.0
+            chance: 5.0
           replant:
             crop: 'tomato'
             chance: 10.0
@@ -83,4 +80,21 @@ Crop:
             crop: 'tomato'
             chance: 10.0
 
+  # when crop is harvested, chance to drop stars from 1-3
+  stars:
+    '1':
+      name: '&7Buğday &8(&e★)'
+      material: 'WHEAT_SEEDS'
+      amount: 1
+      chance: 45.0
+    '2':
+      name: '&7Buğday &8(&e★★)'
+      material: 'WHEAT_SEEDS'
+      amount: '1-3'
+      chance: 30.0
+    '3':
+      name: '&7Buğday &8(&e★★★)'
+      material: 'WHEAT_SEEDS'
+      amount: '2-5'
+      chance: 10.0
 

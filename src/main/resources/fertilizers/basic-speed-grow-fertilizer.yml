@@ -1,0 +1,26 @@
+Fertilizer:
+  name: '&7Sıradan Hızlandırıcı Gübre'
+  type: 'SPEED_GROW'
+  chance: 50.0
+  speed: 1 # +1 stage on grow
+
+  item:
+    name: '&7Sıradan Hızlandırıcı Gübre'
+    material: 'BONE_MEAL'
+    lore:
+    - ''
+    - ' &7Bu gübre ile &fdaha hızlı şekilde'
+    - ' &7hasatlar elde edebilirsin.'
+    - ''
+
+  pots:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+    - 'default-pot'
+
+  events:
+    on-plant:
+      play-effect:
+        value: 'SPELL_WITCH'
+      play-sound:
+        value: 'ITEM_HOE_TILL'

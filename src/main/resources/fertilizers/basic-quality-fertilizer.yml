@@ -1,0 +1,29 @@
+Fertilizer:
+  name: '&7Sıradan Kalite Gübresi'
+  type: 'QUALITY'
+  chance: 50.0
+  amount: 10.0 # +10% chance for get higher stars
+
+  item:
+    name: '&7Sıradan Kalite Gübresi'
+    material: 'BONE_MEAL'
+    lore:
+      - ''
+      - ' &7Bu gübre ile &fdaha kaliteli'
+      - ' &7hasatlar elde edebilirsin.'
+      - ''
+
+  pots:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+      - 'default-pot'
+
+  events:
+    on-plant:
+      play-effect:
+        value: 'SCRAPE'
+      play-sound:
+        value: 'ITEM_HOE_TILL'
+
+
+

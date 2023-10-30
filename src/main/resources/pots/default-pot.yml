@@ -11,8 +11,3 @@ Pot:
     list:
       - 'BANANA'
 
-  crows:
-    enabled: true
-    chance: 0.1
-    model: 'BAT'
-

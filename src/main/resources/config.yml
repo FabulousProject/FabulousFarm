@@ -11,12 +11,89 @@ Main:
 
   scarecrow:
     enabled: true
-    block:
-      name: '&cKorkuluk'
-      material: 'IRON_BLOCK'
+    blocks:
+      'basic':
+        name: '&cSıradan Korkuluk'
+        material: 'IRON_BLOCK'
+        lore:
+          - ''
+          - ' &7Korkuluk sayesinde istenmeyen'
+          - ' &7hayvanları uzak tutabilirsin.'
+          - ''
+          - ' &7Etki Alanı: &e16 blok'
+        range: 16 # 16x16 square
+      'advanced':
+        name: '&cGelişmiş Korkuluk'
+        material: 'DIAMOND_BLOCK'
+        lore:
+          - ''
+          - ' &7Korkuluk sayesinde istenmeyen'
+          - ' &7hayvanları uzak tutabilirsin.'
+          - ''
+          - ' &7Etki Alanı: &e32 blok'
+        range: 32 # 32x32 square
+
+  crows:
+    enabled: true
+    mobs:
+      'crow':
+        name: '&4Karga'
+        entity: 'BAT'
+        chance: 1.0 # 1.0% chance to spawn for every crop grow
+      'silverfish':
+        name: '&4Kemirgen'
+        entity: 'SILVERFISH'
+        chance: 0.5 # 0.5% chance to spawn for every crop grow
 
   schedule:
+    enabled: true
+    time: '07:00' # every day at 07:00 pots will dry, after that sprinklers will water them, and crops will grow.
 
+  seasons:
+    enabled: true
+    list: # you can add more seasons.
+      winter:
+        enabled: true
+        name: '&bKış'
+        time: 144 # minecraft days
+      autumn:
+        enabled: true
+        name: '&6Sonbahar'
+        time: 144 # minecraft days
+      spring:
+        enabled: true
+        name: '&aİlkbahar'
+        time: 144 # minecraft days
+      summer:
+        enabled: true
+        name: '&eYaz'
+        time: 144 # minecraft days
+
+  greenhouse:
+    enabled: true
+    items:
+      'basic':
+        name: '&7Sıradan Sera Camı'
+        material: 'GLASS'
+        lore:
+          - ''
+          - ' &7Sera camı ile &fher mevsimde'
+          - ' &7ürün ekebilirsiniz.'
+          - ''
+          - ' &7Yükseklik: &e8 blok'
+          - ''
+        height: 8
+      'advanced':
+        name: '&7Gelişmiş Sera Camı'
+        material: 'GLASS'
+        lore:
+          - ''
+          - ' &7Sera camı ile &fher mevsimde'
+          - ' &7ürün ekebilirsiniz.'
+          - ''
+          - ' &7Yükseklik: &e32 blok'
+          - ''
+        height: 32
 
 Data:
   provider: 'yaml' # yaml

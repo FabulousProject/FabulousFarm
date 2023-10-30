@@ -1,0 +1,27 @@
+Fertilizer:
+  name: '&7Sıradan Hasat Çoğaltıcı'
+  type: 'PRODUCE_MULTIPLIER'
+  chance: 50.0
+  amount: '0-2' # +0-2 produce items
+
+  item:
+    name: '&7Sıradan Hasat Çoğaltıcı'
+    material: 'BONE_MEAL'
+    lore:
+      - ''
+      - ' &7Bu gübre ile &fdaha fazla'
+      - ' &7hasat elde edebilirsin.'
+      - ''
+
+  pots:
+    mode: 'WHITELIST' # BLACKLIST or WHITELIST
+    list:
+      - 'default-pot'
+
+  events:
+    on-plant:
+      play-effect:
+        value: 'SPELL'
+      play-sound:
+        value: 'ITEM_HOE_TILL'
+
