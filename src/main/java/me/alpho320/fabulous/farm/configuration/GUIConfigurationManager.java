@@ -4,6 +4,7 @@ import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.FileUtil;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
+import me.alpho320.fabulous.farm.FarmAPI;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
@@ -85,7 +86,7 @@ public class GUIConfigurationManager {
                         (id.contains("iter-") ? (Integer.parseInt(id.split("-")[1].split(":")[0]) + i) : Integer.parseInt(id)),
                         new Button(
                                 BukkitCore.instance().message().colored(section.getString("name", "")),
-                                FarmAPI.getItemFromSection(section),
+                                FarmAPI.getItemFromSection(plugin, section),
                                 section.getString("material", "AIR"),
                                 section.getString("button-value", "null"),
                                 section.getString("button-type", "BASIC"),
