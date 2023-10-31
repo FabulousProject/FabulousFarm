@@ -6,16 +6,22 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
+import me.alpho320.fabulous.farm.command.FarmCommand;
 import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import me.alpho320.fabulous.farm.data.Cache;
 import me.alpho320.fabulous.farm.hook.Hooks;
+import me.alpho320.fabulous.farm.hook.impl.MythicMobsHook;
+import me.alpho320.fabulous.farm.hook.impl.PAPIHook;
 import me.alpho320.fabulous.farm.listener.ItemsAdderLoadListener;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.workload.LoadFarmsWorkloadThread;
+import me.alpho320.fabulous.farm.workload.SaveFarmsWorkloadThread;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -66,15 +72,12 @@ public class FarmPlugin extends JavaPlugin {
 
         if (!setupEconomy()) throw new IllegalStateException("Could not connect to Vault");
 
-        FarmAPI.plugin = this;
-
         this.inventory = new BasicSmartInventory(this);
         this.inventory.init();
 
         this.farmCommand = new FarmCommand(this);
 
-        FarmAPI.registerListeners(
-                this,
+        registerListeners(
                 new PlayerJoinListener(this),
                 new PlayerQuitListener(this)
         );
@@ -88,7 +91,7 @@ public class FarmPlugin extends JavaPlugin {
 
         if (getConfig().getBoolean("Hooks.itemsadder", false)) {
             getLogger().info(" | Found hook of ItemsAdder, waiting for ItemsadderReadyEvent...");
-            FarmAPI.registerListeners(this, new ItemsAdderLoadListener(this, now));
+            registerListeners(new ItemsAdderLoadListener(this, now));
         } else {
             FarmAPI.init(this, state -> {
                 if (state) {
@@ -223,7 +226,12 @@ public class FarmPlugin extends JavaPlugin {
     }
 
     public int versionInt() {
-        return versionInt;
+        return this.versionInt;
+    }
+
+    public void registerListeners(Listener...listeners) {
+        for (Listener listener : listeners)
+            getServer().getPluginManager().registerEvents(listener, this);
     }
 
     public LoadFarmsWorkloadThread loadRealmsWorkloadThread() {

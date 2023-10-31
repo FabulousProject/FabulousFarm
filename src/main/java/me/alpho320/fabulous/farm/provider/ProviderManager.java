@@ -2,6 +2,8 @@ package me.alpho320.fabulous.farm.provider;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.data.PlayerData;
+import me.alpho320.fabulous.farm.task.TaskManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +46,6 @@ public class ProviderManager {
             } else {
                 TaskManager.startTasks(plugin);
                 FarmAPI.checkCallback(callback, true);
-                FarmAPI.runASYNC(() -> Realms.createAllRealms(plugin.getConfig(), plugin));
             }
 
         } else {

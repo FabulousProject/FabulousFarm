@@ -1,5 +1,6 @@
 package me.alpho320.fabulous.farm.provider;
 
+import me.alpho320.fabulous.farm.data.PlayerData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
