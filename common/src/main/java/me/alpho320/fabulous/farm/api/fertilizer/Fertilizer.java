@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public @NotNull abstract class Fertilizer<Type> {
+public abstract class Fertilizer<Type> {
 
     private final @NotNull String id;
     private final @NotNull String name;
