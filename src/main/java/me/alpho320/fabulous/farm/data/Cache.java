@@ -32,7 +32,6 @@ public class Cache {
             insufficientItem,
             insufficientPerm,
             insufficientItemMessageType,
-            insufficientRealmLevel,
 
             playerHelpMessageType,
             adminHelpMessageType;
@@ -65,7 +64,6 @@ public class Cache {
         this.insufficientLevel = MessageType.getType(messages.getString("Messages.insufficient-level.type", "TITLE"));
         this.insufficientItem = MessageType.getType(messages.getString("Messages.insufficient-item.type", "TITLE"));
         this.insufficientPerm = MessageType.getType(messages.getString("Messages.insufficient-perm.type", "TITLE"));
-        this.insufficientRealmLevel = MessageType.getType(messages.getString("Messages.insufficient-realmlevel.type", "TITLE"));
         this.insufficientItemMessageType = MessageType.getType(messages.getString("Messages.insufficient-item.type", "TITLE"));
 
     }

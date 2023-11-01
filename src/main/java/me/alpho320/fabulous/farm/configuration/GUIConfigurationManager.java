@@ -9,6 +9,7 @@ import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
 import me.alpho320.fabulous.farm.gui.Interact;
+import me.alpho320.fabulous.farm.util.SoundUtil;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -108,7 +109,7 @@ public class GUIConfigurationManager {
                 interacts.add(
                         new Interact(
                                 section.getStringList("commands"),
-                                FarmAPI.getSoundFromList(section.getStringList("sounds")),
+                                SoundUtil.getSoundFromList(section.getStringList("sounds")),
                                 Interact.InteractType.getType(interact)
                         )
                 );

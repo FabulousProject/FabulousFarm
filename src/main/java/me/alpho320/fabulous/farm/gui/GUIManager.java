@@ -10,30 +10,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class GUIManager {
 
-    private final @NotNull FarmPlugin plugin;
-    private static GUIManager instance;
-
-    public GUIManager(@NotNull FarmPlugin plugin) {
-        this.plugin = plugin;
+    public static void open(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts) {
+        GUIManager.open(player, provider, title, row, async, interacts, 10L);
     }
 
-    public void openGUI(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts) {
-        openGUI(player, provider, title, row, async, interacts, 10L);
+    public static void open(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts, long startDelay) {
+        GUIManager.open(player, provider, title, row, async, interacts, startDelay, null);
     }
 
-    public void openGUI(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts, long startDelay) {
-        openGUI(player, provider, title, row, async, interacts, startDelay, null);
-    }
-
-    public void openGUI(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts, long startDelay, Runnable whenClose) {
-        Page page = Page.build(plugin.inventory(), provider)
+    public static void open(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts, long startDelay, Runnable whenClose) {
+        Page page = Page.build(FarmPlugin.instance().inventory(), provider)
                 .title(BukkitCore.instance().message().coloredWithPlaceholders(player, title))
                 .row(row)
                 .tick(2L)
@@ -76,10 +68,5 @@ public class GUIManager {
         });
     }
 
-
-    public static @NotNull GUIManager instance() {
-        if (instance == null) throw new IllegalStateException("Plugin is not initialized yet!");
-        return instance;
-    }
 
 }

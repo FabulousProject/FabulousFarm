@@ -6,7 +6,7 @@
 
     <groupId>me.alpho320.fabulous.core</groupId>
     <artifactId>FabulousFarm</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <repositories>
         <repository>

@@ -82,6 +82,7 @@ public class FarmPlugin extends JavaPlugin {
                 new PlayerQuitListener(this)
         );
 
+
         setConfigurationManager(new ConfigurationManager(this));
         configurationManager().reload(false);
         LogHandler.init(this);
