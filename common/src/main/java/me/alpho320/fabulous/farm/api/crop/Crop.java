@@ -1,7 +1,7 @@
 package me.alpho320.fabulous.farm.api.crop;
 
 import me.alpho320.fabulous.farm.api.condition.Condition;
-import me.alpho320.fabulous.farm.api.event.EventAction;
+import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import me.alpho320.fabulous.farm.api.event.EventType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
