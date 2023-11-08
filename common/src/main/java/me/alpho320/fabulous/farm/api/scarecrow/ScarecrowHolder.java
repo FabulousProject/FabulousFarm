@@ -25,8 +25,11 @@ public class ScarecrowHolder {
     public boolean isInRange(@NotNull Location location) {
         if (!location.getWorld().getName().equals(location().world())) return false;
 
-        int range = scarecrow().range();
-        return (location().x() - location.getX()) <= range && (location().z() - location.getZ()) <= range;
+        final Location scarecrowLoc = location().loc();
+        final int range = scarecrow().range();
+
+        double distance = Math.sqrt((scarecrowLoc.getBlockX() - location.getBlockX())^2 + (scarecrowLoc.getBlockZ() - location.getBlockZ())^2);
+        return distance <= range;
     }
 
 }
