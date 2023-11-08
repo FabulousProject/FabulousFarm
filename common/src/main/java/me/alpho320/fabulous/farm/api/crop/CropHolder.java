@@ -1,6 +1,5 @@
 package me.alpho320.fabulous.farm.api.crop;
 
-import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.jetbrains.annotations.NotNull;
 

@@ -4,7 +4,6 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import dev.lone.itemsadder.api.CustomStack;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
-import me.alpho320.fabulous.farm.FarmPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
