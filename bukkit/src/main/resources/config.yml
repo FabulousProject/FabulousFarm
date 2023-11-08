@@ -56,18 +56,22 @@ Main:
         enabled: true
         name: '&bKış'
         time: 144 # minecraft days
+        order: 4 # order of seasons
       autumn:
         enabled: true
         name: '&6Sonbahar'
         time: 144 # minecraft days
+        order: 3 # order of seasons
       spring:
         enabled: true
         name: '&aİlkbahar'
         time: 144 # minecraft days
+        order: 1 # order of seasons
       summer:
         enabled: true
         name: '&eYaz'
         time: 144 # minecraft days
+        order: 2 # order of seasons
 
   greenhouse:
     enabled: true

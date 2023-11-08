@@ -1,21 +1,19 @@
 package me.alpho320.fabulous.farm.api.season;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.time.LocalDateTime;
 
 public class Season {
 
     private final @NotNull String id;
-    private final boolean enabled;
+    private boolean active;
+
+    private final int order;
     private final int days;
 
-    private @Nullable LocalDateTime time;
-
-    public Season(@NotNull String id, boolean enabled, int days) {
+    public Season(@NotNull String id, boolean active, int order, int days) {
         this.id = id;
-        this.enabled = enabled;
+        this.active = active;
+        this.order = order;
         this.days = days;
     }
 
@@ -23,23 +21,20 @@ public class Season {
         return this.id;
     }
 
-    public boolean isEnabled() {
-        return this.enabled;
+    public void setActive(boolean enabled) {
+        this.active = enabled;
+    }
+
+    public boolean isActive() {
+        return this.active;
     }
 
     public int days() {
         return this.days;
     }
 
-    /**
-     * @return null means not started yet, left time for next season.
-     */
-    public @Nullable LocalDateTime time() {
-        return this.time;
-    }
-
-    public void setTime(@Nullable LocalDateTime time) {
-        this.time = time;
+    public int order() {
+        return this.order;
     }
 
 }
