@@ -1,8 +1,9 @@
 package me.alpho320.fabulous.farm.api.crop;
 
 import me.alpho320.fabulous.farm.api.condition.Condition;
-import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import me.alpho320.fabulous.farm.api.event.EventType;
+import me.alpho320.fabulous.farm.api.event.action.EventAction;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,9 +60,9 @@ public class Crop {
         return this.actions.getOrDefault(eventType, new ArrayList<>());
     }
 
-    public void doAction(@NotNull EventType eventType) {
+    public void doAction(@NotNull EventType eventType, @NotNull Event event) {
         for (EventAction action : actions(eventType)) {
-            action.execute();
+            action.execute(event);
         }
     }
 

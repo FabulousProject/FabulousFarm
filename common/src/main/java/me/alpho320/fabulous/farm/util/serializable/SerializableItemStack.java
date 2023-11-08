@@ -1,5 +1,6 @@
-package me.alpho320.fabulous.farm.data;
+package me.alpho320.fabulous.farm.util.serializable;
 
+import me.alpho320.fabulous.farm.util.item.ItemCreatorUtil;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +14,7 @@ public class SerializableItemStack implements Serializable {
         this.base64 = base64;
     }
 
-    public SerializableItemStack(@NotNull ItemStack stack) throws IllegalArgumentException {
+    public SerializableItemStack(@NotNull ItemStack stack) {
         ItemStack[] items = new ItemStack[1];
         items[0] = stack;
         this.base64 = ItemCreatorUtil.itemStackArrayToBase64(items);
@@ -24,8 +25,8 @@ public class SerializableItemStack implements Serializable {
     }
 
 
-    public @NotNull String getBase64() {
-        return base64;
+    public @NotNull String base64() {
+        return this.base64;
     }
 
     public @NotNull ItemStack toItemStack() {

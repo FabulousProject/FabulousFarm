@@ -3,6 +3,7 @@ package me.alpho320.fabulous.farm.api.fertilizer;
 import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.mode.Mode;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,9 +71,9 @@ public abstract class Fertilizer<Type> {
         return this.events.getOrDefault(eventType, new ArrayList<>());
     }
 
-    public void doAction(@NotNull EventType eventType) {
+    public void doAction(@NotNull EventType eventType, @NotNull Event event) {
         for (EventAction action : eventActions(eventType)) {
-            action.execute();
+            action.execute(event);
         }
     }
 

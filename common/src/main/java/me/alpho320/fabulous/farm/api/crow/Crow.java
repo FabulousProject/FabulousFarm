@@ -1,5 +1,6 @@
 package me.alpho320.fabulous.farm.api.crow;
 
+import me.alpho320.fabulous.farm.api.pot.Pot;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 

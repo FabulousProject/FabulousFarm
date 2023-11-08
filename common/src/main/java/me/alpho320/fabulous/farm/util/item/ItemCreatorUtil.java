@@ -1,4 +1,4 @@
-package me.alpho320.fabulous.farm.util;
+package me.alpho320.fabulous.farm.util.item;
 
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
@@ -77,13 +77,8 @@ public class ItemCreatorUtil {
     public static ItemStack createItem(Material material, String name, short i, List<String> lore, int amount, int modelData) {
         ItemStack item = createItem(material, name, i, lore, amount);
 
-
-        if (FarmPlugin.instance().versionInt() >= 14) {
-            ItemMeta meta = item.getItemMeta();
-
-            //meta.setCustomModelData(modelData == -1 ? null : modelData);
-            item.setItemMeta(meta);
-        }
+        ItemMeta meta = item.getItemMeta();
+        item.setItemMeta(meta);
 
         return item;
     }
@@ -91,13 +86,9 @@ public class ItemCreatorUtil {
     public static ItemStack getItem(String material, String name, short i, int amount, int modelData, List<String> lore, List<String> enchantments) {
         ItemStack item = getItem(material, name, i, amount, lore);
 
-        if (FarmPlugin.instance().versionInt() >= 14) {
-            ItemMeta meta = item.getItemMeta();
+        ItemMeta meta = item.getItemMeta();
 
-            //meta.setCustomModelData(modelData == -1 ? null : modelData);
-            item.setItemMeta(meta);
-        }
-
+        item.setItemMeta(meta);
         item.addUnsafeEnchantments(getEnchantmentsFromList(enchantments));
 
         return item;
@@ -193,12 +184,8 @@ public class ItemCreatorUtil {
     public static ItemStack getItem(Player player, String material, String name, short data, int amount, int modelData, List<String> lore) {
         ItemStack item = getItem(player, material, name, data, amount, lore);
 
-        if (FarmPlugin.instance().versionInt() >= 14) {
-            ItemMeta meta = item.getItemMeta();
-
-            //meta.setCustomModelData(modelData == -1 ? null : modelData);
-            item.setItemMeta(meta);
-        }
+        ItemMeta meta = item.getItemMeta();
+        item.setItemMeta(meta);
 
         return item;
     }

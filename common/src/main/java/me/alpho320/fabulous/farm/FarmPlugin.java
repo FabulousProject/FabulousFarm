@@ -1,5 +1,6 @@
 package me.alpho320.fabulous.farm;
 
+import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import me.alpho320.fabulous.farm.gui.GUIManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
