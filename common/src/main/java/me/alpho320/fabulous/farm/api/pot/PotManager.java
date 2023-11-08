@@ -2,6 +2,7 @@ package me.alpho320.fabulous.farm.api.pot;
 
 import me.alpho320.fabulous.farm.api.TypedManager;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
+import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,4 +29,7 @@ public abstract class PotManager extends TypedManager<String, Pot> {
     }
 
 
+    public @Nullable PotHolder findHolder(@NotNull SerializableLocation location) {
+        return POT_HOLDERS.getOrDefault(location.loc(), null);
+    }
 }

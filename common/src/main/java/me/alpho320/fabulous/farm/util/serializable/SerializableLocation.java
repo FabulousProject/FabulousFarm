@@ -70,4 +70,19 @@ public class SerializableLocation implements Serializable {
     public float yaw() {
         return this.yaw;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Location) return this.loc().equals(obj);
+
+        if (obj instanceof SerializableLocation) {
+            SerializableLocation location = (SerializableLocation) obj;
+            return this.world.equals(location.world) && this.x == location.x && this.y == location.y && this.z == location.z && this.pitch == location.pitch && this.yaw == location.yaw;
+        }
+
+        return false;
+    }
+
 }

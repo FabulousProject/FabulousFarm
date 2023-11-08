@@ -47,7 +47,7 @@ Main:
 
   schedule:
     enabled: true
-    time: '07:00' # every day at 07:00 pots will dry, after that sprinklers will water them, and crops will grow.
+    time: '07:00' # every day at 07:00 pots sprinklers will water them, and crops will grow, after that pots will be dry.
 
   seasons:
     enabled: true

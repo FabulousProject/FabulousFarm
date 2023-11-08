@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm.api.crop;
 
 import me.alpho320.fabulous.farm.api.TypedManager;
+import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +15,10 @@ public abstract class CropManager extends TypedManager<String, Crop> {
 
     public @Nullable CropHolder findCropHolder(@NotNull Location location) {
         return this.CROP_HOLDERS.getOrDefault(location, null);
+    }
+
+    public @Nullable CropHolder findCropHolder(@NotNull SerializableLocation location) {
+        return this.CROP_HOLDERS.getOrDefault(location.loc(), null);
     }
 
     public @NotNull Map<Location, CropHolder> cropHolders() {
