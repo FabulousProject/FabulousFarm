@@ -13,6 +13,9 @@ public abstract class CropManager extends TypedManager<String, Crop> {
 
     private final @NotNull Map<Location, CropHolder> CROP_HOLDERS = new ConcurrentHashMap<>();
 
+    public abstract @Nullable CropHolder plant(@NotNull Crop crop, @NotNull Location location);
+    public abstract @Nullable CropHolder plant(@NotNull String cropId, @NotNull Location location);
+
     public @Nullable CropHolder findCropHolder(@NotNull Location location) {
         return this.CROP_HOLDERS.getOrDefault(location, null);
     }

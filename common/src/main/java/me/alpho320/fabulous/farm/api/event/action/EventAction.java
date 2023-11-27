@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,12 +17,15 @@ public abstract class EventAction {
     protected final @NotNull EventType eventType;
 
     protected final @NotNull ConfigurationSection section;
+
+    private final double chance;
     private boolean registered = false;
 
     public EventAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
         this.plugin = plugin;
         this.eventType = eventType;
         this.section = section;
+        this.chance = section.getDouble("chance", 100);
     }
 
     public @NotNull FarmPlugin plugin() {
@@ -64,6 +69,16 @@ public abstract class EventAction {
 
     public void setRegistered(boolean registered) {
         this.registered = registered;
+    }
+
+    public @Nullable Location tryToGetLocation(@Nullable Event event) {
+        if (event == null) return null;
+        if (event instanceof BlockBreakEvent) {
+            return ((BlockBreakEvent) event).getBlock().getLocation();
+        } else if (event instanceof BlockPlaceEvent) {
+            return ((BlockPlaceEvent) event).getBlock().getLocation();
+        } // todo - add more events (ON PLANT, ON HARVEST, ON GROW, ON FILL)
+        return null;
     }
 
 }

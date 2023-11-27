@@ -47,6 +47,12 @@ public abstract class GreenhouseManager extends TypedManager<String, Greenhouse>
         return false;
     }
 
+    /**
+     *
+     * @param greenhouseHolder greenhouse to check can this greenhouse effect.
+     * @param cropHolder crop to check can this greenhouse effect.
+     * @return true if can effect, otherwise false. (pot always under the crop)
+     */
     public boolean canEffect(@NotNull GreenhouseHolder greenhouseHolder, @NotNull CropHolder cropHolder) {
         return canEffect(greenhouseHolder, cropHolder.location().loc().subtract(0, 1, 0));
     }

@@ -3,34 +3,36 @@ package me.alpho320.fabulous.farm.api.event.action.impl;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.event.action.EventAction;
-import org.bukkit.Effect;
+import me.alpho320.fabulous.farm.util.item.ItemCreatorUtil;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayEffectAction extends EventAction {
+public class DropItemAction extends EventAction {
 
-    private Effect effect;
+    private ItemStack item;
 
-    public PlayEffectAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
+    public DropItemAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
         super(plugin, eventType, section);
     }
 
     @Override
     public boolean register() {
         try {
-            this.effect = Effect.valueOf(section.getString("value", "null"));
+            this.item = ItemCreatorUtil.getItemFromSection(section, "material");
             return true;
-        } catch (IllegalArgumentException e) {
-            plugin.logger().severe("EventAction | Effect of " + section.getString("value", "null") + " not found.");
-            plugin.logger().severe("EventAction | Path: " + section.getCurrentPath());
-            return false;
+        } catch (Exception e) {
+            plugin.logger().severe("EventAction | DropItemAction of "+ section.getString("material", "null") +" not found.");
+            plugin.logger().severe("EventAction | Section: " + section);
+            plugin.logger().severe("EventAction | EventType: " + eventType);
         }
+        return false;
     }
 
     @Override
@@ -48,8 +50,7 @@ public class PlayEffectAction extends EventAction {
             return;
         }
 
-        finalLocation.getWorld().playEffect(finalLocation, effect, 0);
+        finalLocation.getWorld().dropItemNaturally(finalLocation, item.clone());
     }
-
 
 }

@@ -45,11 +45,9 @@ public class PlaySoundAction extends EventAction {
             finalLocation = location.clone();
         } else if (entity != null) {
             finalLocation = entity.getLocation().clone();
-        } else if (event instanceof BlockBreakEvent) {
-            finalLocation = ((BlockBreakEvent) event).getBlock().getLocation().clone();
-        } else if (event instanceof BlockPlaceEvent) {
-            finalLocation = ((BlockPlaceEvent) event).getBlock().getLocation().clone();
-        } else { // todo - add more events (ON PLANT, ON HARVEST, ON GROW, ON FILL)
+        } else if (tryToGetLocation(event) != null) {
+            finalLocation = tryToGetLocation(event).clone();
+        } else {
             printExecuteError("Location not found for " + eventType.type() + " event.", event, entity, location, extraInfo);
             return;
         }

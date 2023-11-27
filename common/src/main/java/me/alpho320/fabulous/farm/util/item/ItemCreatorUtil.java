@@ -4,10 +4,14 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import dev.lone.itemsadder.api.CustomStack;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
+import me.alpho320.fabulous.core.bukkit.util.BukkitItemCreator;
+import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
+import me.alpho320.fabulous.farm.data.IntData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -221,6 +225,77 @@ public class ItemCreatorUtil {
 
         return map;
     }
+
+    public static @NotNull ItemStack getItemFromSection(ConfigurationSection section) {
+        return getItemFromSection(section, "material");
+    }
+
+    public static @NotNull ItemStack getItemFromSection(ConfigurationSection section, String typeKey) {
+        try {
+            if (section == null) {
+                throw new IllegalStateException("GTFS section null!");
+            } else {
+                String mat = section.getString(typeKey, "AIR");
+                if (section.isSet("==")) {
+                    try {
+                        ItemStack itemStack = section.getItemStack(section.getCurrentPath(), new ItemStack(Material.AIR));
+                        return itemStack;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (mat.startsWith("ITEMSADDER-")) {
+                    if (Bukkit.getServer().getPluginManager().isPluginEnabled("ItemsAdder")) {
+                        CustomStack stack = CustomStack.getInstance(section.getString(typeKey, "null").split("-")[1]);
+                        if (stack == null) {
+                            Debug.debug(1, " | ItemError: " + section.getString(typeKey, "null") + " is not itemsadder item!");
+                            return new ItemStack(Material.AIR);
+                        }
+
+                        ItemStack clone = stack.getItemStack().clone();
+                        ItemMeta meta = clone.getItemMeta();
+
+                        if (section.isList("lore"))
+                            meta.setLore(BukkitCore.instance().message().colored(section.getStringList("lore")));
+                        if (section.isString("name"))
+                            meta.setDisplayName(BukkitCore.instance().message().colored(section.getString("name", "")));
+
+                        clone.setItemMeta(meta);
+                        clone.setAmount(IntData.of(section).toInt());
+                        return clone;
+                    } else {
+                        Debug.debug(1, " | " + mat + " is itemsadder item but itemsadder is not enabled!");
+                        return new ItemStack(Material.AIR);
+                    }
+                } else if (section.getString(typeKey, "AIR").contains("%") || section.getString(typeKey, "AIR").contains(":")) {
+                    return new BukkitItemCreator()
+                            .type("STONE")
+                            .name(BukkitCore.instance().message().colored(section.getString("name", "null")))
+                            .amount(IntData.of(section).toInt())
+                            .lore(BukkitCore.instance().message().colored(section.getStringList("lore")))
+                            .damage((short) section.getInt("damage", 0))
+                            .enchantFromList(section.getStringList("enchantments"))
+                            .modelData(section.getInt("model-data", 0))
+                            .create();
+                } else {
+                    return new BukkitItemCreator()
+                            .type(section.getString(typeKey, "AIR"))
+                            .name(BukkitCore.instance().message().colored(section.getString("name", "null")))
+                            .amount(IntData.of(section).toInt())
+                            .lore(BukkitCore.instance().message().colored(section.getStringList("lore")))
+                            .damage((short) section.getInt("damage", 0))
+                            .enchantFromList(section.getStringList("enchantments"))
+                            .modelData(section.getInt("model-data", 0))
+                            .create();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ItemCreatorUtil.getItem("BARRIER", "Item not found!", (short) 0, new ArrayList<>());
+        }
+    }
+
 
     public static ItemStack getItemWithGlow(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
