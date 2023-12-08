@@ -45,9 +45,8 @@ public class ReplantAction extends EventAction {
         if (location != null) {
             cropLocation = location.clone();
         } else {
-            if (tryToGetLocation(event) != null) {
-                cropLocation = tryToGetLocation(event).clone();
-            }
+            Location loc = tryToGetLocation(event);
+            if (loc != null) cropLocation = loc.clone();
         }
 
         if (cropLocation != null) {

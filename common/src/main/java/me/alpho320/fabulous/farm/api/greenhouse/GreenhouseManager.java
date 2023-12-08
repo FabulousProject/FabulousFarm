@@ -13,14 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class GreenhouseManager extends TypedManager<String, Greenhouse> {
 
     private final @NotNull Map<Location, GreenhouseHolder> GREENHOUSE_HOLDERS = new ConcurrentHashMap<>();
-    private final int MAX_GREENHOUSE_HEIGHT = 30;
+    private int MAX_GREENHOUSE_HEIGHT = 30;
 
     @Override
     public @Nullable Greenhouse find(String id) {
         return map().getOrDefault(id, null);
     }
-
-
 
     public int maxGreenhouseHeight() {
         return this.MAX_GREENHOUSE_HEIGHT;

@@ -44,9 +44,8 @@ public class ChangeStageAction extends EventAction {
         if (location != null) {
             cropHolder = plugin.farmManager().cropManager().findCropHolder(location);
         } else {
-            if (tryToGetLocation(event) != null) {
-                cropHolder = plugin.farmManager().cropManager().findCropHolder(tryToGetLocation(event));
-            }
+            Location loc = tryToGetLocation(event);
+            if (loc != null) cropHolder = plugin.farmManager().cropManager().findCropHolder(loc);
         }
 
         if (cropHolder != null) {

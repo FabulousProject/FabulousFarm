@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm.api;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +16,7 @@ public abstract class TypedManager<KEY, OBJECT> extends Manager {
     public abstract void init(@NotNull FarmPlugin plugin);
 
     public abstract @Nullable OBJECT find(KEY id);
-    public abstract @Nullable OBJECT fromSection(String id, String section);
+    public abstract @Nullable OBJECT fromSection(String id, ConfigurationSection section);
 
     public void register(@NotNull KEY key, @NotNull OBJECT object) {
         this.map.put(key, object);
