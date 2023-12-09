@@ -123,24 +123,7 @@ public class FarmAPI {
         BukkitFarmPlugin.instance().getServer().getScheduler().runTaskAsynchronously(BukkitFarmPlugin.instance(), runnable);
     }
 
-    public static void executeCommands(Player player, List<String> commands) {
-        if (player == null || commands == null) return;
-        final BukkitFarmPlugin plugin = BukkitFarmPlugin.instance();
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
-            for (String command : commands) {
-                if (command.contains("null")) return;
 
-                String[] split = command.split(":");
-                CommandSender executor;
-
-                if (split[0].equalsIgnoreCase("console"))
-                    executor = Bukkit.getConsoleSender();
-                else
-                    executor = player;
-                Bukkit.dispatchCommand(executor, split[1].replaceAll("%player%", player.getName()));
-            }
-        });
-    }
 
     public static void checkCallback(@Nullable Provider.Callback callback, boolean state) {
         if (callback != null)

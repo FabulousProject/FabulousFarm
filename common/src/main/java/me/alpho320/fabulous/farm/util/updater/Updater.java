@@ -13,7 +13,8 @@ import java.net.URLConnection;
 import java.util.regex.Pattern;
 
 public class Updater {
-    private final @NotNull FarmPlugin plugin;
+
+    private final FarmPlugin plugin;
 
     private final boolean enabled;
     private final @NotNull String version;
@@ -24,14 +25,14 @@ public class Updater {
 
     private boolean updateAvailable = false;
 
-    public Updater(@NotNull FarmPlugin plugin, @NotNull String version, boolean enabled) {
+    public Updater(FarmPlugin plugin, @NotNull String version, boolean enabled) {
         this.plugin = plugin;
         this.enabled = enabled;
-        this.version = plugin.version();
+        this.version = plugin == null ? "1.0.0" : plugin.version();
         this.tokenizedCurrentVersion = tokenize(version);
 
         try {
-            this.url = new URL("https://raw.githubusercontent.com/FabulousProject/version/main/version.md");
+            this.url = new URL("https://raw.githubusercontent.com/FabulousProject/FabulousFarm/master/bukkit/pom.xml");
         } catch (MalformedURLException e) {
             e.printStackTrace();
             System.out.println("Failed to create URL for Updater!");
@@ -42,17 +43,30 @@ public class Updater {
 
     public void check() {
         if (!enabled) {
-            plugin.logger().warning("Updater is disabled but check() was called!");
             return;
         } else if (url == null) {
             plugin.logger().warning("Updater is enabled but connection URL is null!");
-            plugin.logger().warning("Is github down? check the 'https://raw.githubusercontent.com/FabulousProject/version/main/version.md'");
+            plugin.logger().warning("Is github down? check the 'https://raw.githubusercontent.com/FabulousProject/FabulousFarm/master/bukkit/pom.xml'");
             return;
         }
 
         try {
             URLConnection connection = url.openConnection();
-            this.returnedVersion = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            boolean finished = false;
+
+            while (!finished) {
+                String line = reader.readLine();
+                if (line != null) {
+                    if (line.contains("<version>")) {
+                        // <version>1.0.1</version>
+                        this.returnedVersion = line.split(Pattern.quote("<version>"))[1].split(Pattern.quote("</version>"))[0];
+                        break;
+                    }
+                } else {
+                    finished = true;
+                }
+            }
 
             plugin.logger().info("Updater returned version: " + this.returnedVersion + " (current: " + version + ")");
 

@@ -8,7 +8,6 @@ import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
 import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.command.FarmCommand;
-import me.alpho320.fabulous.farm.configuration.BukkitConfi;
 import me.alpho320.fabulous.farm.configuration.BukkitConfigurationManager;
 import me.alpho320.fabulous.farm.configuration.BukkitGUIManager;
 import me.alpho320.fabulous.farm.data.Cache;
@@ -16,7 +15,6 @@ import me.alpho320.fabulous.farm.gui.GUIManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
-import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import me.alpho320.fabulous.farm.task.TaskManager;
@@ -81,7 +79,6 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
 
         configurationManager().reload(false);
-        LogHandler.init(this);
         logger.setServerLoggingLevel(getConfig().getBoolean("Main.debug", false) ? FarmPluginLogger.LoggingLevel.DEBUG : FarmPluginLogger.LoggingLevel.INFO);
 
         this.updater = new Updater(this, getDescription().getVersion(), getConfig().getBoolean("Main.updater", false));

@@ -1,29 +1,33 @@
 package me.alpho320.fabulous.farm.gui;
 
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
+import me.alpho320.fabulous.farm.FarmPlugin;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
 
 public class Interact {
 
-    private final List<String> commands;
-    private final Map<Sound, Integer> sounds;
+    private final @NotNull FarmPlugin plugin;
+    private final @NotNull List<String> commands;
+    private final @NotNull Map<Sound, Integer> sounds;
 
-    private final InteractType type;
+    private final @NotNull InteractType type;
 
-    public Interact(List<String> commands, Map<Sound, Integer> sounds, InteractType type) {
+    public Interact(@NotNull FarmPlugin plugin, @NotNull List<String> commands, @NotNull Map<Sound, Integer> sounds, @NotNull InteractType type) {
+        this.plugin = plugin;
         this.commands = commands;
         this.sounds = sounds;
         this.type = type;
     }
 
     public void run(Player player) {
-        FarmAPI.runSYNC(
+        plugin.runSYNC(
                 () -> {
-                    FarmAPI.executeCommands(player, commands);
+                    plugin.executeCommands(player, commands);
 
                     sounds.forEach((key, value) ->
                             BukkitCore.instance().sound().send(

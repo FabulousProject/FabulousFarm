@@ -28,7 +28,7 @@ public class BukkitConfigurationManager extends ConfigurationManager {
         this.core.init(plugin, ChatColor.translateAlternateColorCodes('&', config().getString("Main.prefix", "ServerName")), messages());
 
         Debug.setDebug(config().getBoolean("Main.debug", false));
-        if (loadGuis) BukkitGUIManager.reload(plugin);
+        if (loadGuis) plugin.guiManager().setup();
     }
 
 }
