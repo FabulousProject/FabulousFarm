@@ -1,7 +1,7 @@
 package me.alpho320.fabulous.farm.util;
 
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.CompletableFuture;
@@ -16,7 +16,7 @@ public class StringUtil {
     public static String getFormattedTime(long time) {
         try {
             CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
-                final FarmPlugin plugin = FarmPlugin.instance();
+                final BukkitFarmPlugin plugin = BukkitFarmPlugin.instance();
                 long seconds = time, minutes = 0, hours = 0, days = 0, weeks = 0, months = 0, years = 0;
 
                 while (seconds >= 60) {

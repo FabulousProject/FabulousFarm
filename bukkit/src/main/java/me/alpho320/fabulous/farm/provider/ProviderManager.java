@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.provider;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.task.TaskManager;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class ProviderManager {
     private static final @NotNull Map<String, Provider> MAP = new HashMap<>();
     private static Provider PROVIDER;
 
-    public static void setup(@NotNull FarmPlugin plugin, boolean loadAllData, @Nullable Provider.Callback callback) {
+    public static void setup(@NotNull BukkitFarmPlugin plugin, boolean loadAllData, @Nullable Provider.Callback callback) {
         String key = plugin.getConfig().getString("Data.provider", "null").toLowerCase();
         long now = System.currentTimeMillis();
 

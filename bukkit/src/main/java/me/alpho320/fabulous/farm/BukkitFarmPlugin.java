@@ -6,9 +6,12 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
+import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.command.FarmCommand;
 import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import me.alpho320.fabulous.farm.data.Cache;
+import me.alpho320.fabulous.farm.gui.GUIManager;
+import me.alpho320.fabulous.farm.hook.HookManager;
 import me.alpho320.fabulous.farm.hook.impl.MythicMobsHook;
 import me.alpho320.fabulous.farm.hook.impl.PAPIHook;
 import me.alpho320.fabulous.farm.listener.ItemsAdderLoadListener;
@@ -17,6 +20,9 @@ import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.task.TaskManager;
+import me.alpho320.fabulous.farm.util.logger.FarmPluginLogger;
+import me.alpho320.fabulous.farm.util.updater.Updater;
 import me.alpho320.fabulous.farm.workload.LoadFarmsWorkloadThread;
 import me.alpho320.fabulous.farm.workload.SaveFarmsWorkloadThread;
 import net.milkbowl.vault.economy.Economy;
@@ -24,18 +30,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class FarmPlugin extends JavaPlugin {
+public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
-    private static FarmPlugin instance;
+    private static BukkitFarmPlugin instance;
 
     private FarmCommand farmCommand;
     private Cache cache;
-
-    private ConfigurationManager configurationManager;
-
-    private LoadFarmsWorkloadThread loadRealmsWorkloadThread;
-    private SaveFarmsWorkloadThread saveRealmsWorkloadThread;
 
     private int versionInt;
     private boolean isLoaded = false;
@@ -51,14 +53,6 @@ public class FarmPlugin extends JavaPlugin {
         instance = this;
         isDisabled = false;
 
-        ProviderManager.register(
-                new YAMLProvider(this)
-        );
-
-        Hooks.register(
-                new PAPIHook(this, true),
-                new MythicMobsHook(this, false)
-        );
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false).verboseOutput(true));
     }
 
@@ -82,47 +76,13 @@ public class FarmPlugin extends JavaPlugin {
         );
 
 
-        setConfigurationManager(new ConfigurationManager(this));
         configurationManager().reload(false);
         LogHandler.init(this);
 
         getLogger().info(" | You're running on " + versionInt);
         farmCommand().setup();
 
-        if (getConfig().getBoolean("Hooks.itemsadder", false)) {
-            getLogger().info(" | Found hook of ItemsAdder, waiting for ItemsadderReadyEvent...");
-            registerListeners(new ItemsAdderLoadListener(this, now));
-        } else {
-            FarmAPI.init(this, state -> {
-                if (state) {
 
-                    Hooks.get("PlaceholderAPI").setEnabled(getConfig().getBoolean("Hooks.placeholderapi", true));
-                    Hooks.get("MythicMobs").setEnabled(getConfig().getBoolean("Hooks.mythicmobs", false));
-
-                    Hooks.initAll(this);
-
-
-                    Debug.debug(0, "");
-                    Debug.debug(0, " | Successfully loaded! (" + FarmAPI.took(now) + ")");
-
-                    Debug.debug(0, "");
-                    Debug.debug(0, "============ FabulousFarmPlugin ============");
-                    Debug.debug(0, "");
-                    Debug.debug(0, "FabulousFarmPlugin Active!");
-                    Debug.debug(0, "Version: " + getDescription().getVersion());
-                    Debug.debug(0, "Developer: Alpho320#9202");
-                    Debug.debug(0, "");
-                    Debug.debug(0, "============ FabulousFarmPlugin ============");
-                    Debug.debug(0, "");
-
-                    this.isLoaded = true;
-                } else {
-                    Debug.debug(1, " | Failed to load! Please check the console.");
-                    getServer().getPluginManager().disablePlugin(this);
-                }
-
-            });
-        }
         CommandAPI.onEnable(this);
     }
 
@@ -184,7 +144,7 @@ public class FarmPlugin extends JavaPlugin {
         return this.farmCommand;
     }
 
-    public static FarmPlugin instance() {
+    public static BukkitFarmPlugin instance() {
         return instance;
     }
 
@@ -217,16 +177,59 @@ public class FarmPlugin extends JavaPlugin {
         this.cache = cache;
     }
 
-    public @NotNull ConfigurationManager configurationManager() {
-        return this.configurationManager;
+
+    @Override
+    public @NotNull FarmPluginLogger logger() {
+        return null;
     }
 
-    public void setConfigurationManager(@NotNull ConfigurationManager configurationManager) {
-        this.configurationManager = configurationManager;
+    @Override
+    public @NotNull ConfigurationManager configurationManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull ProviderManager providerManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull GUIManager guiManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull HookManager hookManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull FarmManager farmManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull Updater updater() {
+        return null;
+    }
+
+    @Override
+    public @NotNull TaskManager taskManager() {
+        return null;
+    }
+
+    @Override
+    public @NotNull String version() {
+        return null;
     }
 
     public int versionInt() {
         return this.versionInt;
+    }
+
+    @Override
+    public void reload(boolean async, @Nullable Callback callback) {
+
     }
 
     public void registerListeners(Listener...listeners) {
@@ -234,27 +237,13 @@ public class FarmPlugin extends JavaPlugin {
             getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    public LoadFarmsWorkloadThread loadRealmsWorkloadThread() {
-        return loadRealmsWorkloadThread;
-    }
 
-    public void setLoadFarmsWorkloadThread(LoadFarmsWorkloadThread loadRealmsWorkloadThread) {
-        this.loadRealmsWorkloadThread = loadRealmsWorkloadThread;
-    }
-
-    public SaveFarmsWorkloadThread saveFarmsWorkloadThread() {
-        return saveRealmsWorkloadThread;
-    }
-
-    public void setSaveFarmsWorkloadThread(SaveFarmsWorkloadThread saveFarmsWorkloadThread) {
-        this.saveRealmsWorkloadThread = saveRealmsWorkloadThread;
-    }
     public static boolean isDisabled() {
         return isDisabled;
     }
 
     public static void setIsDisabled(boolean isDisabled) {
-        FarmPlugin.isDisabled = isDisabled;
+        BukkitFarmPlugin.isDisabled = isDisabled;
     }
 
 }

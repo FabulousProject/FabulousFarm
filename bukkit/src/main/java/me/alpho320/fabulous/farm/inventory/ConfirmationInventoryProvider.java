@@ -6,7 +6,7 @@ import me.alpho320.fabulous.core.util.inv.smartinventory.Icon;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryContents;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
 import org.bukkit.Material;
@@ -101,7 +101,7 @@ public class ConfirmationInventoryProvider implements InventoryProvider {
                 }
 
             }
-        }.runTaskLater(FarmPlugin.instance(), delay);
+        }.runTaskLater(BukkitFarmPlugin.instance(), delay);
     }
 
 }

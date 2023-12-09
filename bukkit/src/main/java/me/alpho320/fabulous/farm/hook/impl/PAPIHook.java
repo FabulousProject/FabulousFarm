@@ -1,16 +1,16 @@
 package me.alpho320.fabulous.farm.hook.impl;
 
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class PAPIHook extends PlaceholderExpansion implements Hook {
 
-    private final @NotNull FarmPlugin plugin;
+    private final @NotNull BukkitFarmPlugin plugin;
     private boolean enabled;
 
-    public PAPIHook(@NotNull FarmPlugin plugin, boolean enabled) {
+    public PAPIHook(@NotNull BukkitFarmPlugin plugin, boolean enabled) {
         this.plugin = plugin;
         this.enabled = enabled;
     }

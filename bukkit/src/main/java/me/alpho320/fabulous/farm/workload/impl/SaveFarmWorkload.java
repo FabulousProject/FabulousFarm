@@ -1,6 +1,6 @@
 package me.alpho320.fabulous.farm.workload.impl;
 
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import me.alpho320.fabulous.farm.workload.Workload;
@@ -11,9 +11,9 @@ import java.util.UUID;
 public class SaveFarmWorkload implements Workload {
 
     private final @NotNull UUID id;
-    private final @NotNull FarmPlugin plugin;
+    private final @NotNull BukkitFarmPlugin plugin;
 
-    public SaveFarmWorkload(@NotNull FarmPlugin plugin, @NotNull UUID id) {
+    public SaveFarmWorkload(@NotNull BukkitFarmPlugin plugin, @NotNull UUID id) {
         this.id = id;
         this.plugin = plugin;
     }

@@ -3,18 +3,18 @@ package me.alpho320.fabulous.farm.configuration;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import org.bukkit.ChatColor;
 
 public class ConfigurationManager {
 
-    private final FarmPlugin plugin;
+    private final BukkitFarmPlugin plugin;
     private BukkitCore core;
 
     private BukkitConfiguration config;
     private BukkitConfiguration messages;
 
-    public ConfigurationManager(FarmPlugin plugin) {
+    public ConfigurationManager(BukkitFarmPlugin plugin) {
         this.plugin = plugin;
     }
 

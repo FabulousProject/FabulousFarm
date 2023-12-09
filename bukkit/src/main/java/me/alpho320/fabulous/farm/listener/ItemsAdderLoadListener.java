@@ -3,17 +3,17 @@ package me.alpho320.fabulous.farm.listener;
 import dev.lone.itemsadder.api.Events.ItemsAdderLoadDataEvent;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemsAdderLoadListener implements Listener {
 
-    private final @NotNull FarmPlugin plugin;
+    private final @NotNull BukkitFarmPlugin plugin;
     private final long now;
 
-    public ItemsAdderLoadListener(@NotNull FarmPlugin plugin, long now) {
+    public ItemsAdderLoadListener(@NotNull BukkitFarmPlugin plugin, long now) {
         this.plugin = plugin;
         this.now = now;
     }

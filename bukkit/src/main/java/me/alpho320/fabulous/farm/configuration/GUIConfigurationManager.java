@@ -5,7 +5,7 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.FileUtil;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
 import me.alpho320.fabulous.farm.gui.Interact;
@@ -27,7 +27,7 @@ public class GUIConfigurationManager {
 
     private static final Map<String, GUI> guiMap = new HashMap<>();
 
-    public static void reload(FarmPlugin plugin) {
+    public static void reload(BukkitFarmPlugin plugin) {
         FileUtil.createNewFile(plugin.getDataFolder().toString(), "/guis/x.yml", true);
         FileUtil.createNewFile(plugin.getDataFolder().toString(), "/animations/x.yml", true);
 
@@ -63,7 +63,7 @@ public class GUIConfigurationManager {
         return guiMap.getOrDefault(name, null);
     }
 
-    public static void loadGUIS(@NotNull FarmPlugin plugin, @NotNull String path) {
+    public static void loadGUIS(@NotNull BukkitFarmPlugin plugin, @NotNull String path) {
         File[] folder = new File(plugin.getDataFolder(), path).listFiles();
         if ((folder != null ? folder.length : 0) > 0) {
             Arrays.stream(folder)
@@ -76,7 +76,7 @@ public class GUIConfigurationManager {
         }
     }
 
-    public static void loadGUI(FarmPlugin plugin, String gui, BukkitConfiguration configuration) {
+    public static void loadGUI(BukkitFarmPlugin plugin, String gui, BukkitConfiguration configuration) {
         Map<Integer, Button> buttonMap = new HashMap<>();
 
         Debug.debug(2, "----------------------------------------------------------------");

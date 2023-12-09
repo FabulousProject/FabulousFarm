@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.task.impl;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import me.alpho320.fabulous.farm.task.Task;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class BackupTask extends Task {
 
-    public BackupTask(@NotNull FarmPlugin plugin) {
+    public BackupTask(@NotNull BukkitFarmPlugin plugin) {
         super(plugin, UUID.randomUUID());
     }
 

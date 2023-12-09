@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.util;
 
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class SoundUtil {
         if (key == null || player == null) return;
         BukkitCore.instance().sound().send(
                 player,
-                matchSound(FarmPlugin.instance().getConfig().getString("Sound." + key, "null"))
+                matchSound(BukkitFarmPlugin.instance().getConfig().getString("Sound." + key, "null"))
         );
     }
 
@@ -44,7 +44,7 @@ public class SoundUtil {
         if (key == null || players == null) return;
         BukkitCore.instance().sound().send(
                 players,
-                matchSound(FarmPlugin.instance().getConfig().getString("Sound." + key, "null"))
+                matchSound(BukkitFarmPlugin.instance().getConfig().getString("Sound." + key, "null"))
         );
     }
 

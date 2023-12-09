@@ -1,23 +1,13 @@
 package me.alpho320.fabulous.farm;
 
-import dev.lone.itemsadder.api.CustomStack;
 import me.alpho320.fabulous.core.api.util.RoundedNumberFormat;
-import me.alpho320.fabulous.core.bukkit.BukkitCore;
-import me.alpho320.fabulous.core.bukkit.util.BukkitItemCreator;
-import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
-import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
-import me.alpho320.fabulous.farm.data.Cache;
-import me.alpho320.fabulous.farm.data.IntData;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,26 +20,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class FarmAPI {
-
-    public static void init(@NotNull FarmPlugin plugin, @Nullable Provider.Callback callback) {
-        if (plugin == null) throw new IllegalStateException("init plugin cannot be null!");
-
-        reload(plugin, true, callback);
-    }
-
-    public static void reload(@NotNull FarmPlugin plugin, boolean loadAllData, @Nullable Provider.Callback callback) {
-        plugin.getServer().getScheduler().cancelTasks(plugin);
-
-        plugin.setConfigurationManager(new ConfigurationManager(plugin));
-        plugin.configurationManager().reload(true);
-        plugin.setCache(new Cache(plugin.configurationManager()));
-
-        setupFormats(plugin);
-        
-        ProviderManager.setup(plugin, loadAllData, callback);
-        
-        if (!loadAllData) checkCallback(callback, true);
-    }
 
     public static @Nullable PlayerData getPlayerData(Player player) {
         if (player == null) return null;
@@ -73,7 +43,7 @@ public class FarmAPI {
         }
     }
 
-    public static void setupFormats(@NotNull FarmPlugin plugin) {
+    public static void setupFormats(@NotNull BukkitFarmPlugin plugin) {
         if (!plugin.getConfig().getBoolean("Numbers.formats.enabled")) return;
 
         RoundedNumberFormat.setFormats(
@@ -87,79 +57,13 @@ public class FarmAPI {
         );
     }
 
-    public static @NotNull ItemStack getItemFromSection(@NotNull FarmPlugin plugin, ConfigurationSection section) {
-        return getItemFromSection(plugin, section, "material");
-    }
-
-    public static @NotNull ItemStack getItemFromSection(@NotNull FarmPlugin plugin, ConfigurationSection section, String typeKey) {
-        if (section == null) {
-            throw new IllegalStateException("GTFS section null!");
-        } else {
-            String mat = section.getString(typeKey, "AIR");
-            if (section.isSet("==")) {
-                try {
-                    Debug.debug(0, " | CurrentPath: " + section.getCurrentPath());
-                    ItemStack itemStack = section.getItemStack(section.getCurrentPath(), new ItemStack(Material.AIR));
-                    Debug.debug(0," | ItemStack: " + itemStack);
-                    return itemStack;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (mat.startsWith("ITEMSADDER-")) {
-                if (plugin.getServer().getPluginManager().isPluginEnabled("ItemsAdder")) {
-                    CustomStack stack = CustomStack.getInstance(section.getString(typeKey, "null").split("-")[1]);
-                    if (stack == null) {
-                        Debug.debug(1, " | ItemError: " + section.getString(typeKey, "null") + " is not itemsadder item!");
-                        return new ItemStack(Material.AIR);
-                    }
-
-                    ItemStack clone = stack.getItemStack().clone();
-                    ItemMeta meta = clone.getItemMeta();
-
-                    if (section.isList("lore"))
-                        meta.setLore(BukkitCore.instance().message().colored(section.getStringList("lore")));
-                    if (section.isString("name"))
-                        meta.setDisplayName(BukkitCore.instance().message().colored(section.getString("name", "")));
-
-                    clone.setItemMeta(meta);
-                    clone.setAmount(IntData.of(section).toInt());
-                    return clone;
-                } else {
-                    Debug.debug(1, " | " + mat + " is itemsadder item but itemsadder is not enabled!");
-                    return new ItemStack(Material.AIR);
-                }
-            }  else if (section.getString(typeKey, "AIR").contains("%") || section.getString(typeKey, "AIR").contains(":")) {
-                return new BukkitItemCreator()
-                        .type("STONE")
-                        .name(BukkitCore.instance().message().colored(section.getString("name", "null")))
-                        .amount(IntData.of(section).toInt())
-                        .lore(BukkitCore.instance().message().colored(section.getStringList("lore")))
-                        .damage((short) section.getInt("damage", 0))
-                        .enchantFromList(section.getStringList("enchantments"))
-                        .modelData(section.getInt("model-data", 0))
-                        .create();
-            } else {
-                return new BukkitItemCreator()
-                        .type(section.getString(typeKey, "AIR"))
-                        .name(BukkitCore.instance().message().colored(section.getString("name", "null")))
-                        .amount(IntData.of(section).toInt())
-                        .lore(BukkitCore.instance().message().colored(section.getStringList("lore")))
-                        .damage((short) section.getInt("damage", 0))
-                        .enchantFromList(section.getStringList("enchantments"))
-                        .modelData(section.getInt("model-data", 0))
-                        .create();
-            }
-        }
-    }
 
     public static String format(double i) {
-        if (!FarmPlugin.instance().getConfig().getBoolean("Numbers.decimal", false)) {
+        if (!BukkitFarmPlugin.instance().getConfig().getBoolean("Numbers.decimal", false)) {
             return String.format("%.2f", i);
         }
 
-        return FarmPlugin.instance().getConfig().getBoolean("Numbers.formats.enabled", false) ? RoundedNumberFormat.format(i) : String.valueOf(i);
+        return BukkitFarmPlugin.instance().getConfig().getBoolean("Numbers.formats.enabled", false) ? RoundedNumberFormat.format(i) : String.valueOf(i);
     }
 
     public static String took(long from) {
@@ -210,18 +114,18 @@ public class FarmAPI {
     }
 
     public static void runSYNC(Runnable runnable) {
-        if (FarmPlugin.isDisabled()) return;
-        FarmPlugin.instance().getServer().getScheduler().runTask(FarmPlugin.instance(), runnable);
+        if (BukkitFarmPlugin.isDisabled()) return;
+        BukkitFarmPlugin.instance().getServer().getScheduler().runTask(BukkitFarmPlugin.instance(), runnable);
     }
 
     public static void runASYNC(Runnable runnable) {
-        if (FarmPlugin.isDisabled()) return;
-        FarmPlugin.instance().getServer().getScheduler().runTaskAsynchronously(FarmPlugin.instance(), runnable);
+        if (BukkitFarmPlugin.isDisabled()) return;
+        BukkitFarmPlugin.instance().getServer().getScheduler().runTaskAsynchronously(BukkitFarmPlugin.instance(), runnable);
     }
 
     public static void executeCommands(Player player, List<String> commands) {
         if (player == null || commands == null) return;
-        final FarmPlugin plugin = FarmPlugin.instance();
+        final BukkitFarmPlugin plugin = BukkitFarmPlugin.instance();
         plugin.getServer().getScheduler().runTask(plugin, () -> {
             for (String command : commands) {
                 if (command.contains("null")) return;

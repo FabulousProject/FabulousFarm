@@ -4,7 +4,7 @@ import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
 import me.alpho320.fabulous.core.util.inv.smartinventory.Page;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -25,7 +25,7 @@ public class GUIManager {
     }
 
     public static void open(Player player, InventoryProvider provider, String title, int row, boolean async, List<Interact> interacts, long startDelay, Runnable whenClose) {
-        Page page = Page.build(FarmPlugin.instance().inventory(), provider)
+        Page page = Page.build(BukkitFarmPlugin.instance().inventory(), provider)
                 .title(BukkitCore.instance().message().coloredWithPlaceholders(player, title))
                 .row(row)
                 .tick(2L)

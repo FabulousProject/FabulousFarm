@@ -1,7 +1,7 @@
 package me.alpho320.fabulous.farm.listener;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlayerQuitListener implements Listener {
 
-    private final @NotNull FarmPlugin plugin;
+    private final @NotNull BukkitFarmPlugin plugin;
 
-    public PlayerQuitListener(@NotNull FarmPlugin plugin) {
+    public PlayerQuitListener(@NotNull BukkitFarmPlugin plugin) {
         this.plugin = plugin;
     }
 

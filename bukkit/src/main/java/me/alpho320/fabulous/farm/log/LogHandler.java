@@ -1,7 +1,7 @@
 package me.alpho320.fabulous.farm.log;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +16,7 @@ public class LogHandler {
     private static @NotNull File LOG_FILE;
     private static @NotNull YamlConfiguration CONFIGURATION;
 
-    public static void init(@NotNull FarmPlugin plugin) {
+    public static void init(@NotNull BukkitFarmPlugin plugin) {
         LOG_FILE = createFile(plugin);
         CONFIGURATION = YamlConfiguration.loadConfiguration(LOG_FILE);;
     }
@@ -39,7 +39,7 @@ public class LogHandler {
         }
     }
 
-    private static @NotNull File createFile(@NotNull FarmPlugin plugin) {
+    private static @NotNull File createFile(@NotNull BukkitFarmPlugin plugin) {
         File file = new File(plugin.getDataFolder(), "/logs/log-" + new SimpleDateFormat("dd-MMMM-yyyy", new Locale("en")).format(new Date()) + ".yml");
         if (!file.exists()) {
             file.getParentFile().mkdirs();
