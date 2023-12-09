@@ -16,7 +16,7 @@ import me.alpho320.fabulous.farm.hook.HookManager;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.provider.Provider;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import me.alpho320.fabulous.farm.task.TaskManager;
 import me.alpho320.fabulous.farm.util.logger.BukkitPluginLogger;
 import me.alpho320.fabulous.farm.util.logger.FarmPluginLogger;
@@ -92,7 +92,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     public void onDisable() {
         isDisabled = true;
         long now = System.currentTimeMillis();
-        Provider provider = ProviderManager.get();
+        Provider provider = BukkitProviderManager.get();
 
         provider.saveAllData(false, state -> {
             if (state) {
@@ -187,7 +187,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     }
 
     @Override
-    public @NotNull ProviderManager providerManager() {
+    public @NotNull BukkitProviderManager providerManager() {
         return null;
     }
 
@@ -228,6 +228,16 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     @Override
     public void reload(boolean async, @Nullable Callback callback) {
 
+    }
+
+    @Override
+    public void runSYNC(@NotNull Runnable runnable) {
+        getServer().getScheduler().runTask(this, runnable);
+    }
+
+    @Override
+    public void runASYNC(@NotNull Runnable runnable) {
+        getServer().getScheduler().runTaskAsynchronously(this, runnable);
     }
 
     public void registerListeners(Listener...listeners) {

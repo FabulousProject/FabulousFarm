@@ -3,9 +3,7 @@ package me.alpho320.fabulous.farm;
 import me.alpho320.fabulous.core.api.util.RoundedNumberFormat;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.provider.Provider;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -23,19 +21,19 @@ public class FarmAPI {
 
     public static @Nullable PlayerData getPlayerData(Player player) {
         if (player == null) return null;
-        return ProviderManager.findPlayerData(player);
+        return BukkitProviderManager.findPlayerData(player);
     }
 
     public static @Nullable PlayerData getPlayerData(UUID id) {
         if (id == null) return null;
-        return ProviderManager.findPlayerData(id);
+        return BukkitProviderManager.findPlayerData(id);
     }
 
     public static void getPlayerData(UUID id, boolean load, @Nullable Provider.Callback callback) {
         if (id == null) return;
-        PlayerData data = ProviderManager.findPlayerData(id);
+        PlayerData data = BukkitProviderManager.findPlayerData(id);
         if (data == null && load) {
-            ProviderManager.get().loadPlayerData(id, true, c -> {
+            BukkitProviderManager.get().loadPlayerData(id, true, c -> {
                 checkCallback(callback, c);
             });
         } else {

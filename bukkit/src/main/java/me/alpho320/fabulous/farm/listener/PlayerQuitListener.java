@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.listener;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,11 +20,11 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        ProviderManager.get().savePlayerData(player.getUniqueId(), true, state -> {
+        BukkitProviderManager.get().savePlayerData(player.getUniqueId(), true, state -> {
                 if (state) Debug.debug(2, " | Data successfully saved for " + player.getName() + "-" + player.getUniqueId());
                 else Debug.debug(1, " | Failed to save data for " + player.getName() + "-" + player.getUniqueId());
 
-                ProviderManager.get().map().remove(player.getUniqueId());
+                BukkitProviderManager.get().map().remove(player.getUniqueId());
             }
         );
 

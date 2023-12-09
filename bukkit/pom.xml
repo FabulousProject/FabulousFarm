@@ -6,10 +6,11 @@
     <parent>
         <groupId>me.alpho320.fabulous</groupId>
         <artifactId>FabulousFarm</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>bukkit</artifactId>
+    <version>1.0.2</version>
 
     <dependencyManagement>
         <dependencies>

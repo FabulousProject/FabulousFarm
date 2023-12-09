@@ -3,7 +3,7 @@ package me.alpho320.fabulous.farm.task.impl;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import me.alpho320.fabulous.farm.task.Task;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public class BackupTask extends Task {
         Debug.debug(0, " | Backup starting...");
 
         long now = System.currentTimeMillis();
-        ProviderManager.get().saveAllData(true, state -> {
+        BukkitProviderManager.get().saveAllData(true, state -> {
             if (state) {
                 Debug.debug(0, " | All data successfully saved. (" + FarmAPI.took(now) + ")");
             } else {

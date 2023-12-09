@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.listener;
 
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,7 +21,7 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        ProviderManager.get().loadPlayerData(player.getUniqueId(), true, state -> {
+        BukkitProviderManager.get().loadPlayerData(player.getUniqueId(), true, state -> {
             if (state) Debug.debug(2, " | Data successfully  loaded for " + player.getName() + "-" + player.getUniqueId());
             else Debug.debug(1, " | Failed to load data for " + player.getName() + "-" + player.getUniqueId());
 

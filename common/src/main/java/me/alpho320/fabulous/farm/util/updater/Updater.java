@@ -53,12 +53,18 @@ public class Updater {
         try {
             URLConnection connection = url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
             boolean finished = false;
+            boolean parentVersionFounded = false;
 
             while (!finished) {
                 String line = reader.readLine();
                 if (line != null) {
                     if (line.contains("<version>")) {
+                        if (!parentVersionFounded) {
+                            parentVersionFounded = true;
+                            continue;
+                        }
                         // <version>1.0.1</version>
                         this.returnedVersion = line.split(Pattern.quote("<version>"))[1].split(Pattern.quote("</version>"))[0];
                         break;

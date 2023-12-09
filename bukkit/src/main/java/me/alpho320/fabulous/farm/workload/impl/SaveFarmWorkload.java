@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.workload.impl;
 
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.log.LogHandler;
-import me.alpho320.fabulous.farm.provider.ProviderManager;
+import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import me.alpho320.fabulous.farm.workload.Workload;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ public class SaveFarmWorkload implements Workload {
 
     @Override
     public void compute() {
-        ProviderManager.get().saveFarmData(id, false, state -> {
+        BukkitProviderManager.get().saveFarmData(id, false, state -> {
             if (state)
                 LogHandler.log(true, " | Farm  " + id + " successfully saved." );
             else
