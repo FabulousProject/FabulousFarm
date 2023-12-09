@@ -1,0 +1,12 @@
+name: FabulousFarm
+version: ${project.version}
+api-version: 1.13
+main: me.alpho320.fabulous.farm.BukkitFarmPlugin
+author: Alpho320
+depend:
+  - Vault
+  - PlaceholderAPI
+softdepend:
+  - ItemsAdder
+  - Oraxen
+  - MythicMobs
