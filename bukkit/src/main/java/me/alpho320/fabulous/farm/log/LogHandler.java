@@ -18,7 +18,7 @@ public class LogHandler {
 
     public static void init(@NotNull BukkitFarmPlugin plugin) {
         LOG_FILE = createFile(plugin);
-        CONFIGURATION = YamlConfiguration.loadConfiguration(LOG_FILE);;
+        CONFIGURATION = YamlConfiguration.loadConfiguration(LOG_FILE);
     }
 
     public static void log(@NotNull String message) {

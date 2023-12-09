@@ -1,6 +1,7 @@
 Main:
   prefix: '&6Luser&bRealms &c|'
   debug: true
+  updater: true
   backup-interval: 1800 #seconds
   log-save-interval: 120 #seconds
   load-max-ms-per-tick: 10

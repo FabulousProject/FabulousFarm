@@ -13,8 +13,6 @@ public abstract class TypedManager<KEY, OBJECT> extends Manager {
     private final @NotNull Map<KEY, OBJECT> map = new HashMap<>();
     private boolean enabled = true;
 
-    public abstract void init(@NotNull FarmPlugin plugin);
-
     public abstract @Nullable OBJECT find(KEY id);
     public abstract @Nullable OBJECT fromSection(String id, ConfigurationSection section);
 

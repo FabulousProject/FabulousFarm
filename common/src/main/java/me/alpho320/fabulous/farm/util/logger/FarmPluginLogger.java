@@ -8,7 +8,6 @@ public interface FarmPluginLogger {
     void setServerLoggingLevel(@NotNull LoggingLevel serverLoggingLevel);
 
     void log(@NotNull String str);
-    void log(@NotNull String str, @NotNull LoggingLevel level);
     void debug(@NotNull String str);
     void info(@NotNull String str);
     void warning(@NotNull String str);

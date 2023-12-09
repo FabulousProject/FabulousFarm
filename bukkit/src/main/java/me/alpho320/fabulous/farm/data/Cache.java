@@ -4,7 +4,7 @@ import me.alpho320.fabulous.core.api.manager.impl.message.MessageType;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.manager.impl.message.BukkitMessageManager;
 import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
-import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
+import me.alpho320.fabulous.farm.configuration.BukkitConfi;
 import org.jetbrains.annotations.NotNull;
 
 public class Cache {
@@ -34,7 +34,7 @@ public class Cache {
             playerHelpMessageType,
             adminHelpMessageType;
 
-    public Cache(@NotNull ConfigurationManager manager) {
+    public Cache(@NotNull BukkitConfi manager) {
         BukkitConfiguration config = manager.getConfig();
         BukkitConfiguration messages = manager.getMessages();
         BukkitMessageManager messageManager = BukkitCore.instance().message();

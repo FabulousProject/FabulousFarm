@@ -54,7 +54,7 @@ public class Updater {
             URLConnection connection = url.openConnection();
             this.returnedVersion = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
 
-            plugin.logger().debug("Updater returned version: " + this.returnedVersion + " (current: " + version + ")");
+            plugin.logger().info("Updater returned version: " + this.returnedVersion + " (current: " + version + ")");
 
             int[] tokenizedVersion = tokenize(returnedVersion);
             boolean newVersion = false;

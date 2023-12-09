@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class Manager {
 
-    public abstract void setup(FarmPlugin plugin);
+    public abstract void setup();
     public abstract @NotNull FarmPlugin plugin();
 
 }

@@ -8,23 +8,21 @@ import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
 import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.command.FarmCommand;
-import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
+import me.alpho320.fabulous.farm.configuration.BukkitConfi;
+import me.alpho320.fabulous.farm.configuration.BukkitConfigurationManager;
+import me.alpho320.fabulous.farm.configuration.BukkitGUIManager;
 import me.alpho320.fabulous.farm.data.Cache;
 import me.alpho320.fabulous.farm.gui.GUIManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
-import me.alpho320.fabulous.farm.hook.impl.MythicMobsHook;
-import me.alpho320.fabulous.farm.hook.impl.PAPIHook;
-import me.alpho320.fabulous.farm.listener.ItemsAdderLoadListener;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
 import me.alpho320.fabulous.farm.task.TaskManager;
+import me.alpho320.fabulous.farm.util.logger.BukkitPluginLogger;
 import me.alpho320.fabulous.farm.util.logger.FarmPluginLogger;
 import me.alpho320.fabulous.farm.util.updater.Updater;
-import me.alpho320.fabulous.farm.workload.LoadFarmsWorkloadThread;
-import me.alpho320.fabulous.farm.workload.SaveFarmsWorkloadThread;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -38,6 +36,11 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     private FarmCommand farmCommand;
     private Cache cache;
+    private Updater updater;
+
+    private BukkitPluginLogger logger;
+    private BukkitConfigurationManager configurationManager;
+    private BukkitGUIManager guiManager;
 
     private int versionInt;
     private boolean isLoaded = false;
@@ -53,6 +56,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
         instance = this;
         isDisabled = false;
 
+        this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false).verboseOutput(true));
     }
 
@@ -78,11 +82,12 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
         configurationManager().reload(false);
         LogHandler.init(this);
+        logger.setServerLoggingLevel(getConfig().getBoolean("Main.debug", false) ? FarmPluginLogger.LoggingLevel.DEBUG : FarmPluginLogger.LoggingLevel.INFO);
 
-        getLogger().info(" | You're running on " + versionInt);
+        this.updater = new Updater(this, getDescription().getVersion(), getConfig().getBoolean("Main.updater", false));
+        getServer().getScheduler().runTaskAsynchronously(this, updater::check);
+
         farmCommand().setup();
-
-
         CommandAPI.onEnable(this);
     }
 
@@ -150,11 +155,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull BukkitConfiguration getConfig() {
-        return configurationManager().getConfig();
-    }
-
-    public @NotNull BukkitConfiguration config() {
-        return configurationManager().getConfig();
+        return configurationManager().config();
     }
 
     public void setConfig(@NotNull BukkitConfiguration config) {
@@ -162,7 +163,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     }
 
     public @NotNull BukkitConfiguration messages() {
-        return configurationManager().getMessages();
+        return configurationManager().messages();
     }
 
     public void setMessages(@NotNull BukkitConfiguration messages) {
@@ -180,12 +181,12 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull FarmPluginLogger logger() {
-        return null;
+        return this.logger;
     }
 
     @Override
-    public @NotNull ConfigurationManager configurationManager() {
-        return null;
+    public @NotNull BukkitConfigurationManager configurationManager() {
+        return this.configurationManager;
     }
 
     @Override
@@ -195,7 +196,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull GUIManager guiManager() {
-        return null;
+        return this.guiManager;
     }
 
     @Override
@@ -210,7 +211,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull Updater updater() {
-        return null;
+        return this.updater;
     }
 
     @Override
@@ -220,7 +221,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull String version() {
-        return null;
+        return getDescription().getVersion();
     }
 
     public int versionInt() {
