@@ -39,10 +39,10 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     private Updater updater;
 
     private BukkitPluginLogger logger;
+    private BukkitGUIManager guiManager;
     private BukkitConfigurationManager configurationManager;
     private BukkitProviderManager providerManager;
     private BukkitHookManager hookManager;
-    private BukkitGUIManager guiManager;
 
     private int versionInt;
     private boolean isLoaded = false;
@@ -60,6 +60,8 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
         new BukkitFarmAPI(this);
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
+        this.guiManager = new BukkitGUIManager(this);
+        this.configurationManager = new BukkitConfigurationManager(this);
         this.providerManager = new BukkitProviderManager(this);
         this.hookManager = new BukkitHookManager(this);
 
@@ -96,7 +98,8 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
                 logger.info(" | All hooks successfully loaded. " + BukkitFarmAPI.took(now));
                 providerManager.setup(ProviderManager.ProviderLoadType.ALL_FARMS, state -> {
                     if (state) {
-                        logger.info(" | All data successfully loaded. " + BukkitFarmAPI.took(now));
+                        guiManager.setup();
+
                         setLoaded(true);
                     } else {
                         logger.severe(" | Failed to load all data!");

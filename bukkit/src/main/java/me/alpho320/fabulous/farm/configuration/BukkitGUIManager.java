@@ -38,7 +38,6 @@ public class BukkitGUIManager extends GUIManager {
         this.plugin = plugin;
     }
 
-
     @Override
     public void setup() {
         FileUtil.createNewFile(plugin.getDataFolder().toString(), "/guis/x.yml", true);
@@ -96,7 +95,7 @@ public class BukkitGUIManager extends GUIManager {
                     }
                 })
                 .whenTick(ev -> interacts.stream().filter(interact -> interact.getType().equals(Interact.InteractType.WHEN_UPDATE)).forEach(interact -> interact.run(player)));
-        BukkitFarmAPI.runSYNC(() -> {
+        plugin.runSYNC(() -> {
             int i = player.getOpenInventory().getTopInventory().getSize() / 9;
 
             if (i < page.row())
@@ -162,6 +161,7 @@ public class BukkitGUIManager extends GUIManager {
                 plugin.logger().debug("   | Interact of " + interact + " loading...");
                 interacts.add(
                         new Interact(
+                                plugin,
                                 section.getStringList("commands"),
                                 SoundUtil.getSoundFromList(section.getStringList("sounds")),
                                 Interact.InteractType.getType(interact)
@@ -184,7 +184,7 @@ public class BukkitGUIManager extends GUIManager {
                         configuration.getString("GUI.animation-type", "null"),
                         (int) buttonMap.values()
                                 .stream()
-                                .filter(button -> button.getName().contains("%") || BukkitFarmAPI.getItemLoreOrNew(button.getItem()).contains("%"))
+                                .filter(button -> button.name().contains("%") || BukkitFarmAPI.getItemLoreOrNew(button.item()).contains("%"))
                                 .count(),
                         interacts,
                         buttonMap

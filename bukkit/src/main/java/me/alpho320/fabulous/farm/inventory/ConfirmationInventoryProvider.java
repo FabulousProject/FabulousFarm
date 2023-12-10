@@ -7,8 +7,6 @@ import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryContents;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
 import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.gui.Button;
-import me.alpho320.fabulous.farm.gui.GUI;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -12,10 +12,7 @@ public class BukkitConfigurationManager extends ConfigurationManager {
     private final @NotNull BukkitFarmPlugin plugin;
     private BukkitCore core;
 
-    private BukkitConfiguration config;
-    private BukkitConfiguration messages;
-
-    public BukkitConfigurationManager(BukkitFarmPlugin plugin) {
+    public BukkitConfigurationManager(@NotNull BukkitFarmPlugin plugin) {
         super(plugin);
         this.plugin = plugin;
     }
