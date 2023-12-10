@@ -12,10 +12,12 @@ import me.alpho320.fabulous.farm.configuration.BukkitConfigurationManager;
 import me.alpho320.fabulous.farm.configuration.BukkitGUIManager;
 import me.alpho320.fabulous.farm.data.Cache;
 import me.alpho320.fabulous.farm.gui.GUIManager;
+import me.alpho320.fabulous.farm.hook.BukkitHookManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
+import me.alpho320.fabulous.farm.provider.ProviderManager;
 import me.alpho320.fabulous.farm.provider.impl.MySQLProvider;
 import me.alpho320.fabulous.farm.task.BukkitTaskManager;
 import me.alpho320.fabulous.farm.util.logger.BukkitPluginLogger;
@@ -38,6 +40,8 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     private BukkitPluginLogger logger;
     private BukkitConfigurationManager configurationManager;
+    private BukkitProviderManager providerManager;
+    private BukkitHookManager hookManager;
     private BukkitGUIManager guiManager;
 
     private int versionInt;
@@ -55,6 +59,8 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
         isDisabled = false;
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
+        this.providerManager = new BukkitProviderManager(this);
+        this.hookManager = new BukkitHookManager(this);
 
         providerManager().register("mysql", new MySQLProvider(this));
 
@@ -86,6 +92,16 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
         this.updater = new Updater(this, getDescription().getVersion(), getConfig().getBoolean("Main.updater", false));
         getServer().getScheduler().runTaskAsynchronously(this, updater::check);
+
+        hookManager.init(state -> {
+            if (state) {
+                logger.info(" | All hooks successfully loaded. " + FarmAPI.took(now));
+
+            } else {
+                logger.severe(" | Failed to load all hooks!");
+            }
+        });
+
 
         farmCommand().setup();
         CommandAPI.onEnable(this);
@@ -190,7 +206,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull BukkitProviderManager providerManager() {
-        return null;
+        return this.providerManager;
     }
 
     @Override
@@ -200,7 +216,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull HookManager hookManager() {
-        return null;
+        return this.hookManager;
     }
 
     @Override
@@ -247,6 +263,9 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
             getServer().getPluginManager().registerEvents(listener, this);
     }
 
+    public void checkCallback(@Nullable Callback callback, boolean state) {
+        if (callback != null) callback.complete(state);
+    }
 
     public static boolean isDisabled() {
         return isDisabled;

@@ -1,5 +1,6 @@
 package me.alpho320.fabulous.farm.manager;
 
+import me.alpho320.fabulous.farm.Callback;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.Manager;
 import org.jetbrains.annotations.NotNull;
@@ -12,12 +13,9 @@ import java.util.concurrent.CompletableFuture;
 
 public abstract class AbstractDataManager<OBJECT_ID, OBJECT> {
 
-    protected final @NotNull FarmPlugin plugin;
     private final @NotNull Map<OBJECT_ID, OBJECT> map = new HashMap<>();
 
-    public AbstractDataManager(@NotNull FarmPlugin plugin) {
-        this.plugin = plugin;
-    }
+    public abstract void init(@Nullable Callback callback);
 
     public abstract @NotNull CompletableFuture<Boolean> loadAll(boolean async);
     public abstract @NotNull CompletableFuture<Boolean> unloadAll(boolean async);
@@ -49,10 +47,6 @@ public abstract class AbstractDataManager<OBJECT_ID, OBJECT> {
 
     public void clear() {
         this.map.clear();
-    }
-
-    public @NotNull FarmPlugin plugin() {
-        return this.plugin;
     }
 
 }

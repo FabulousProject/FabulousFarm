@@ -43,10 +43,10 @@ public class BukkitProviderManager extends ProviderManager {
                     if (state) {
                         plugin.logger().info(" | Provider successfully loaded. (" + (System.currentTimeMillis() - now.get()) + "ms)");
                         plugin.taskManager().startTasks();
-                        if (callback != null) callback.complete(true);
+                        plugin.checkCallback(callback, true);
                     } else {
                         plugin.logger().severe(" | Failed to load provider, plugin disabling!");
-                        if (callback != null) callback.complete(false);
+                        plugin.checkCallback(callback, false);
                         Bukkit.getServer().getPluginManager().disablePlugin((BukkitFarmPlugin) plugin);
                     }
                 };

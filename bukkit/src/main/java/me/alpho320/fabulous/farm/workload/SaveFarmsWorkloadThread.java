@@ -2,6 +2,7 @@ package me.alpho320.fabulous.farm.workload;
 
 import com.google.common.collect.Queues;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
+import me.alpho320.fabulous.farm.Callback;
 import me.alpho320.fabulous.farm.FarmAPI;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -11,10 +12,10 @@ public class SaveFarmsWorkloadThread extends BukkitRunnable {
 
     private final int MAX_MS_PER_TICK;
     private final ArrayDeque<Workload> deque = Queues.newArrayDeque();
-    private Provider.Callback callback;
+    private Callback callback;
     private boolean finished = false;
 
-    public SaveFarmsWorkloadThread(int MAX_MS_PER_TICK, Provider.Callback callback) {
+    public SaveFarmsWorkloadThread(int MAX_MS_PER_TICK, Callback callback) {
         this.MAX_MS_PER_TICK = MAX_MS_PER_TICK;
         this.callback = callback;
     }
