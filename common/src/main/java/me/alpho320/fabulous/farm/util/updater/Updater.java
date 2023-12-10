@@ -45,8 +45,8 @@ public class Updater {
         if (!enabled) {
             return;
         } else if (url == null) {
-            plugin.logger().warning("Updater is enabled but connection URL is null!");
-            plugin.logger().warning("Is github down? check the 'https://raw.githubusercontent.com/FabulousProject/FabulousFarm/master/bukkit/pom.xml'");
+            plugin.logger().warning(" | Updater is enabled but connection URL is null!");
+            plugin.logger().warning(" | Is github down? check the 'https://raw.githubusercontent.com/FabulousProject/FabulousFarm/master/bukkit/pom.xml'");
             return;
         }
 
@@ -74,7 +74,7 @@ public class Updater {
                 }
             }
 
-            plugin.logger().info("Updater returned version: " + this.returnedVersion + " (current: " + version + ")");
+            plugin.logger().info(" | Updater returned version: " + this.returnedVersion + " (current: " + version + ")");
 
             int[] tokenizedVersion = tokenize(returnedVersion);
             boolean newVersion = false;
@@ -95,8 +95,8 @@ public class Updater {
             if (newVersion) {
                 this.updateAvailable = true;
 
-                plugin.logger().warning("A new version " + returnedVersion + " was found! (your version: " + version + "). Please update.");
-                plugin.logger().warning("Remember; if you continue to use an old version you will not get any support.");
+                plugin.logger().warning(" | A new version " + returnedVersion + " was found! (your version: " + version + "). Please update.");
+                plugin.logger().warning(" | Remember; if you continue to use an old version you will not get any support.");
             }
 
         } catch (IOException e) {
