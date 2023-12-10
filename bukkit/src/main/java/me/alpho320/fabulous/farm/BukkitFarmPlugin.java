@@ -57,12 +57,11 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
         instance = this;
         isDisabled = false;
+        new BukkitFarmAPI(this);
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
         this.providerManager = new BukkitProviderManager(this);
         this.hookManager = new BukkitHookManager(this);
-
-        providerManager().register("mysql", new MySQLProvider(this));
 
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false).verboseOutput(true));
     }
@@ -86,17 +85,23 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
                 new PlayerQuitListener(this)
         );
 
-
         configurationManager().reload(false);
         logger.setServerLoggingLevel(getConfig().getBoolean("Main.debug", false) ? FarmPluginLogger.LoggingLevel.DEBUG : FarmPluginLogger.LoggingLevel.INFO);
 
         this.updater = new Updater(this, getDescription().getVersion(), getConfig().getBoolean("Main.updater", false));
         getServer().getScheduler().runTaskAsynchronously(this, updater::check);
 
-        hookManager.init(state -> {
-            if (state) {
-                logger.info(" | All hooks successfully loaded. " + FarmAPI.took(now));
-
+        hookManager.init(hookState -> {
+            if (hookState) {
+                logger.info(" | All hooks successfully loaded. " + BukkitFarmAPI.took(now));
+                providerManager.setup(ProviderManager.ProviderLoadType.ALL_FARMS, state -> {
+                    if (state) {
+                        logger.info(" | All data successfully loaded. " + BukkitFarmAPI.took(now));
+                        setLoaded(true);
+                    } else {
+                        logger.severe(" | Failed to load all data!");
+                    }
+                });
             } else {
                 logger.severe(" | Failed to load all hooks!");
             }
@@ -114,7 +119,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
         providerManager().provider().saveAllData(false, state -> {
             if (state) {
-                Debug.debug(0, " | All data successfully saved (" + FarmAPI.took(now) + ")");
+                Debug.debug(0, " | All data successfully saved (" + BukkitFarmAPI.took(now) + ")");
             } else {
                 Debug.debug(1, " | Failed to save all data!");
             }

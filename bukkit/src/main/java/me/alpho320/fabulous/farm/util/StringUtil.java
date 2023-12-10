@@ -1,6 +1,6 @@
 package me.alpho320.fabulous.farm.util;
 
-import me.alpho320.fabulous.farm.FarmAPI;
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public class StringUtil {
 
     public static String getFormattedTime(LocalDateTime time) {
-        return getFormattedTime(FarmAPI.getDiff(time));
+        return getFormattedTime(BukkitFarmAPI.getDiff(time));
     }
 
     public static String getFormattedTime(long time) {

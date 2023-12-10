@@ -42,10 +42,10 @@ public class ChangeStageAction extends EventAction {
     public void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo) {
         CropHolder cropHolder = null;
         if (location != null) {
-            cropHolder = plugin.farmManager().cropManager().findCropHolder(location);
+            cropHolder = plugin.farmManager().cropManager().findHolder(location);
         } else {
             Location loc = tryToGetLocation(event);
-            if (loc != null) cropHolder = plugin.farmManager().cropManager().findCropHolder(loc);
+            if (loc != null) cropHolder = plugin.farmManager().cropManager().findHolder(loc);
         }
 
         if (cropHolder != null) {

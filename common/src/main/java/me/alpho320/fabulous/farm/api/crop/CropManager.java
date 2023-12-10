@@ -16,11 +16,11 @@ public abstract class CropManager extends TypedManager<String, Crop> {
     public abstract @Nullable CropHolder plant(@NotNull Crop crop, @NotNull Location location);
     public abstract @Nullable CropHolder plant(@NotNull String cropId, @NotNull Location location);
 
-    public @Nullable CropHolder findCropHolder(@NotNull Location location) {
+    public @Nullable CropHolder findHolder(@NotNull Location location) {
         return this.CROP_HOLDERS.getOrDefault(location, null);
     }
 
-    public @Nullable CropHolder findCropHolder(@NotNull SerializableLocation location) {
+    public @Nullable CropHolder findHolder(@NotNull SerializableLocation location) {
         return this.CROP_HOLDERS.getOrDefault(location.loc(), null);
     }
 

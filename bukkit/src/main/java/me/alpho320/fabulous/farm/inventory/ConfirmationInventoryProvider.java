@@ -5,7 +5,7 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitItemCreator;
 import me.alpho320.fabulous.core.util.inv.smartinventory.Icon;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryContents;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
-import me.alpho320.fabulous.farm.FarmAPI;
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
@@ -67,7 +67,7 @@ public class ConfirmationInventoryProvider implements InventoryProvider {
 
                     List<String> lore = new ArrayList<>();
 
-                    for (String line : FarmAPI.getItemLoreOrNew(button.getItem())) {
+                    for (String line : BukkitFarmAPI.getItemLoreOrNew(button.getItem())) {
                         if (line.contains("%confirm-lore%")) {
                             lore.addAll(confirmLore);
                         } else if (line.contains("%reject-lore%")) {
@@ -85,14 +85,14 @@ public class ConfirmationInventoryProvider implements InventoryProvider {
                             .lore(lore)
                             .create();
 
-                    FarmAPI.runSYNC(() -> {
+                    BukkitFarmAPI.runSYNC(() -> {
                         contents.set(slot, Icon.click(clone, clickEvent -> {
-                            FarmAPI.executeCommands(player, button.getCommands());
+                            BukkitFarmAPI.executeCommands(player, button.getCommands());
 
                             if (button.getType().equalsIgnoreCase("confirm")) {
-                                FarmAPI.runSYNC(confirm);
+                                BukkitFarmAPI.runSYNC(confirm);
                             } else if (button.getType().equalsIgnoreCase("reject")) {
-                                FarmAPI.runSYNC(reject);
+                                BukkitFarmAPI.runSYNC(reject);
                             }
 
                         }));

@@ -5,7 +5,6 @@ import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.api.condition.Condition;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseHolder;
-import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +24,7 @@ public class SeasonCondition extends Condition {
         final FarmManager farmManager = plugin.farmManager();
         if (seasons.contains(farmManager.seasonManager().currentSeason().id())) return true;
 
-        final CropHolder cropHolder = farmManager.cropManager().findCropHolder(location);
+        final CropHolder cropHolder = farmManager.cropManager().findHolder(location);
         if (cropHolder == null) return false;
 
         GreenhouseHolder greenhouseHolder = farmManager.greenhouseManager().findHolder(cropHolder);

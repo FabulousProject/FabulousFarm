@@ -3,10 +3,9 @@ package me.alpho320.fabulous.farm.configuration;
 import me.alpho320.fabulous.core.bukkit.BukkitCore;
 import me.alpho320.fabulous.core.bukkit.util.BukkitConfiguration;
 import me.alpho320.fabulous.core.bukkit.util.FileUtil;
-import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
 import me.alpho320.fabulous.core.util.inv.smartinventory.Page;
-import me.alpho320.fabulous.farm.FarmAPI;
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
@@ -97,7 +96,7 @@ public class BukkitGUIManager extends GUIManager {
                     }
                 })
                 .whenTick(ev -> interacts.stream().filter(interact -> interact.getType().equals(Interact.InteractType.WHEN_UPDATE)).forEach(interact -> interact.run(player)));
-        FarmAPI.runSYNC(() -> {
+        BukkitFarmAPI.runSYNC(() -> {
             int i = player.getOpenInventory().getTopInventory().getSize() / 9;
 
             if (i < page.row())
@@ -185,7 +184,7 @@ public class BukkitGUIManager extends GUIManager {
                         configuration.getString("GUI.animation-type", "null"),
                         (int) buttonMap.values()
                                 .stream()
-                                .filter(button -> button.getName().contains("%") || FarmAPI.getItemLoreOrNew(button.getItem()).contains("%"))
+                                .filter(button -> button.getName().contains("%") || BukkitFarmAPI.getItemLoreOrNew(button.getItem()).contains("%"))
                                 .count(),
                         interacts,
                         buttonMap

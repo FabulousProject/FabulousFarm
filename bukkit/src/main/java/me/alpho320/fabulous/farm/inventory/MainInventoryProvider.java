@@ -5,7 +5,7 @@ import me.alpho320.fabulous.core.bukkit.util.BukkitItemCreator;
 import me.alpho320.fabulous.core.util.inv.smartinventory.Icon;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryContents;
 import me.alpho320.fabulous.core.util.inv.smartinventory.InventoryProvider;
-import me.alpho320.fabulous.farm.FarmAPI;
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.gui.Button;
 import me.alpho320.fabulous.farm.gui.GUI;
@@ -40,7 +40,7 @@ public class MainInventoryProvider implements InventoryProvider {
                     .type(button.getMaterial().equalsIgnoreCase("%player_head%") ? "head_" + player.getName() : button.getMaterial())
                     .name(BukkitCore.instance().message().colored(button.getName()))
                     .damage(button.getItem().getDurability())
-                    .lore(FarmAPI.getItemLoreOrNew(button.getItem())
+                    .lore(BukkitFarmAPI.getItemLoreOrNew(button.getItem())
                             .stream()
                             .map(line -> BukkitCore.instance().message().coloredWithPlaceholders(player, line))
                             .collect(Collectors.toList()))
@@ -49,12 +49,12 @@ public class MainInventoryProvider implements InventoryProvider {
             int slot = entry.getKey();
             ItemStack clone = item.clone();
 
-            FarmAPI.runSYNC(() -> {
+            BukkitFarmAPI.runSYNC(() -> {
                 contents.set(slot, Icon.click(clone, event -> {
-                    FarmAPI.executeCommands(player, button.getCommands());
+                    BukkitFarmAPI.executeCommands(player, button.getCommands());
 
                     if (button.getType().equalsIgnoreCase("exit") || button.getType().equalsIgnoreCase("back"))
-                        FarmAPI.runSYNC(player::closeInventory);
+                        BukkitFarmAPI.runSYNC(player::closeInventory);
 
                 }));
             });
