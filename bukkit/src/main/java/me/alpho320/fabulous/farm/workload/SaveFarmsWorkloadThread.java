@@ -3,7 +3,6 @@ package me.alpho320.fabulous.farm.workload;
 import com.google.common.collect.Queues;
 import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.farm.FarmAPI;
-import me.alpho320.fabulous.farm.provider.Provider;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayDeque;

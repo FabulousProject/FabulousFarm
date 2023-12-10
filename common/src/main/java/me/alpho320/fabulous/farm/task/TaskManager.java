@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class TaskManager {
 
-    private final @NotNull FarmPlugin plugin;
+    protected final @NotNull FarmPlugin plugin;
 
     public TaskManager(@NotNull FarmPlugin plugin) {
         this.plugin = plugin;

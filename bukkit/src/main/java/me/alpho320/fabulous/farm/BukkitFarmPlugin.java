@@ -15,9 +15,9 @@ import me.alpho320.fabulous.farm.gui.GUIManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
 import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
-import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
-import me.alpho320.fabulous.farm.task.TaskManager;
+import me.alpho320.fabulous.farm.provider.impl.MySQLProvider;
+import me.alpho320.fabulous.farm.task.BukkitTaskManager;
 import me.alpho320.fabulous.farm.util.logger.BukkitPluginLogger;
 import me.alpho320.fabulous.farm.util.logger.FarmPluginLogger;
 import me.alpho320.fabulous.farm.util.updater.Updater;
@@ -55,6 +55,9 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
         isDisabled = false;
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
+
+        providerManager().register("mysql", new MySQLProvider(this));
+
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false).verboseOutput(true));
     }
 
@@ -92,15 +95,14 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     public void onDisable() {
         isDisabled = true;
         long now = System.currentTimeMillis();
-        Provider provider = BukkitProviderManager.get();
 
-        provider.saveAllData(false, state -> {
+        providerManager().provider().saveAllData(false, state -> {
             if (state) {
                 Debug.debug(0, " | All data successfully saved (" + FarmAPI.took(now) + ")");
             } else {
                 Debug.debug(1, " | Failed to save all data!");
             }
-            provider.close(null);
+            providerManager().provider().close(null);
         });
 
 
@@ -212,7 +214,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     }
 
     @Override
-    public @NotNull TaskManager taskManager() {
+    public @NotNull BukkitTaskManager taskManager() {
         return null;
     }
 

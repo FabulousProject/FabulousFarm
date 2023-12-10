@@ -2,7 +2,6 @@ package me.alpho320.fabulous.farm;
 
 import me.alpho320.fabulous.core.api.util.RoundedNumberFormat;
 import me.alpho320.fabulous.farm.data.PlayerData;
-import me.alpho320.fabulous.farm.provider.Provider;
 import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
