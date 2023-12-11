@@ -7,6 +7,8 @@ import me.alpho320.fabulous.core.bukkit.util.debugger.Debug;
 import me.alpho320.fabulous.core.util.inv.smartinventory.SmartInventory;
 import me.alpho320.fabulous.core.util.inv.smartinventory.manager.BasicSmartInventory;
 import me.alpho320.fabulous.farm.api.FarmManager;
+import me.alpho320.fabulous.farm.api.scheduler.BukkitSchedulerManager;
+import me.alpho320.fabulous.farm.api.scheduler.SchedulerManager;
 import me.alpho320.fabulous.farm.command.FarmCommand;
 import me.alpho320.fabulous.farm.configuration.BukkitConfigurationManager;
 import me.alpho320.fabulous.farm.configuration.BukkitGUIManager;
@@ -45,6 +47,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     private BukkitHookManager hookManager;
 
     private BukkitTaskManager taskManager;
+    private BukkitSchedulerManager schedulerManager;
 
     private int versionInt;
     private boolean isLoaded = false;
@@ -63,6 +66,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
         this.taskManager = new BukkitTaskManager(this);
+        this.schedulerManager = new BukkitSchedulerManager(this);
         this.guiManager = new BukkitGUIManager(this);
         this.configurationManager = new BukkitConfigurationManager(this);
         this.providerManager = new BukkitProviderManager(this);
@@ -243,6 +247,11 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     @Override
     public @NotNull Updater updater() {
         return this.updater;
+    }
+
+    @Override
+    public @NotNull SchedulerManager schedulerManager() {
+        return this.schedulerManager;
     }
 
     @Override

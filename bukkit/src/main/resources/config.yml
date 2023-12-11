@@ -66,7 +66,7 @@ Main:
     enabled: true
 
 Data:
-  provider: 'yaml' # yaml
+  provider: 'yaml' # yaml, mysql, sqlite
   ip: 'localhost'
   port: '3306'
   database: 'db_name'

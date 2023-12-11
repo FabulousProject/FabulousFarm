@@ -3,7 +3,8 @@ Sprinkler:
   range: 2 # squared
   max-water: 5 # amount of water that sprinkler can hold
   item:
-    material: ''
+    name: '&7Sıradan Fıskiye'
+    material: 'CAULDRON'
 
   pots:
     mode: 'WHITELIST' # BLACKLIST or WHITELIST
@@ -30,4 +31,5 @@ Sprinkler:
 
   animation: # WORK IN PROGRESS
     enabled: true
+    type: 'NONE' # WORK IN PROGRESS
 

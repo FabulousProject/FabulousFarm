@@ -9,6 +9,7 @@ import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseManager;
 import me.alpho320.fabulous.farm.api.pot.PotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.ScarecrowManager;
 import me.alpho320.fabulous.farm.api.season.SeasonManager;
+import me.alpho320.fabulous.farm.api.sprinkler.SprinklerManager;
 import me.alpho320.fabulous.farm.api.vermin.VerminManager;
 import me.alpho320.fabulous.farm.api.wateringcan.WateringCanManager;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +30,7 @@ public abstract class FarmManager {
     protected ConditionManager conditionManager;
     protected WateringCanManager wateringCanManager;
     protected BeeManager beeManager;
+    protected SprinklerManager sprinklerManager;
 
     protected final @NotNull List<String> worldBlacklist = new ArrayList<>();
 
@@ -76,6 +78,10 @@ public abstract class FarmManager {
 
     public @NotNull BeeManager beeManager() {
         return this.beeManager;
+    }
+
+    public @NotNull SprinklerManager sprinklerManager() {
+        return this.sprinklerManager;
     }
 
     public @NotNull List<String> worldBlacklist() {

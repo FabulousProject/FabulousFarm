@@ -42,7 +42,6 @@ public class BukkitProviderManager extends ProviderManager {
                 Callback callback2 = (state) -> {
                     if (state) {
                         plugin.logger().info(" | Provider successfully loaded. (" + (System.currentTimeMillis() - now.get()) + "ms)");
-                        plugin.taskManager().startTasks();
                         plugin.checkCallback(callback, true);
                     } else {
                         plugin.logger().severe(" | Failed to load provider, plugin disabling!");

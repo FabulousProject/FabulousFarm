@@ -4,6 +4,7 @@ import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.task.impl.BackupTask;
 import me.alpho320.fabulous.farm.task.impl.BeeCheckTask;
 import me.alpho320.fabulous.farm.task.impl.LogSaveTask;
+import me.alpho320.fabulous.farm.task.impl.SchedulerCheckTask;
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitTaskManager extends TaskManager {
@@ -19,7 +20,8 @@ public class BukkitTaskManager extends TaskManager {
         plugin.logger().info(" | Tasks Starting...");
         setupBackupTask();
         setupLogSaveTask();
-        setupBeeCheckTask();
+        if (plugin.farmManager().beeManager().enabled()) setupBeeCheckTask();
+        if (plugin.schedulerManager().enabled()) setupSchedulerCheckTask();
     }
 
     private void setupBackupTask() {
@@ -35,6 +37,10 @@ public class BukkitTaskManager extends TaskManager {
     private void setupBeeCheckTask() {
         long time = plugin.getConfig().getInt("Main.bees.check-interval", 20);
         new BeeCheckTask(plugin).runTaskTimerAsynchronously(plugin, time, time);
+    }
+
+    private void setupSchedulerCheckTask() {
+        new SchedulerCheckTask(plugin).runTaskTimerAsynchronously(plugin, 35, 35);
     }
 
 }

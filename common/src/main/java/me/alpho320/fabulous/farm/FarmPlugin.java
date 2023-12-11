@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm;
 
 import me.alpho320.fabulous.farm.api.FarmManager;
+import me.alpho320.fabulous.farm.api.scheduler.SchedulerManager;
 import me.alpho320.fabulous.farm.configuration.ConfigurationManager;
 import me.alpho320.fabulous.farm.gui.GUIManager;
 import me.alpho320.fabulous.farm.hook.HookManager;
@@ -25,6 +26,7 @@ public interface FarmPlugin {
     @NotNull HookManager hookManager();
     @NotNull FarmManager farmManager();
     @NotNull Updater updater();
+    @NotNull SchedulerManager schedulerManager();
     @NotNull TaskManager taskManager();
 
     @NotNull String version();
