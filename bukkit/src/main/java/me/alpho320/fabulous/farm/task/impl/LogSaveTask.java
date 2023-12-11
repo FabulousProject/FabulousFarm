@@ -7,8 +7,6 @@ import me.alpho320.fabulous.farm.log.LogHandler;
 import me.alpho320.fabulous.farm.task.Task;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
 public class LogSaveTask extends Task {
 
     public LogSaveTask(@NotNull BukkitFarmPlugin plugin) {

@@ -1,8 +1,8 @@
 package me.alpho320.fabulous.farm.provider;
 
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.Callback;
-import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.provider.impl.MySQLProvider;
 import me.alpho320.fabulous.farm.provider.impl.SQLiteProvider;
 import me.alpho320.fabulous.farm.provider.impl.YAMLProvider;

@@ -1,7 +1,6 @@
 package me.alpho320.fabulous.farm.task;
 
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.task.impl.BackupTask;
 import me.alpho320.fabulous.farm.task.impl.BeeCheckTask;
 import me.alpho320.fabulous.farm.task.impl.LogSaveTask;

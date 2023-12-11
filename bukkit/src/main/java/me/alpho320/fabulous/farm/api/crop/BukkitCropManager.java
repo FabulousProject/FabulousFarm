@@ -152,10 +152,10 @@ public class BukkitCropManager extends CropManager {
                 ConfigurationSection stageSection = section.getConfigurationSection(key);
                 if (stageSection == null) continue;
 
-                CropStar staar = cropStarFromSection(starId, stageSection);
-                if (staar == null) continue;
+                CropStar star = cropStarFromSection(starId, stageSection);
+                if (star == null) continue;
 
-                map.put(starId, staar);
+                map.put(starId, star);
             } catch (NumberFormatException e) {
                 plugin.logger().warning("  | Crop start id must be integer. (" + key + " is not integer)");
             }
