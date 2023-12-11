@@ -6,17 +6,35 @@ import me.alpho320.fabulous.farm.api.condition.Condition;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeasonCondition extends Condition {
 
-    private final @NotNull List<String> seasons;
+    private @NotNull List<String> seasons = new ArrayList<>();
 
-    public SeasonCondition(@NotNull FarmPlugin plugin, @NotNull List<String> seasons) {
-        super(plugin);
-        this.seasons = seasons;
+    public SeasonCondition(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
+        super(plugin, section);
+    }
+
+    @Override
+    public boolean register() {
+        try {
+            if (!section.isList("value")) {
+                plugin.logger().severe("SeasonCondition | Seasons value not found. Please check your section.");
+                plugin.logger().severe("SeasonCondition | 'value' key not found.");
+                plugin.logger().severe("SeasonCondition | Section: " + section);
+                return false;
+            }
+            this.seasons = section.getStringList("value");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

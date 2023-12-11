@@ -15,8 +15,8 @@ public class ChangeStageAction extends EventAction {
 
     private int stage;
 
-    public ChangeStageAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
-        super(plugin, eventType, section);
+    public ChangeStageAction(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
+        super(plugin, section);
     }
 
     @Override
@@ -26,14 +26,13 @@ public class ChangeStageAction extends EventAction {
                 this.stage = section.getInt("value", 0);
                 return true;
             } else {
-                plugin.logger().severe("ChangeStageAction | Stage value not found for " + eventType.type() + " event. Please check your section.");
+                plugin.logger().severe("ChangeStageAction | Stage value not found. Please check your section.");
                 plugin.logger().severe("ChangeStageAction | 'value' key not found.");
                 plugin.logger().severe("ChangeStageAction | Section: " + section);
             }
         } catch (Exception e) {
             plugin.logger().severe("ChangeStageAction | An error accorded while registering. (" + e.getMessage() + ")");
             plugin.logger().severe("EventAction | Section: " + section);
-            plugin.logger().severe("EventAction | EventType: " + eventType);
         }
         return false;
     }

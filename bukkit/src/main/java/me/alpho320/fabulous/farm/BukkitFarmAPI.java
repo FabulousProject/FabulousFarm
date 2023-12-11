@@ -17,12 +17,14 @@ import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.hook.Hook;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
@@ -180,6 +182,38 @@ public class BukkitFarmAPI implements FarmAPI {
 
     public static String took(long from) {
         return (System.currentTimeMillis() - from) + "ms";
+    }
+
+    public static boolean validateConfigurationSection(@NotNull BukkitFarmPlugin plugin, @NotNull ConfigurationSection section, String path, @NotNull String id) {
+        if (section.isConfigurationSection(path)) return true;
+
+        plugin.logger().warning(id + " has no '" + path + "' section, please check your file.");
+        return false;
+    }
+
+    public static boolean validateConfigurationKeyIsSet(@NotNull BukkitFarmPlugin plugin, @NotNull ConfigurationSection section, String path, @NotNull String id) {
+        if (section.isSet(path)) return true;
+
+        plugin.logger().warning(id + " has no '" + path + "' value, please check your file.");
+        return false;
+    }
+
+    public static void extractDefaultFolderFilesFromJarIfNoExist(@NotNull BukkitFarmPlugin plugin, @NotNull String path) {
+        try {
+            File[] folder = new File(plugin.getDataFolder(), path).listFiles();
+            if (folder == null || folder.length == 0) {
+                plugin.getClass().getClassLoader().getResources(path).asIterator().forEachRemaining(url -> {
+                    String[] split = url.getPath().split("/");
+                    String fileName = split[split.length - 1];
+
+                    plugin.logger().debug(" | Extracting default file: " + fileName);
+                    plugin.saveResource(path + "/" + fileName, false);
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            plugin.logger().severe(" | Could not extract default files! (FolderPath: " + path + ")");
+        }
     }
 
 }

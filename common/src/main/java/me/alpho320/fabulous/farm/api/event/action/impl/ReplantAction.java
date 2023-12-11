@@ -15,8 +15,8 @@ public class ReplantAction extends EventAction {
 
     private String cropId;
 
-    public ReplantAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
-        super(plugin, eventType, section);
+    public ReplantAction(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
+        super(plugin, section);
     }
 
     @Override
@@ -26,14 +26,13 @@ public class ReplantAction extends EventAction {
                 this.cropId = section.getString("crop", "");
                 return true;
             } else {
-                plugin.logger().severe("ReplantAction | Crop id not found for " + eventType.type() + " event. Please check your section.");
+                plugin.logger().severe("ReplantAction | Crop id not found. Please check your section.");
                 plugin.logger().severe("ReplantAction | 'crop' key not found.");
                 plugin.logger().severe("ReplantAction | Section: " + section);
             }
         } catch (Exception e) {
             plugin.logger().severe("ReplantAction | An error accorded while registering. (" + e.getMessage() + ")");
             plugin.logger().severe("EventAction | Section: " + section);
-            plugin.logger().severe("EventAction | EventType: " + eventType);
         }
         return false;
     }

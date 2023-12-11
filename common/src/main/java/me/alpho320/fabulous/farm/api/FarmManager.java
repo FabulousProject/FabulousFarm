@@ -1,8 +1,10 @@
 package me.alpho320.fabulous.farm.api;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.api.condition.impl.ConditionManager;
 import me.alpho320.fabulous.farm.api.crop.CropManager;
 import me.alpho320.fabulous.farm.api.crow.CrowManager;
+import me.alpho320.fabulous.farm.api.event.action.EventActionManager;
 import me.alpho320.fabulous.farm.api.fertilizer.FertilizerManager;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseManager;
 import me.alpho320.fabulous.farm.api.pot.PotManager;
@@ -12,13 +14,15 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class FarmManager {
 
-    private CropManager cropManager;
-    private CrowManager crowManager;
-    private FertilizerManager fertilizerManager;
-    private GreenhouseManager greenhouseManager;
-    private PotManager potManager;
-    private ScarecrowManager scarecrowManager;
-    private SeasonManager seasonManager;
+    protected CropManager cropManager;
+    protected CrowManager crowManager;
+    protected FertilizerManager fertilizerManager;
+    protected GreenhouseManager greenhouseManager;
+    protected PotManager potManager;
+    protected ScarecrowManager scarecrowManager;
+    protected SeasonManager seasonManager;
+    protected EventActionManager eventActionManager;
+    protected ConditionManager conditionManager;
 
     public abstract void init(@NotNull FarmPlugin plugin);
 
@@ -48,6 +52,14 @@ public abstract class FarmManager {
 
     public @NotNull SeasonManager seasonManager() {
         return this.seasonManager;
+    }
+
+    public @NotNull EventActionManager eventActionManager() {
+        return this.eventActionManager;
+    }
+
+    public ConditionManager conditionManager() {
+        return this.conditionManager;
     }
 
 }

@@ -19,8 +19,8 @@ public class PlaySoundAction extends EventAction {
     private float volume;
     private float pitch;
 
-    public PlaySoundAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
-        super(plugin, eventType, section);
+    public PlaySoundAction(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
+        super(plugin, section);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PlaySoundAction extends EventAction {
         } else if (tryToGetLocation(event) != null) {
             finalLocation = tryToGetLocation(event).clone();
         } else {
-            printExecuteError("Location not found for " + eventType.type() + " event.", event, entity, location, extraInfo);
+            printExecuteError("Location not found.", event, entity, location, extraInfo);
             return;
         }
 

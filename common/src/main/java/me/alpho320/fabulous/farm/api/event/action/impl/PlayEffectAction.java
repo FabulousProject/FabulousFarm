@@ -17,8 +17,8 @@ public class PlayEffectAction extends EventAction {
 
     private Effect effect;
 
-    public PlayEffectAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
-        super(plugin, eventType, section);
+    public PlayEffectAction(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
+        super(plugin, section);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class PlayEffectAction extends EventAction {
         } else if (tryToGetLocation(event) != null) {
             finalLocation = tryToGetLocation(event).clone();
         } else {
-            printExecuteError("Location not found for " + eventType.type() + " event.", event, entity, location, extraInfo);
+            printExecuteError("Location not found.", event, entity, location, extraInfo);
             return;
         }
 

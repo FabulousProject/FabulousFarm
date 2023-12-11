@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm.api.event;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public enum EventType {
 
@@ -20,13 +21,13 @@ public enum EventType {
         return this.type;
     }
 
-    public static @NotNull EventType match(@NotNull String type) {
+    public static @Nullable EventType match(@NotNull String type) {
         for (EventType eventType : values()) {
-            if (eventType.type().equalsIgnoreCase(type) || eventType.type().startsWith(type.toLowerCase())) {
+            if (eventType.type().equalsIgnoreCase(type) || type.startsWith(eventType.type().toLowerCase())) {
                 return eventType;
             }
         }
-        throw new IllegalStateException(" | EventType " + type + " not found!");
+        return null;
     }
 
 }

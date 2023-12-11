@@ -14,16 +14,13 @@ import org.jetbrains.annotations.Nullable;
 public abstract class EventAction {
 
     protected final @NotNull FarmPlugin plugin;
-    protected final @NotNull EventType eventType;
-
     protected final @NotNull ConfigurationSection section;
 
     private final double chance;
     private boolean registered = false;
 
-    public EventAction(@NotNull FarmPlugin plugin, @NotNull EventType eventType, @NotNull ConfigurationSection section) {
+    public EventAction(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
         this.plugin = plugin;
-        this.eventType = eventType;
         this.section = section;
         this.chance = section.getDouble("chance", 100);
     }
@@ -32,8 +29,8 @@ public abstract class EventAction {
         return this.plugin;
     }
 
-    public @NotNull EventType eventType() {
-        return this.eventType;
+    public double chance() {
+        return this.chance;
     }
 
     public @NotNull ConfigurationSection section() {
@@ -61,7 +58,6 @@ public abstract class EventAction {
         plugin.logger().warning("EventAction | Event: " + event.getClass().getSimpleName());
         plugin.logger().warning("EventAction | ExtraInfo: " + extraInfo);
     }
-
 
     public boolean isRegistered() {
         return this.registered;
