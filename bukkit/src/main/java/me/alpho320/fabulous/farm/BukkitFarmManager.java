@@ -8,6 +8,7 @@ import me.alpho320.fabulous.farm.api.crop.BukkitCropManager;
 import me.alpho320.fabulous.farm.api.greenhouse.BukkitGreenhouseManager;
 import me.alpho320.fabulous.farm.api.pots.BukkitPotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.BukkitScarecrowManager;
+import me.alpho320.fabulous.farm.api.season.BukkitSeasonManager;
 import me.alpho320.fabulous.farm.api.wateringcan.BukkitWateringCanManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,14 +18,15 @@ public class BukkitFarmManager extends FarmManager {
 
     public BukkitFarmManager(@NotNull BukkitFarmPlugin plugin) {
         this.plugin = plugin;
-        this.conditionManager = new BukkitConditionManager(this.plugin);
-        this.eventActionManager = new BukkitEventActionManager(this.plugin);
-        this.wateringCanManager = new BukkitWateringCanManager(this.plugin);
-        this.beeManager = new BukkitBeeManager(this.plugin);
-        this.cropManager = new BukkitCropManager(this.plugin);
-        this.potManager = new BukkitPotManager(this.plugin);
-        this.scarecrowManager = new BukkitScarecrowManager(this.plugin);
-        this.greenhouseManager = new BukkitGreenhouseManager(this.plugin);
+        this.conditionManager = new BukkitConditionManager(plugin);
+        this.eventActionManager = new BukkitEventActionManager(plugin);
+        this.wateringCanManager = new BukkitWateringCanManager(plugin);
+        this.beeManager = new BukkitBeeManager(plugin);
+        this.cropManager = new BukkitCropManager(plugin);
+        this.potManager = new BukkitPotManager(plugin);
+        this.scarecrowManager = new BukkitScarecrowManager(plugin);
+        this.greenhouseManager = new BukkitGreenhouseManager(plugin);
+        this.seasonManager = new BukkitSeasonManager(plugin);
     }
 
     @Override
@@ -38,6 +40,7 @@ public class BukkitFarmManager extends FarmManager {
         wateringCanManager.setup();
         scarecrowManager.setup();
         greenhouseManager.setup();
+        seasonManager.setup();
     }
 
 }

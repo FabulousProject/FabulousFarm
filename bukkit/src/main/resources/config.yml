@@ -50,16 +50,6 @@ Main:
   seasons:
     enabled: true
     list: # you can add more seasons.
-      winter:
-        enabled: true
-        name: '&bKış'
-        time: 144 # minecraft days
-        order: 4 # order of seasons
-      autumn:
-        enabled: true
-        name: '&6Sonbahar'
-        time: 144 # minecraft days
-        order: 3 # order of seasons
       spring:
         enabled: true
         name: '&aİlkbahar'
@@ -70,6 +60,16 @@ Main:
         name: '&eYaz'
         time: 144 # minecraft days
         order: 2 # order of seasons
+      autumn:
+        enabled: true
+        name: '&6Sonbahar'
+        time: 144 # minecraft days
+        order: 3 # order of seasons
+      winter:
+        enabled: true
+        name: '&bKış'
+        time: 144 # minecraft days
+        order: 4 # order of seasons
 
   greenhouse:
     enabled: true

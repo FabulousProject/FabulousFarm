@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm.provider;
 
 import me.alpho320.fabulous.farm.Callback;
+import me.alpho320.fabulous.farm.api.season.Season;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +32,8 @@ public interface Provider {
     void loadAllScarecrowData(boolean async, @Nullable Callback callback);
     void loadScarecrowData(@NotNull String id, boolean async, @Nullable Callback callback);
 
+    @Nullable Season lastSeason();
+
     void deletePlayerData(@NotNull UUID id, boolean async, @Nullable Callback callback);
     void deletePotData(@NotNull String id, boolean async, @Nullable Callback callback);
     void deleteCropData(@NotNull String id, boolean async, @Nullable Callback callback);
@@ -60,7 +63,6 @@ public interface Provider {
 
     @Nullable PlayerData findPlayerData(@NotNull UUID id);
     @NotNull CompletableFuture<@Nullable PlayerData> findPlayerDataAsync(@NotNull UUID id);
-
 
     @NotNull String name();
 
