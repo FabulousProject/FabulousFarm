@@ -44,6 +44,9 @@ public class BukkitFarmManager extends FarmManager {
         greenhouseManager.setup();
         seasonManager.setup();
         verminManager.setup();
+
+        worldBlacklist().clear();
+        worldBlacklist().addAll(plugin.getConfig().getStringList("Main.world-blacklist"));
     }
 
 }

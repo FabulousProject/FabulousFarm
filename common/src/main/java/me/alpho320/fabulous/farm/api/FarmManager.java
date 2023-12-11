@@ -13,6 +13,9 @@ import me.alpho320.fabulous.farm.api.vermin.VerminManager;
 import me.alpho320.fabulous.farm.api.wateringcan.WateringCanManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class FarmManager {
 
     protected CropManager cropManager;
@@ -26,6 +29,8 @@ public abstract class FarmManager {
     protected ConditionManager conditionManager;
     protected WateringCanManager wateringCanManager;
     protected BeeManager beeManager;
+
+    protected final @NotNull List<String> worldBlacklist = new ArrayList<>();
 
     public abstract void setup();
 
@@ -71,6 +76,10 @@ public abstract class FarmManager {
 
     public @NotNull BeeManager beeManager() {
         return this.beeManager;
+    }
+
+    public @NotNull List<String> worldBlacklist() {
+        return this.worldBlacklist;
     }
 
 }
