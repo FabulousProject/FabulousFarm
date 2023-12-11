@@ -17,15 +17,6 @@ Main:
   # vermin will eat crops and make them grow slower.
   vermin:
     enabled: true
-    mobs:
-      'crow':
-        name: '&4Karga'
-        entity: 'BAT'
-        chance: 1.0 # 1.0% chance to spawn for every crop grow
-      'silverfish':
-        name: '&4Kemirgen'
-        entity: 'SILVERFISH'
-        chance: 0.5 # 0.5% chance to spawn for every crop grow
 
   # bees that around pots will pollinate crops and make them grow faster.
   bees:

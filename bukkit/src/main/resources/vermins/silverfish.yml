@@ -1,0 +1,4 @@
+Vermin:
+  name: '&4Kemirgen'
+  entity: 'SILVERFISH'
+  chance: 0.5 # 0.5% chance to spawn for every crop grow

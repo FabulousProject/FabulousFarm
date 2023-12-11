@@ -1,0 +1,4 @@
+Vermin:
+  name: '&4Karga'
+  entity: 'BAT'
+  chance: 1.0 # 1.0% chance to spawn for every crop grow
