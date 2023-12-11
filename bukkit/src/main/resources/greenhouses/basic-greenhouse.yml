@@ -1,0 +1,11 @@
+Greenhouse:
+  name: '&7Sıradan Sera Camı'
+  material: 'GLASS'
+  lore:
+    - ''
+    - ' &7Sera camı ile &fher mevsimde'
+    - ' &7ürün ekebilirsiniz.'
+    - ''
+    - ' &7Yükseklik: &e8 blok'
+    - ''
+  height: 8

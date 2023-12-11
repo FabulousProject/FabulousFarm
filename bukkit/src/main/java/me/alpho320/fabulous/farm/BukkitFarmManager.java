@@ -5,6 +5,7 @@ import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.api.bee.BukkitBeeManager;
 import me.alpho320.fabulous.farm.api.condition.BukkitConditionManager;
 import me.alpho320.fabulous.farm.api.crop.BukkitCropManager;
+import me.alpho320.fabulous.farm.api.greenhouse.BukkitGreenhouseManager;
 import me.alpho320.fabulous.farm.api.pots.BukkitPotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.BukkitScarecrowManager;
 import me.alpho320.fabulous.farm.api.wateringcan.BukkitWateringCanManager;
@@ -23,6 +24,7 @@ public class BukkitFarmManager extends FarmManager {
         this.cropManager = new BukkitCropManager(this.plugin);
         this.potManager = new BukkitPotManager(this.plugin);
         this.scarecrowManager = new BukkitScarecrowManager(this.plugin);
+        this.greenhouseManager = new BukkitGreenhouseManager(this.plugin);
     }
 
     @Override
@@ -35,6 +37,7 @@ public class BukkitFarmManager extends FarmManager {
         potManager.setup();
         wateringCanManager.setup();
         scarecrowManager.setup();
+        greenhouseManager.setup();
     }
 
 }

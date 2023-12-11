@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class BukkitWateringCanManager extends WateringCanManager {
                     plugin.logger().info(" | Watering can of " + id + " loaded.");
                 }
             }
-            plugin.logger().info(" | Amount of " + map().size() + " watering cans loaded. (" + map().keySet().toArray() + ")");
+            plugin.logger().info(" | Amount of " + map().size() + " watering cans loaded. (" + Arrays.toString(map().keySet().toArray()) + ")");
         }
 
     }

@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class BukkitScarecrowManager extends ScarecrowManager {
 
@@ -51,7 +52,7 @@ public class BukkitScarecrowManager extends ScarecrowManager {
                     plugin.logger().info(" | Scarecrow of " + id + " loaded.");
                 }
             }
-            plugin.logger().info(" | Amount of " + map().size() + " scarecrows loaded. (" + map().keySet().toArray() + ")");
+            plugin.logger().info(" | Amount of " + map().size() + " scarecrows loaded. (" + Arrays.toString(map().keySet().toArray()) + ")");
         }
 
     }

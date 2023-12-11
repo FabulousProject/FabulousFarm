@@ -73,29 +73,6 @@ Main:
 
   greenhouse:
     enabled: true
-    items:
-      'basic':
-        name: '&7Sıradan Sera Camı'
-        material: 'GLASS'
-        lore:
-          - ''
-          - ' &7Sera camı ile &fher mevsimde'
-          - ' &7ürün ekebilirsiniz.'
-          - ''
-          - ' &7Yükseklik: &e8 blok'
-          - ''
-        height: 8
-      'advanced':
-        name: '&7Gelişmiş Sera Camı'
-        material: 'GLASS'
-        lore:
-          - ''
-          - ' &7Sera camı ile &fher mevsimde'
-          - ' &7ürün ekebilirsiniz.'
-          - ''
-          - ' &7Yükseklik: &e32 blok'
-          - ''
-        height: 32
 
 Data:
   provider: 'yaml' # yaml
