@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class Pot {
+public class Pot {
     
     private final @NotNull String id;
     private final @NotNull String name;
