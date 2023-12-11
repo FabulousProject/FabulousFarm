@@ -42,7 +42,7 @@ public class BukkitCropManager extends CropManager {
                         final String id = FileUtil.removeExtension(file.getName());
                         plugin.logger().info("  | Crop of " + id + " loading...");
 
-                        BukkitConfiguration configuration = new BukkitConfiguration("/crops/" + id, plugin);
+                        BukkitConfiguration configuration = new BukkitConfiguration("crops/" + id, plugin);
                         if (!configuration.isConfigurationSection("Crop")) {
                             plugin.logger().warning("  | Crop of " + id + " has no 'Crop' section, please check your file.");
                             continue;

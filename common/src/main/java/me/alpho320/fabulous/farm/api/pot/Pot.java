@@ -3,8 +3,6 @@ package me.alpho320.fabulous.farm.api.pot;
 import me.alpho320.fabulous.farm.api.mode.Mode;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class Pot {
     
     private final @NotNull String id;

@@ -1,0 +1,10 @@
+Scarecrow:
+  name: '&cSıradan Korkuluk'
+  material: 'IRON_BLOCK'
+  lore:
+    - ''
+    - ' &7Korkuluk sayesinde istenmeyen'
+    - ' &7hayvanları uzak tutabilirsin.'
+    - ''
+    - ' &7Etki Alanı: &e16 blok'
+  range: 16 # 16x16 square

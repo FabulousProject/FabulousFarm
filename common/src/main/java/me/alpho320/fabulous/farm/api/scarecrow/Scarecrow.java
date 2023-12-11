@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class Scarecrow {
+public class Scarecrow {
 
     private final @NotNull String id;
     private final @NotNull ItemStack item;

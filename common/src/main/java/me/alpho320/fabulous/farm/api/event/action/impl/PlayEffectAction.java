@@ -1,15 +1,12 @@
 package me.alpho320.fabulous.farm.api.event.action.impl;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
-import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

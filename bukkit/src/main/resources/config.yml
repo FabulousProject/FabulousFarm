@@ -10,30 +10,11 @@ Main:
   world-blacklist:
     - 'someworld'
 
+  # scarecrow will scare vermin away from crops.
   scarecrow:
     enabled: true
-    blocks:
-      'basic':
-        name: '&cSıradan Korkuluk'
-        material: 'IRON_BLOCK'
-        lore:
-          - ''
-          - ' &7Korkuluk sayesinde istenmeyen'
-          - ' &7hayvanları uzak tutabilirsin.'
-          - ''
-          - ' &7Etki Alanı: &e16 blok'
-        range: 16 # 16x16 square
-      'advanced':
-        name: '&cGelişmiş Korkuluk'
-        material: 'DIAMOND_BLOCK'
-        lore:
-          - ''
-          - ' &7Korkuluk sayesinde istenmeyen'
-          - ' &7hayvanları uzak tutabilirsin.'
-          - ''
-          - ' &7Etki Alanı: &e32 blok'
-        range: 32 # 32x32 square
 
+  # vermin will eat crops and make them grow slower.
   vermin:
     enabled: true
     mobs:

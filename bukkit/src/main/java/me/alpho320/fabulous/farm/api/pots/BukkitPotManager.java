@@ -36,7 +36,7 @@ public class BukkitPotManager extends PotManager {
                         final String id = FileUtil.removeExtension(file.getName());
                         plugin.logger().info("  | Pot of " + id + " loading...");
 
-                        BukkitConfiguration configuration = new BukkitConfiguration("/pots/" + id, plugin);
+                        BukkitConfiguration configuration = new BukkitConfiguration("pots/" + id, plugin);
                         if (!configuration.isConfigurationSection("Pot")) {
                             plugin.logger().warning("  | Pot of " + id + " has no 'Pot' section, please check your file.");
                             continue;

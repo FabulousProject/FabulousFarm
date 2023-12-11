@@ -38,7 +38,7 @@ public class BukkitWateringCanManager extends WateringCanManager {
                     final String id = file.getName().replace(".yml", "");
                     plugin.logger().info("  | Watering can of " + id + " loading...");
 
-                    BukkitConfiguration configuration = new BukkitConfiguration("/watering-cans/" + id, plugin);
+                    BukkitConfiguration configuration = new BukkitConfiguration("watering-cans/" + id, plugin);
                     if (!configuration.isConfigurationSection("Can")) {
                         plugin.logger().warning("  | Watering can of " + id + " has no 'Can' section, please check your file.");
                         continue;

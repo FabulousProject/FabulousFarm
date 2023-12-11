@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class ScarecrowManager extends TypedManager<String, Scarecrow> {
 
     private final @NotNull Map<Location, ScarecrowHolder> SCARECROW_HOLDER_MAP = new ConcurrentHashMap<>();
+    private boolean enabled = false;
 
     public @Nullable Scarecrow find(@NotNull String id) {
         return map().getOrDefault(id, null);
@@ -22,6 +23,10 @@ public abstract class ScarecrowManager extends TypedManager<String, Scarecrow> {
 
     public @NotNull Map<Location, ScarecrowHolder> scarecrowHolderMap() {
         return SCARECROW_HOLDER_MAP;
+    }
+
+    public boolean enabled() {
+        return this.enabled;
     }
 
 }

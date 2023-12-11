@@ -4,8 +4,6 @@ import me.alpho320.fabulous.farm.FarmPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
 public abstract class Task extends BukkitRunnable {
 
     private final @NotNull FarmPlugin plugin;

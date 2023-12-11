@@ -1,7 +1,6 @@
 package me.alpho320.fabulous.farm.api.event.action;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
-import me.alpho320.fabulous.farm.api.event.EventType;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;

@@ -31,13 +31,12 @@ public class BukkitBeeManager extends BeeManager {
 
     @Override
     public void setup() {
-        plugin.logger().info(" | Loading bee system...");
-
         this.enabled = plugin.getConfig().getBoolean("Main.bees.enabled", false);
         if (!enabled) {
             plugin.logger().info(" | Bee system is disabled.");
             return;
         }
+        plugin.logger().info(" | Loading bee system...");
 
         this.radius = plugin.getConfig().getInt("Main.bees.radius", 5);
         this.chance = plugin.getConfig().getDouble("Main.bees.chance", 0.5);

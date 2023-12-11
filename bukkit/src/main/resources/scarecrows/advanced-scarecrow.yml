@@ -1,0 +1,10 @@
+Scarecrow:
+  name: '&cGelişmiş Korkuluk'
+  material: 'DIAMOND_BLOCK'
+  lore:
+    - ''
+    - ' &7Korkuluk sayesinde istenmeyen'
+    - ' &7hayvanları uzak tutabilirsin.'
+    - ''
+    - ' &7Etki Alanı: &e32 blok'
+  range: 32 # 32x32 square

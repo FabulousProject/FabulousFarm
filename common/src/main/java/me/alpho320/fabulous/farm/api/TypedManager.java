@@ -1,6 +1,5 @@
 package me.alpho320.fabulous.farm.api;
 
-import me.alpho320.fabulous.farm.FarmPlugin;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

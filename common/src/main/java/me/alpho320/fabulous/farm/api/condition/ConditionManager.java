@@ -2,7 +2,6 @@ package me.alpho320.fabulous.farm.api.condition;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.TypedManager;
-import me.alpho320.fabulous.farm.api.condition.Condition;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

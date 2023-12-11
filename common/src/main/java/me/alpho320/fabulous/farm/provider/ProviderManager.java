@@ -1,8 +1,6 @@
 package me.alpho320.fabulous.farm.provider;
 
 import me.alpho320.fabulous.farm.Callback;
-import me.alpho320.fabulous.farm.FarmPlugin;
-import me.alpho320.fabulous.farm.manager.AbstractDataManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
