@@ -79,20 +79,9 @@ public class BukkitPotManager extends PotManager {
             String wetModel = section.getString("wet-model", "");
 
             if (!BukkitFarmAPI.validateConfigurationKeyIsSet(plugin, section, "crops.mode", "   | ")) return null;
-            Mode cropsMode = Mode.match(section.getString("crops.mode", ""));
+            Mode cropsMode = new Mode(Mode.Type.match(section.getString("crops.mode", "")), section.getStringList("crops.list"));
 
-            if (!BukkitFarmAPI.validateConfigurationKeyIsSet(plugin, section, "crops.list", "   | ")) return null;
-            List<String> cropsList = section.getStringList("crops.list");
-
-            return new Pot(
-                    id,
-                    name,
-                    maxWater,
-                    dryModel,
-                    wetModel,
-                    cropsMode,
-                    cropsList
-            );
+            return new Pot(id, name, maxWater, dryModel, wetModel, cropsMode);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

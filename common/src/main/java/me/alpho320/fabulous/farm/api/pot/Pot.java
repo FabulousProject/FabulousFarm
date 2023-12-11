@@ -16,16 +16,14 @@ public class Pot {
     private final @NotNull String wetModel;
     
     private final @NotNull Mode cropsMode;
-    private final @NotNull List<String> cropsModeList;
 
-    public Pot(@NotNull String id, @NotNull String name, int maxWater, @NotNull String dryModel, @NotNull String wetModel, @NotNull Mode cropsMode, @NotNull List<String> cropsModeList) {
+    public Pot(@NotNull String id, @NotNull String name, int maxWater, @NotNull String dryModel, @NotNull String wetModel, @NotNull Mode cropsMode) {
         this.id = id;
         this.name = name;
         this.maxWater = maxWater;
         this.dryModel = dryModel;
         this.wetModel = wetModel;
         this.cropsMode = cropsMode;
-        this.cropsModeList = cropsModeList;
     }
 
     public @NotNull String id() {
@@ -52,12 +50,8 @@ public class Pot {
         return this.cropsMode;
     }
 
-    public @NotNull List<String> cropsModeList() {
-        return this.cropsModeList;
-    }
-
     public boolean canCropGrow(@NotNull String cropId) {
-        return (cropsMode == Mode.WHITELIST) == cropsModeList.contains(cropId);
+        return cropsMode.check(cropId);
     }
 
 }

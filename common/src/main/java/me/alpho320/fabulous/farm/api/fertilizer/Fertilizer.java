@@ -25,9 +25,8 @@ public abstract class Fertilizer<Type> {
     private final @NotNull Map<EventType, List<EventAction>> events;
     
     private final @NotNull Mode potMode;
-    private final @NotNull List<String> potsModeList;
 
-    public Fertilizer(@NotNull String id, @NotNull String name, @NotNull ItemStack item, @NotNull FertilizerType type, double chance, @NotNull Type value, @NotNull Map<EventType, List<EventAction>> events, @NotNull Mode potMode, @NotNull List<String> potsModeList) {
+    public Fertilizer(@NotNull String id, @NotNull String name, @NotNull ItemStack item, @NotNull FertilizerType type, double chance, @NotNull Type value, @NotNull Map<EventType, List<EventAction>> events, @NotNull Mode potMode) {
         this.id = id;
         this.name = name;
         this.item = item;
@@ -36,7 +35,6 @@ public abstract class Fertilizer<Type> {
         this.value = value;
         this.events = events;
         this.potMode = potMode;
-        this.potsModeList = potsModeList;
     }
 
     public @NotNull String id() {
@@ -81,12 +79,9 @@ public abstract class Fertilizer<Type> {
         return this.potMode;
     }
 
-    public @NotNull List<String> potsModeList() {
-        return this.potsModeList;
-    }
 
     public boolean isPotUseable(@NotNull String potId) {
-        return (this.potMode == Mode.WHITELIST) == this.potsModeList.contains(potId);
+        return potMode.check(potId);
     }
 
 }

@@ -1,4 +1,4 @@
-package me.alpho320.fabulous.farm.api.condition.impl;
+package me.alpho320.fabulous.farm.api.condition;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.TypedManager;

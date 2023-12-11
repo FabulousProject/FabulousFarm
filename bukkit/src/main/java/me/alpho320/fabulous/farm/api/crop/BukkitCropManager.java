@@ -100,16 +100,7 @@ public class BukkitCropManager extends CropManager {
                 stars = cropStarsFromSection(section.getConfigurationSection("stars"));
             }
 
-            return new Crop(
-                    id,
-                    seedItem,
-                    deathModel,
-                    maxGrowStage,
-                    actionsMap,
-                    conditions,
-                    stages,
-                    stars
-            );
+            return new Crop(id, seedItem, deathModel, maxGrowStage, actionsMap, conditions, stages, stars);
         } catch (Exception e) {
             e.printStackTrace();
         }
