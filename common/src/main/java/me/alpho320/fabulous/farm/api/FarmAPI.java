@@ -2,7 +2,7 @@ package me.alpho320.fabulous.farm.api;
 
 import me.alpho320.fabulous.farm.api.crop.Crop;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
-import me.alpho320.fabulous.farm.api.crow.Crow;
+import me.alpho320.fabulous.farm.api.vermin.Vermin;
 import me.alpho320.fabulous.farm.api.fertilizer.Fertilizer;
 import me.alpho320.fabulous.farm.api.greenhouse.Greenhouse;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseHolder;
@@ -31,7 +31,7 @@ public interface FarmAPI {
 
     @Nullable Pot findPot(@NotNull String id);
     @Nullable Crop findCrop(@NotNull String id);
-    @Nullable Crow findCrow(@NotNull String id);
+    @Nullable Vermin findCrow(@NotNull String id);
     @Nullable Season findSeason(@NotNull String id);
     @Nullable Scarecrow findScarecrow(@NotNull String id);
     @Nullable Fertilizer findFertilizer(@NotNull String id);

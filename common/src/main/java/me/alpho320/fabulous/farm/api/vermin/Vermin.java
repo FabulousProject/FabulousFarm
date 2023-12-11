@@ -1,17 +1,17 @@
-package me.alpho320.fabulous.farm.api.crow;
+package me.alpho320.fabulous.farm.api.vermin;
 
 import me.alpho320.fabulous.farm.api.pot.Pot;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class Crow {
+public abstract class Vermin {
 
     private final @NotNull String id;
     private final @NotNull String entity;
 
     private final double chance;
 
-    public Crow(@NotNull String id, @NotNull String entity, double chance) {
+    public Vermin(@NotNull String id, @NotNull String entity, double chance) {
         this.id = id;
         this.entity = entity;
         this.chance = chance;

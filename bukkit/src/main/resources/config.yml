@@ -34,7 +34,7 @@ Main:
           - ' &7Etki Alanı: &e32 blok'
         range: 32 # 32x32 square
 
-  crows:
+  vermin:
     enabled: true
     mobs:
       'crow':
@@ -45,6 +45,22 @@ Main:
         name: '&4Kemirgen'
         entity: 'SILVERFISH'
         chance: 0.5 # 0.5% chance to spawn for every crop grow
+
+  # bees that around pots will pollinate crops and make them grow faster.
+  bees:
+    enabled: true
+    radius: 8 # radius between bee and crop
+    chance: 0.5
+    check-interval: 500 # ticks
+    particle:
+      type: 'REDSTONE'
+      count: 1
+      color: 'GREEN'
+      color-size: 1
+      offset:
+        x: 0.5
+        y: 0.5
+        z: 0.5
 
   schedule:
     enabled: true

@@ -4,7 +4,7 @@ import me.alpho320.fabulous.core.api.util.RoundedNumberFormat;
 import me.alpho320.fabulous.farm.api.FarmAPI;
 import me.alpho320.fabulous.farm.api.crop.Crop;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
-import me.alpho320.fabulous.farm.api.crow.Crow;
+import me.alpho320.fabulous.farm.api.vermin.Vermin;
 import me.alpho320.fabulous.farm.api.fertilizer.Fertilizer;
 import me.alpho320.fabulous.farm.api.greenhouse.Greenhouse;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseHolder;
@@ -86,7 +86,7 @@ public class BukkitFarmAPI implements FarmAPI {
     }
 
     @Override
-    public @Nullable Crow findCrow(@NotNull String id) {
+    public @Nullable Vermin findCrow(@NotNull String id) {
         return plugin.farmManager().crowManager().find(id);
     }
 

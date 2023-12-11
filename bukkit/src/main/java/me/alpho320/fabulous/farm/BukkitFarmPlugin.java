@@ -18,7 +18,6 @@ import me.alpho320.fabulous.farm.listener.PlayerJoinListener;
 import me.alpho320.fabulous.farm.listener.PlayerQuitListener;
 import me.alpho320.fabulous.farm.provider.BukkitProviderManager;
 import me.alpho320.fabulous.farm.provider.ProviderManager;
-import me.alpho320.fabulous.farm.provider.impl.MySQLProvider;
 import me.alpho320.fabulous.farm.task.BukkitTaskManager;
 import me.alpho320.fabulous.farm.util.logger.BukkitPluginLogger;
 import me.alpho320.fabulous.farm.util.logger.FarmPluginLogger;
@@ -39,10 +38,13 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
     private Updater updater;
 
     private BukkitPluginLogger logger;
+    private BukkitFarmManager farmManager;
     private BukkitGUIManager guiManager;
     private BukkitConfigurationManager configurationManager;
     private BukkitProviderManager providerManager;
     private BukkitHookManager hookManager;
+
+    private BukkitTaskManager taskManager;
 
     private int versionInt;
     private boolean isLoaded = false;
@@ -60,10 +62,12 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
         new BukkitFarmAPI(this);
 
         this.logger = new BukkitPluginLogger(this, FarmPluginLogger.LoggingLevel.DEBUG);
+        this.taskManager = new BukkitTaskManager(this);
         this.guiManager = new BukkitGUIManager(this);
         this.configurationManager = new BukkitConfigurationManager(this);
         this.providerManager = new BukkitProviderManager(this);
         this.hookManager = new BukkitHookManager(this);
+        this.farmManager = new BukkitFarmManager(this);
 
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false).verboseOutput(true));
     }
@@ -98,9 +102,13 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
                 logger.info(" | All hooks successfully loaded. " + BukkitFarmAPI.took(now));
                 providerManager.setup(ProviderManager.ProviderLoadType.ALL_FARMS, state -> {
                     if (state) {
+
                         guiManager.setup();
+                        farmManager.setup();
+                        taskManager.startTasks();
 
                         setLoaded(true);
+                        logger.info(" | Plugin successfully loaded. " + BukkitFarmAPI.took(now));
                     } else {
                         logger.severe(" | Failed to load all data!");
                     }
@@ -229,7 +237,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull FarmManager farmManager() {
-        return null;
+        return this.farmManager;
     }
 
     @Override
@@ -239,7 +247,7 @@ public class BukkitFarmPlugin extends JavaPlugin implements FarmPlugin {
 
     @Override
     public @NotNull BukkitTaskManager taskManager() {
-        return null;
+        return this.taskManager;
     }
 
     @Override

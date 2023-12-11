@@ -12,7 +12,7 @@ import java.util.UUID;
 public class LogSaveTask extends Task {
 
     public LogSaveTask(@NotNull BukkitFarmPlugin plugin) {
-        super(plugin, UUID.randomUUID());
+        super(plugin);
     }
 
     @Override

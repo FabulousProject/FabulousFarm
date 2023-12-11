@@ -12,7 +12,7 @@ import java.util.UUID;
 public class BackupTask extends Task {
 
     public BackupTask(@NotNull BukkitFarmPlugin plugin) {
-        super(plugin, UUID.randomUUID());
+        super(plugin);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class BackupTask extends Task {
         Debug.debug(0, " | Backup starting...");
 
         long now = System.currentTimeMillis();
-        BukkitProviderManager.get().saveAllData(true, state -> {
+        plugin().providerManager().provider().saveAllData(true, state -> {
             if (state) {
                 Debug.debug(0, " | All data successfully saved. (" + BukkitFarmAPI.took(now) + ")");
             } else {

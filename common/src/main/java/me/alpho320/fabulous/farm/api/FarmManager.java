@@ -1,22 +1,22 @@
 package me.alpho320.fabulous.farm.api;
 
-import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.api.bee.BeeManager;
 import me.alpho320.fabulous.farm.api.condition.ConditionManager;
 import me.alpho320.fabulous.farm.api.crop.CropManager;
-import me.alpho320.fabulous.farm.api.crow.CrowManager;
 import me.alpho320.fabulous.farm.api.event.action.EventActionManager;
 import me.alpho320.fabulous.farm.api.fertilizer.FertilizerManager;
 import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseManager;
 import me.alpho320.fabulous.farm.api.pot.PotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.ScarecrowManager;
 import me.alpho320.fabulous.farm.api.season.SeasonManager;
+import me.alpho320.fabulous.farm.api.vermin.VerminManager;
 import me.alpho320.fabulous.farm.api.wateringcan.WateringCanManager;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class FarmManager {
 
     protected CropManager cropManager;
-    protected CrowManager crowManager;
+    protected VerminManager verminManager;
     protected FertilizerManager fertilizerManager;
     protected GreenhouseManager greenhouseManager;
     protected PotManager potManager;
@@ -25,15 +25,16 @@ public abstract class FarmManager {
     protected EventActionManager eventActionManager;
     protected ConditionManager conditionManager;
     protected WateringCanManager wateringCanManager;
+    protected BeeManager beeManager;
 
-    public abstract void init(@NotNull FarmPlugin plugin);
+    public abstract void setup();
 
     public @NotNull CropManager cropManager() {
         return this.cropManager;
     }
 
-    public @NotNull CrowManager crowManager() {
-        return this.crowManager;
+    public @NotNull VerminManager crowManager() {
+        return this.verminManager;
     }
 
     public @NotNull FertilizerManager fertilizerManager() {
@@ -66,6 +67,10 @@ public abstract class FarmManager {
 
     public @NotNull WateringCanManager wateringCanManager() {
         return this.wateringCanManager;
+    }
+
+    public @NotNull BeeManager beeManager() {
+        return this.beeManager;
     }
 
 }
