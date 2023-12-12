@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class SprinklerAnimation {
 
-    private final @NotNull FarmPlugin plugin;
-    private final @NotNull ConfigurationSection section;
+    protected final @NotNull FarmPlugin plugin;
+    protected final @NotNull ConfigurationSection section;
 
     public SprinklerAnimation(@NotNull FarmPlugin plugin, @NotNull ConfigurationSection section) {
         this.plugin = plugin;
@@ -17,5 +17,13 @@ public abstract class SprinklerAnimation {
 
     public abstract void register();
     public abstract void animate(@NotNull SprinklerHolder sprinkler);
+
+    public @NotNull FarmPlugin plugin() {
+        return this.plugin;
+    }
+
+    public @NotNull ConfigurationSection section() {
+        return this.section;
+    }
 
 }

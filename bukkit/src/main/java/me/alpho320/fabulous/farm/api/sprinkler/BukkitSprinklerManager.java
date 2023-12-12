@@ -7,7 +7,9 @@ import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import me.alpho320.fabulous.farm.api.mode.Mode;
+import me.alpho320.fabulous.farm.api.sprinkler.animation.BukkitSprinklerAnimationManager;
 import me.alpho320.fabulous.farm.api.sprinkler.animation.SprinklerAnimation;
+import me.alpho320.fabulous.farm.api.sprinkler.animation.SprinklerAnimationManager;
 import me.alpho320.fabulous.farm.util.item.ItemCreatorUtil;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -23,14 +25,17 @@ import java.util.Map;
 public class BukkitSprinklerManager extends SprinklerManager {
 
     private final @NotNull BukkitFarmPlugin plugin;
+    private final @NotNull SprinklerAnimationManager animationManager;
 
     public BukkitSprinklerManager(@NotNull BukkitFarmPlugin plugin) {
         this.plugin = plugin;
+        this.animationManager = new BukkitSprinklerAnimationManager(plugin);
     }
 
     @Override
     public void setup() {
-        BukkitConfiguration config = plugin.getConfig();
+        sprinklerAnimationManager().setup();
+
         plugin.logger().info(" | Sprinklers loading...");
         BukkitFarmAPI.extractDefaultFolderFilesFromJarIfNoExist(plugin, "/sprinklers/");
 
@@ -94,4 +99,8 @@ public class BukkitSprinklerManager extends SprinklerManager {
         return this.plugin;
     }
 
+    @Override
+    public @NotNull SprinklerAnimationManager sprinklerAnimationManager() {
+        return this.animationManager;
+    }
 }
