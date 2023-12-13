@@ -14,7 +14,9 @@ public class SchedulerCheckTask extends Task {
     public void run() {
         long now = System.currentTimeMillis();
         plugin().logger().debug(" | SchedulerCheckTask is running.");
+
         plugin().schedulerManager().check();
+
         plugin().logger().debug(" | SchedulerCheckTask is finished. (took " + (System.currentTimeMillis() - now) + "ms)");
     }
 

@@ -2,6 +2,7 @@ Sprinkler:
   name: '&7Sıradan Fıskiye'
   range: 2 # squared
   max-water: 5 # amount of water that sprinkler can hold
+  fill-amount: 1 # amount of water that sprinkler can fill once
   item:
     name: '&7Sıradan Fıskiye'
     material: 'CAULDRON'

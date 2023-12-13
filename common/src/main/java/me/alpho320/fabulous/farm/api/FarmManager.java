@@ -12,12 +12,15 @@ import me.alpho320.fabulous.farm.api.season.SeasonManager;
 import me.alpho320.fabulous.farm.api.sprinkler.SprinklerManager;
 import me.alpho320.fabulous.farm.api.insect.InsectManager;
 import me.alpho320.fabulous.farm.api.wateringcan.WateringCanManager;
+import me.alpho320.fabulous.farm.api.world.FarmWorldManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FarmManager {
+
+    protected FarmWorldManager farmWorldManager;
 
     protected CropManager cropManager;
     protected InsectManager insectManager;
@@ -35,6 +38,10 @@ public abstract class FarmManager {
     protected final @NotNull List<String> worldBlacklist = new ArrayList<>();
 
     public abstract void setup();
+
+    public @NotNull FarmWorldManager farmWorldManager() {
+        return this.farmWorldManager;
+    }
 
     public @NotNull CropManager cropManager() {
         return this.cropManager;

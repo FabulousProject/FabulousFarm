@@ -139,6 +139,15 @@ public class BukkitFarmAPI implements FarmAPI {
         return plugin.getConfig().getBoolean("Numbers.formats.enabled", false) ? RoundedNumberFormat.format(i) : String.valueOf(i);
     }
 
+    @Override
+    public long getWorldTimeFromFormattedString(@NotNull String text) {
+        String[] split = text.split(":");
+        int hour = Integer.parseInt(split[0]);
+        int minute = Integer.parseInt(split[1]);
+
+        return hoursMinutesToTicks(hour, minute);
+    }
+
     public static int getIntFromPerm(Player player, String startsWith, int split) {
         int highest = 0;
         for (PermissionAttachmentInfo permissionAttachmentInfo : player.getEffectivePermissions()) {

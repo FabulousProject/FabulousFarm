@@ -1,15 +1,20 @@
 package me.alpho320.fabulous.farm.hook.impl;
 
+import dev.lone.itemsadder.api.CustomBlock;
+import dev.lone.itemsadder.api.CustomFurniture;
+import dev.lone.itemsadder.api.CustomStack;
 import dev.lone.itemsadder.api.Events.ItemsAdderLoadDataEvent;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.Callback;
+import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.hook.Hook;
+import me.alpho320.fabulous.farm.hook.type.CanChangePotModel;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ItemsAdderHook implements Hook, Listener {
+public class ItemsAdderHook implements Hook, CanChangePotModel, Listener {
 
     private final @NotNull BukkitFarmPlugin plugin;
 
@@ -54,6 +59,22 @@ public class ItemsAdderHook implements Hook, Listener {
     @Override
     public @NotNull Hook.LoadType loadType() {
         return LoadType.SETUP_PLUGIN_AFTER;
+    }
+
+    @Override
+    public boolean changePotModel(@NotNull PotHolder pot, @NotNull String model) {
+        CustomBlock block = CustomBlock.getInstance(model);
+        if (block != null) {
+            block.place(pot.location().loc());
+            return true;
+        }
+
+        if (CustomFurniture.isInRegistry(model)) {
+            CustomFurniture.spawn(model, pot.location().loc().getBlock());
+            return true;
+        }
+
+        return false;
     }
 
 }

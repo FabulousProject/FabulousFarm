@@ -2,11 +2,13 @@ package me.alpho320.fabulous.farm.provider.impl;
 
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.Callback;
+import me.alpho320.fabulous.farm.api.season.Season;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.provider.Provider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -84,6 +86,16 @@ public class SQLiteProvider implements Provider {
     @Override
     public void loadScarecrowData(@NotNull String id, boolean async, @Nullable Callback callback) {
 
+    }
+
+    @Override
+    public @Nullable Season lastSeason() {
+        return null;
+    }
+
+    @Override
+    public @NotNull LocalDateTime lastSeasonTime() {
+        return null;
     }
 
     @Override

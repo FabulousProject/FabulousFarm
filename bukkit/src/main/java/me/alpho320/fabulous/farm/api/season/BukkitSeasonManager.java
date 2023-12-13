@@ -62,6 +62,7 @@ public class BukkitSeasonManager extends SeasonManager {
             currentSeason().setActive(true);
         }
 
+        setTime(plugin.providerManager().provider().lastSeasonTime());
         plugin.logger().info(" | Seasons loaded. (Current: " + currentSeason().id() + ")");
     }
 

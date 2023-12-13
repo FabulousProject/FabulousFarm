@@ -12,6 +12,7 @@ import me.alpho320.fabulous.farm.api.season.BukkitSeasonManager;
 import me.alpho320.fabulous.farm.api.sprinkler.BukkitSprinklerManager;
 import me.alpho320.fabulous.farm.api.insect.BukkitInsectManager;
 import me.alpho320.fabulous.farm.api.wateringcan.BukkitWateringCanManager;
+import me.alpho320.fabulous.farm.api.world.BukkitFarmWorldManager;
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitFarmManager extends FarmManager {
@@ -20,6 +21,7 @@ public class BukkitFarmManager extends FarmManager {
 
     public BukkitFarmManager(@NotNull BukkitFarmPlugin plugin) {
         this.plugin = plugin;
+        this.farmWorldManager = new BukkitFarmWorldManager(plugin);
         this.conditionManager = new BukkitConditionManager(plugin);
         this.eventActionManager = new BukkitEventActionManager(plugin);
         this.wateringCanManager = new BukkitWateringCanManager(plugin);
@@ -35,6 +37,7 @@ public class BukkitFarmManager extends FarmManager {
 
     @Override
     public void setup() {
+        farmWorldManager.setup();
         conditionManager.setup();
         eventActionManager.setup();
 

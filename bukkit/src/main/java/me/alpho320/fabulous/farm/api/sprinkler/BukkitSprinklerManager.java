@@ -85,13 +85,16 @@ public class BukkitSprinklerManager extends SprinklerManager {
         if (!BukkitFarmAPI.validateConfigurationKeyIsSet(plugin, section, "max-water", "   | ")) return null;
         int maxWater = section.getInt("max-water", 0);
 
+        if (!BukkitFarmAPI.validateConfigurationKeyIsSet(plugin, section, "fill-amount", "   | ")) return null;
+        int fillAmount = section.getInt("fill-amount", 0);
+
         SprinklerAnimation animation = null;
         if (section.getBoolean("animation.enabled", false)) {
             if (!BukkitFarmAPI.validateConfigurationSection(plugin, section, "animation.type", "   | ")) return null;
             animation = plugin.farmManager().sprinklerManager().sprinklerAnimationManager().animationFromSection(section.getString("animation.type", ""), section.getConfigurationSection("animation"));
         }
 
-        return new Sprinkler(id, name, item, mode, events, range, maxWater, animation);
+        return new Sprinkler(id, name, item, mode, events, range, maxWater, fillAmount, animation);
     }
 
     @Override

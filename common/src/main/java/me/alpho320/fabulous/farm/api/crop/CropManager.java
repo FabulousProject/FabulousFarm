@@ -1,5 +1,6 @@
 package me.alpho320.fabulous.farm.api.crop;
 
+import com.google.common.collect.ImmutableList;
 import me.alpho320.fabulous.farm.api.TypedManager;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.Location;
@@ -29,16 +30,23 @@ public abstract class CropManager extends TypedManager<String, Crop> {
         return this.CROP_HOLDERS.getOrDefault(location.loc(), null);
     }
 
-    public @NotNull Map<Location, CropHolder> cropHolders() {
-        return this.CROP_HOLDERS;
+    public @NotNull ImmutableList<CropHolder> cropHolders() {
+        return ImmutableList.copyOf(this.CROP_HOLDERS.values());
     }
 
-    public Map<WeakReference<World>, List<CropHolder>> cropHoldersByWorld() {
-        return this.CROP_HOLDERS_BY_WORLD;
+    public @NotNull ImmutableList<CropHolder> cropHoldersFromWorld(@NotNull World world) {
+        return ImmutableList.copyOf(this.CROP_HOLDERS_BY_WORLD.getOrDefault(new WeakReference<>(world), ImmutableList.of()));
     }
 
-    public @NotNull List<CropHolder> cropHoldersByWorld(@NotNull World world) {
-        return this.CROP_HOLDERS_BY_WORLD.getOrDefault(new WeakReference<>(world), new ArrayList<>());
+    public void registerHolder(@NotNull Location location, @NotNull CropHolder cropHolder) {
+        this.CROP_HOLDERS.put(location, cropHolder);
+        this.CROP_HOLDERS_BY_WORLD.computeIfAbsent(new WeakReference<>(location.getWorld()), world -> new ArrayList<>()).add(cropHolder);
+    }
+
+    public void unregisterHolder(@NotNull Location location) {
+        this.CROP_HOLDERS.remove(location);
+        this.CROP_HOLDERS_BY_WORLD.computeIfAbsent(new WeakReference<>(location.getWorld()), world -> new ArrayList<>())
+                .removeIf(cropHolder -> cropHolder.location().loc().equals(location));
     }
 
 }

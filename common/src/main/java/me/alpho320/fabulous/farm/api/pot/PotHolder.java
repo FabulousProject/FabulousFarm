@@ -40,7 +40,7 @@ public class PotHolder {
         return this.currentModel;
     }
 
-    public void setCurrentModel(String currentModel) {
+    public void setCurrentModel(@NotNull String currentModel) {
         this.currentModel = currentModel;
     }
 

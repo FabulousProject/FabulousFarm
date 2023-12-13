@@ -20,7 +20,6 @@ public class BukkitTaskManager extends TaskManager {
         plugin.logger().info(" | Tasks Starting...");
         setupBackupTask();
         setupLogSaveTask();
-        if (plugin.farmManager().beeManager().enabled()) setupBeeCheckTask();
         if (plugin.schedulerManager().enabled()) setupSchedulerCheckTask();
     }
 
@@ -32,11 +31,6 @@ public class BukkitTaskManager extends TaskManager {
     private void setupLogSaveTask() {
         long time = plugin.getConfig().getInt("Main.log-save-interval", 120) * 20L;
         new LogSaveTask(plugin).runTaskTimerAsynchronously(plugin, time, time);
-    }
-
-    private void setupBeeCheckTask() {
-        long time = plugin.getConfig().getInt("Main.bees.check-interval", 20);
-        new BeeCheckTask(plugin).runTaskTimerAsynchronously(plugin, time, time);
     }
 
     private void setupSchedulerCheckTask() {

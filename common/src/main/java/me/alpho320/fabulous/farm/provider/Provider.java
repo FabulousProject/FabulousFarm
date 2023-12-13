@@ -6,6 +6,7 @@ import me.alpho320.fabulous.farm.data.PlayerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +34,7 @@ public interface Provider {
     void loadScarecrowData(@NotNull String id, boolean async, @Nullable Callback callback);
 
     @Nullable Season lastSeason();
+    @NotNull LocalDateTime lastSeasonTime();
 
     void deletePlayerData(@NotNull UUID id, boolean async, @Nullable Callback callback);
     void deletePotData(@NotNull String id, boolean async, @Nullable Callback callback);

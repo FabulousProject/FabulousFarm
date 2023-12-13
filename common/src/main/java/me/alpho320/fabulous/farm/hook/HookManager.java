@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class HookManager {
@@ -29,4 +30,7 @@ public abstract class HookManager {
         return this.map;
     }
 
+    public @NotNull List<Hook> hooks() {
+        return List.copyOf(map.values());
+    }
 }

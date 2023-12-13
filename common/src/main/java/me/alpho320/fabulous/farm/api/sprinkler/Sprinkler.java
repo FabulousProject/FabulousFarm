@@ -23,10 +23,11 @@ public class Sprinkler {
 
     private final int range;
     private final int maxWater;
+    private final int fillAmount;
 
     private final @Nullable SprinklerAnimation animation;
 
-    public Sprinkler(@NotNull String id, @NotNull String name, @NotNull ItemStack item, @NotNull Mode potMode, @NotNull Map<EventType, List<EventAction>> events, int range, int maxWater, @Nullable SprinklerAnimation animation) {
+    public Sprinkler(@NotNull String id, @NotNull String name, @NotNull ItemStack item, @NotNull Mode potMode, @NotNull Map<EventType, List<EventAction>> events, int range, int maxWater, int fillAmount, @Nullable SprinklerAnimation animation) {
         this.id = id;
         this.name = name;
         this.item = item;
@@ -34,6 +35,7 @@ public class Sprinkler {
         this.events = events;
         this.range = range;
         this.maxWater = maxWater;
+        this.fillAmount = fillAmount;
         this.animation = animation;
     }
 
@@ -63,6 +65,10 @@ public class Sprinkler {
 
     public int maxWater() {
         return this.maxWater;
+    }
+
+    public int fillAmount() {
+        return this.fillAmount;
     }
 
     public @Nullable SprinklerAnimation animation() {

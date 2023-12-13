@@ -1,12 +1,11 @@
 package me.alpho320.fabulous.farm.api.scheduler;
 
+import me.alpho320.fabulous.farm.BukkitFarmAPI;
 import me.alpho320.fabulous.farm.BukkitFarmPlugin;
-import me.alpho320.fabulous.farm.api.crop.CropHolder;
-import org.bukkit.Location;
-import org.bukkit.World;
+import me.alpho320.fabulous.farm.api.sprinkler.Sprinkler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
+import java.util.List;
 
 public class BukkitSchedulerManager extends SchedulerManager {
 
@@ -14,6 +13,7 @@ public class BukkitSchedulerManager extends SchedulerManager {
 
     private boolean enabled = false;
     private String time = "07:00";
+    private long checkTime = 0L;
 
     public BukkitSchedulerManager(@NotNull BukkitFarmPlugin plugin) {
         this.plugin = plugin;
@@ -29,6 +29,7 @@ public class BukkitSchedulerManager extends SchedulerManager {
         plugin.logger().info(" | Scheduler Manager Starting...");
         this.enabled = plugin.getConfig().getBoolean("Main.scheduler.enabled", false);
         this.time = plugin.getConfig().getString("Main.scheduler.time", "07:00");
+        this.checkTime = BukkitFarmAPI.instance().getWorldTimeFromFormattedString(this.time);
     }
 
     @Override
@@ -37,12 +38,18 @@ public class BukkitSchedulerManager extends SchedulerManager {
     }
 
     @Override
-    public void check() {
-        for (World world : plugin.getServer().getWorlds()) {
-            for (CropHolder crop : plugin.farmManager().cropManager().cropHoldersByWorld(world)) {
+    public long checkTime() {
+        return this.checkTime;
+    }
 
-            }
-        }
+    @Override
+    public void check() {
+        plugin.farmManager().farmWorldManager().checkAllWorlds();
+    }
+
+    @Override
+    public void checkSprinklers(@NotNull List<Sprinkler> sprinklers) {
+
     }
 
 }

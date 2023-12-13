@@ -45,4 +45,22 @@ public interface FarmAPI {
 
     @NotNull String format(double i);
 
+    default long getWorldTimeFromFormattedString(@NotNull String text) {
+        String[] split = text.split(":");
+        int hour = Integer.parseInt(split[0]);
+        int minute = Integer.parseInt(split[1]);
+
+        return hoursMinutesToTicks(hour, minute);
+    }
+
+    default long hoursMinutesToTicks(final int hours, final int minutes) {
+        long ret = 18000;
+        ret += (hours) * 1000L;
+
+        ret += (minutes / 60) * 1000L;
+
+        ret %= 24000;
+        return ret;
+    }
+
 }

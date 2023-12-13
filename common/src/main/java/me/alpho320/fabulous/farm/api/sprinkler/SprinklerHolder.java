@@ -1,5 +1,8 @@
 package me.alpho320.fabulous.farm.api.sprinkler;
 
+import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.api.crop.CropHolder;
+import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +49,32 @@ public class SprinklerHolder {
 
     public int water() {
         return this.water;
+    }
+
+    public void sprinkle(@NotNull FarmPlugin plugin) {
+        setState(Sprinkler.State.WORKING);
+        if (sprinkler.animation() != null) sprinkler.animation().animate(this);
+
+        int range = sprinkler().range();
+        final Location loc = location();
+
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                Location potLoc = loc.add(i, -1, j);
+                PotHolder pot = plugin.farmManager().potManager().findHolder(potLoc);
+
+                if (pot == null) continue;
+                if (pot.water() <= 0) {
+                    plugin.farmManager().potManager().updatePotModel(pot, pot.pot().wetModel());
+                    pot.setCurrentModel(pot.pot().wetModel());
+                }
+                pot.setWater(pot.water() + sprinkler().fillAmount());
+
+            }
+        }
+
+        setWater(water() - 1);
+        if (sprinkler.animation() == null) setState(Sprinkler.State.IDLE);
     }
 
 }

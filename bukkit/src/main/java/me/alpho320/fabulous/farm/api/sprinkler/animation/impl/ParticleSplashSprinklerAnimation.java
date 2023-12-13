@@ -1,6 +1,7 @@
 package me.alpho320.fabulous.farm.api.sprinkler.animation.impl;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.api.sprinkler.Sprinkler;
 import me.alpho320.fabulous.farm.api.sprinkler.SprinklerHolder;
 import me.alpho320.fabulous.farm.api.sprinkler.animation.SprinklerAnimation;
 import me.alpho320.fabulous.farm.data.ParticleData;
@@ -54,6 +55,12 @@ public class ParticleSplashSprinklerAnimation extends SprinklerAnimation {
             final Location location = sprinkler.location();
             final Block block = location.getBlock();
 
+            if (!block.getWorld().isChunkLoaded(location.getBlockX() >> 4, location.getBlockZ() >> 4)) {
+                sprinkler.setState(Sprinkler.State.IDLE);
+                cancel();
+                return;
+            }
+
             for (BlockFace face : BlockFace.values()) {
                 if (face == BlockFace.UP || face == BlockFace.DOWN) continue;
 
@@ -75,6 +82,7 @@ public class ParticleSplashSprinklerAnimation extends SprinklerAnimation {
 
             elapsed++;
             if (elapsed >= duration()) {
+                sprinkler.setState(Sprinkler.State.IDLE);
                 cancel();
             }
         }
