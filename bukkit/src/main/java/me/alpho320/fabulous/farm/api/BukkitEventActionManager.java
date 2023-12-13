@@ -4,6 +4,7 @@ import me.alpho320.fabulous.farm.BukkitFarmPlugin;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.event.action.EventActionManager;
 import me.alpho320.fabulous.farm.api.event.action.impl.ChangeStageAction;
+import me.alpho320.fabulous.farm.api.event.action.impl.DropExpAction;
 import me.alpho320.fabulous.farm.api.event.action.impl.DropItemAction;
 import me.alpho320.fabulous.farm.api.event.action.impl.PlayEffectAction;
 import me.alpho320.fabulous.farm.api.event.action.impl.PlaySoundAction;
@@ -25,6 +26,7 @@ public class BukkitEventActionManager extends EventActionManager {
         plugin.logger().info(" | Loading event actions...");
 
         register("change-stage", ChangeStageAction.class);
+        register("drop-exp", DropExpAction.class);
         register("drop-item", DropItemAction.class);
         register("play-effect", PlayEffectAction.class);
         register("play-sound", PlaySoundAction.class);

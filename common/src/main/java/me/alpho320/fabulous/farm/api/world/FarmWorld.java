@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FarmWorld {
 
@@ -71,7 +71,7 @@ public class FarmWorld {
         list.remove(0);
         plugin.schedulerManager().runTaskLaterAsync(() -> {
             checkSprinkler(list, list.get(0), callback);
-        }, new Random().nextInt(1, 5));
+        }, ThreadLocalRandom.current().nextInt(1, 5));
     }
 
 
@@ -86,7 +86,7 @@ public class FarmWorld {
 
         plugin.schedulerManager().runTaskLaterAsync(() -> {
             checkCrop(crops, crops.get(0), callback);
-        }, new Random().nextInt(1, 5));
+        }, ThreadLocalRandom.current().nextInt(1, 5));
     }
 
     public void checkCrop(@NotNull List<CropHolder> list, CropHolder crop, @Nullable Callback callback) {
@@ -100,7 +100,7 @@ public class FarmWorld {
         list.remove(0);
         plugin.schedulerManager().runTaskLaterAsync(() -> {
             checkCrop(list, list.get(0), callback);
-        }, new Random().nextInt(1, 5));
+        }, ThreadLocalRandom.current().nextInt(1, 5));
     }
 
     public void setWorld(@NotNull WeakReference<World> world) {

@@ -31,12 +31,13 @@ Crop:
     sky-light:
       value: 5
 
+  # every day if pot is wet and grow conditions are true, crop will gain 1 stage.
   stages:
     '1': # must be start with 1
       model: 'WITHER_ROSE'
       events:
         on-break:
-          play-effect: # overrides base action
+          play-effect:
             value: 'VILLAGER_ANGRY'
         on-place:
             play-effect:
@@ -45,7 +46,7 @@ Crop:
       model: 'WITHER_ROSE'
       events:
         on-break:
-          play-effect: # overrides base action
+          play-effect:
             value: 'VILLAGER_ANGRY'
           drop-item:
             material: 'WHEAT_SEEDS'
@@ -67,6 +68,9 @@ Crop:
           change-stage:
             value: 4
             chance: 10.0
+        on-harvest:
+          drop-exp:
+            value: 10
     '4':
       model: 'HAY_BLOCK'
       events:
@@ -81,6 +85,9 @@ Crop:
           replant:
             crop: 'tomato'
             chance: 10.0
+        on-harvest:
+          drop-exp:
+            value: 20
 
   # when crop is harvested, chance to drop stars from 1-3
   stars:
