@@ -6,5 +6,6 @@ import org.jetbrains.annotations.NotNull;
 public interface CanChangePotModel {
 
     boolean changePotModel(@NotNull PotHolder pot, @NotNull String model);
+    boolean removePotModel(@NotNull PotHolder pot);
 
 }

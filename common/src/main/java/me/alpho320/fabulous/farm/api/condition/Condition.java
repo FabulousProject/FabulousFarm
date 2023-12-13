@@ -4,6 +4,7 @@ import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class Condition {
 
@@ -17,5 +18,6 @@ public abstract class Condition {
 
     public abstract boolean register();
     public abstract boolean check(@NotNull SerializableLocation location);
+    public abstract boolean remove(@Nullable SerializableLocation location, @Nullable Object object, int amount);
 
 }

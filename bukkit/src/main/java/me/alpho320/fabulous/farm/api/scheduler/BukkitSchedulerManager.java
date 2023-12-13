@@ -52,4 +52,14 @@ public class BukkitSchedulerManager extends SchedulerManager {
 
     }
 
+    @Override
+    public void runTaskLater(@NotNull Runnable runnable, long delay) {
+        plugin.getServer().getScheduler().runTaskLater(plugin, runnable, delay);
+    }
+
+    @Override
+    public void runTaskLaterAsync(@NotNull Runnable runnable, long delay) {
+        plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, runnable, delay);
+    }
+
 }

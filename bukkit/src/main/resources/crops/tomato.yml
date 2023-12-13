@@ -28,6 +28,8 @@ Crop:
         - 'AUTUMN'
     water:
       value: 1
+    sky-light:
+      value: 5
 
   stages:
     '1': # must be start with 1

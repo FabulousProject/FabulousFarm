@@ -84,7 +84,9 @@ public class FarmWorld {
             return;
         }
 
-        checkCrop(crops, crops.get(0), callback);
+        plugin.schedulerManager().runTaskLaterAsync(() -> {
+            checkCrop(crops, crops.get(0), callback);
+        }, new Random().nextInt(1, 5));
     }
 
     public void checkCrop(@NotNull List<CropHolder> list, CropHolder crop, @Nullable Callback callback) {
@@ -93,7 +95,7 @@ public class FarmWorld {
             return;
         }
 
-
+        crop.grow(plugin, false);
 
         list.remove(0);
         plugin.schedulerManager().runTaskLaterAsync(() -> {

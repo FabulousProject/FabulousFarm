@@ -2,8 +2,11 @@ package me.alpho320.fabulous.farm.api.crop;
 
 import com.google.common.collect.ImmutableList;
 import me.alpho320.fabulous.farm.api.TypedManager;
+import me.alpho320.fabulous.farm.hook.Hook;
+import me.alpho320.fabulous.farm.hook.type.CanChangeCropModel;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +21,40 @@ public abstract class CropManager extends TypedManager<String, Crop> {
 
     private final @NotNull Map<Location, CropHolder> CROP_HOLDERS = new ConcurrentHashMap<>();
     private final @NotNull Map<WeakReference<World>, List<CropHolder>> CROP_HOLDERS_BY_WORLD = new ConcurrentHashMap<>();
+
+    public boolean updateCropModel(@NotNull CropHolder cropHolder, @NotNull String model) {
+        for (Hook hook : plugin().hookManager().hooks()) {
+            if (!hook.getClass().isAssignableFrom(CanChangeCropModel.class)) continue;
+
+            CanChangeCropModel canChangeCropModel = (CanChangeCropModel) hook;
+            if (canChangeCropModel.changeCropModel(cropHolder, model)) {
+                return true;
+            }
+        }
+
+        Material material = Material.matchMaterial(model);
+        if (material == null) {
+            plugin().logger().severe(" | Crop model of '" + model + "' is not found!");
+            return false;
+        }
+
+        cropHolder.location().loc().getBlock().setType(material);
+        return true;
+    }
+
+    public boolean removeHolder(@NotNull CropHolder cropHolder) {
+        for (Hook hook : plugin().hookManager().hooks()) {
+            if (!hook.getClass().isAssignableFrom(CanChangeCropModel.class)) continue;
+
+            CanChangeCropModel canRemoveCrop = (CanChangeCropModel) hook;
+            if (canRemoveCrop.removeCropModel(cropHolder)) {
+                return true;
+            }
+        }
+
+        cropHolder.location().loc().getBlock().setType(Material.AIR);
+        return true;
+    }
 
     public abstract @Nullable CropHolder plant(@NotNull Crop crop, @NotNull Location location);
     public abstract @Nullable CropHolder plant(@NotNull String cropId, @NotNull Location location);
@@ -48,5 +85,6 @@ public abstract class CropManager extends TypedManager<String, Crop> {
         this.CROP_HOLDERS_BY_WORLD.computeIfAbsent(new WeakReference<>(location.getWorld()), world -> new ArrayList<>())
                 .removeIf(cropHolder -> cropHolder.location().loc().equals(location));
     }
+
 
 }

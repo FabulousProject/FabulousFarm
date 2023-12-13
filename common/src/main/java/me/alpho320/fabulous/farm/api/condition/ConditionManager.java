@@ -2,6 +2,7 @@ package me.alpho320.fabulous.farm.api.condition;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.TypedManager;
+import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,6 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class ConditionManager extends TypedManager<String, Class<?>> {
+
+    public boolean checkConditions(@NotNull List<Condition> conditions, @NotNull SerializableLocation location) {
+        for (Condition condition : conditions) {
+            if (!condition.check(location)) return false;
+        }
+        return true;
+    }
 
     public @NotNull List<Condition> conditionsFromSection(@NotNull ConfigurationSection section) {
         List<Condition> conditions = new ArrayList<>();

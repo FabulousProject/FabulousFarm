@@ -27,24 +27,22 @@ public abstract class PotManager extends TypedManager<String, Pot> {
         return map().getOrDefault(id, null);
     }
 
-    public void updatePotModel(@NotNull PotHolder pot, @NotNull String model) {
-        boolean changed = false;
+    public boolean updatePotModel(@NotNull PotHolder pot, @NotNull String model) {
         for (Hook hook : plugin().hookManager().hooks()) {
             if (!hook.getClass().isAssignableFrom(CanChangePotModel.class)) continue;
 
             CanChangePotModel canChangePotModel = (CanChangePotModel) hook;
             if (canChangePotModel.changePotModel(pot, model)) {
-                changed = true;
-                break;
+                return true;
             }
         }
-        if (changed) return;
-
         Material type = Material.matchMaterial(model);
         if (type != null) {
             pot.location().loc().getBlock().setType(type);
+            return true;
         } else {
             plugin().logger().severe(" | Pot model of '" + model + "' not found!");
+            return false;
         }
     }
 

@@ -8,6 +8,7 @@ import me.alpho320.fabulous.farm.api.greenhouse.GreenhouseHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,11 @@ public class SeasonCondition extends Condition {
         if (greenhouseHolder == null) return false;
 
         return farmManager.greenhouseManager().canEffect(greenhouseHolder, cropHolder);
+    }
+
+    @Override
+    public boolean remove(@Nullable SerializableLocation location, @Nullable Object object, int amount) {
+        return true;
     }
 
 }
