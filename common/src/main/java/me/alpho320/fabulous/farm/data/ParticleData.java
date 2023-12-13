@@ -4,6 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
 public class ParticleData {
@@ -37,6 +38,18 @@ public class ParticleData {
                 .location(location)
                 .allPlayers()
                 .spawn();
+    }
+    
+    public static @NotNull ParticleData fromSection(@NotNull ConfigurationSection section) {
+        return new ParticleData(
+                Particle.valueOf(section.getString("type", "REDSTONE")),
+                Color.fromRGB(java.awt.Color.getColor(section.getString("color", "GREEN")).getRGB()),
+                section.getInt("color-size", 1),
+                section.getInt("count", 1),
+                section.getDouble("offset.x", 0),
+                section.getDouble("offset.y", 0),
+                section.getDouble("offset.z", 0)
+        );
     }
 
 }

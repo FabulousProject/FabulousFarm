@@ -29,7 +29,16 @@ Sprinkler:
         value: 'FALLING_DRIPSTONE_WATER'
         amount: 2
 
-  animation: # WORK IN PROGRESS
+  animation:
     enabled: true
-    type: 'NONE' # WORK IN PROGRESS
-
+    type: 'particle-splash'
+    duration: 60 # ticks
+    particle:
+      type: 'REDSTONE'
+      count: 1
+      color: 'GREEN'
+      color-size: 1
+      offset:
+        x: 0.5
+        y: 0.5
+        z: 0.5

@@ -26,4 +26,6 @@ public abstract class SprinklerAnimation {
         return this.section;
     }
 
+    public abstract int duration();
+
 }

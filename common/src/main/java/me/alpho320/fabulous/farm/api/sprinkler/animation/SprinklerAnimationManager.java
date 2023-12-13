@@ -28,7 +28,7 @@ public abstract class SprinklerAnimationManager extends TypedManager<String, Cla
             final Class<?> clazz = find(id);
             if (clazz == null) {
                 plugin().logger().severe("   | Animation of " + id + " not found.");
-                plugin().logger().severe("   | Available animation: " + Arrays.toString(map().keySet().toArray()));
+                plugin().logger().severe("   | Available animations: " + Arrays.toString(map().keySet().toArray()));
                 return null;
             }
             return (SprinklerAnimation) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
@@ -54,7 +54,8 @@ public abstract class SprinklerAnimationManager extends TypedManager<String, Cla
 
     @Override
     public @Nullable Class<?> fromSection(String id, ConfigurationSection section) {
-        return animationFromSection(id, section).getClass();
+        SprinklerAnimation animation = animationFromSection(id, section);
+        return animation != null ? animation.getClass() : null;
     }
 
 

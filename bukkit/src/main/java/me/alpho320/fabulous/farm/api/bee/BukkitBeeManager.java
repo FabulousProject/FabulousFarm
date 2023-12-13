@@ -41,40 +41,32 @@ public class BukkitBeeManager extends BeeManager {
         this.radius = plugin.getConfig().getInt("Main.bees.radius", 5);
         this.chance = plugin.getConfig().getDouble("Main.bees.chance", 0.5);
         this.checkInterval = plugin.getConfig().getInt("Main.bees.check-interval", 20);
-        this.particleData = new ParticleData(
-                Particle.valueOf(plugin.getConfig().getString("Main.bees.particle.type", "REDSTONE")),
-                Color.fromRGB(java.awt.Color.getColor(plugin.getConfig().getString("Main.bees.particle.color", "GREEN")).getRGB()),
-                plugin.getConfig().getInt("Main.bees.particle.color-size", 1),
-                plugin.getConfig().getInt("Main.bees.particle.count", 1),
-                plugin.getConfig().getDouble("Main.bees.particle.offset.x", 0),
-                plugin.getConfig().getDouble("Main.bees.particle.offset.y", 0),
-                plugin.getConfig().getDouble("Main.bees.particle.offset.z", 0)
-        );
+        this.particleData = ParticleData.fromSection(plugin.getConfig().getConfigurationSection("Main.bees.particle"));
     }
 
     @Override
     public boolean enabled() {
-        return false;
+        return this.enabled;
     }
 
     @Override
     public int radius() {
-        return 0;
+        return this.radius;
     }
 
     @Override
     public double chance() {
-        return 0;
+        return this.chance;
     }
 
     @Override
     public int checkInterval() {
-        return 0;
+        return this.checkInterval;
     }
 
     @Override
     public @NotNull ParticleData particleData() {
-        return null;
+        return this.particleData;
     }
 
     @Override
