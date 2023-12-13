@@ -1,8 +1,10 @@
 package me.alpho320.fabulous.farm.api.condition.impl;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
+import me.alpho320.fabulous.farm.api.FarmManager;
 import me.alpho320.fabulous.farm.api.condition.Condition;
 import me.alpho320.fabulous.farm.api.pot.PotHolder;
+import me.alpho320.fabulous.farm.api.pot.PotManager;
 import me.alpho320.fabulous.farm.api.sprinkler.SprinklerHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.bukkit.configuration.ConfigurationSection;
@@ -35,11 +37,15 @@ public class WaterCondition extends Condition {
     }
 
     @Override
-    public boolean check(@NotNull SerializableLocation location) {
-        PotHolder potHolder = plugin.farmManager().potManager().findHolder(location);
-        if (potHolder == null) return false;
+    public boolean check(@NotNull SerializableLocation location) {;
+        final FarmManager farmManager = plugin.farmManager();
+        final PotManager potManager = farmManager.potManager();
 
-        return potHolder.water() >= waterLevel;
+        PotHolder pot = potManager.findHolder(location, true);
+        if (pot != null) return pot.water() >= waterLevel;
+
+        SprinklerHolder sprinkler = farmManager.sprinklerManager().findHolder(location.loc());
+        return sprinkler != null && sprinkler.water() >= waterLevel;
     }
 
     @Override

@@ -59,6 +59,12 @@ public abstract class PotManager extends TypedManager<String, Pot> {
         return POT_HOLDERS.getOrDefault(location.loc(), null);
     }
 
+    public @Nullable PotHolder findHolder(@NotNull SerializableLocation location, boolean checkBelow) {
+        PotHolder pot = findHolder(location);
+        if (pot != null) return pot;
+        return checkBelow ? findHolder(location.loc().add(0, -1, 0)) : null;
+    }
+
     public @NotNull ImmutableList<PotHolder> potHolders() {
         return ImmutableList.copyOf(POT_HOLDERS.values());
     }
