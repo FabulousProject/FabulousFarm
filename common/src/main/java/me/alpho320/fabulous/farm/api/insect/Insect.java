@@ -1,10 +1,10 @@
-package me.alpho320.fabulous.farm.api.vermin;
+package me.alpho320.fabulous.farm.api.insect;
 
 import me.alpho320.fabulous.farm.api.pot.Pot;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
-public class Vermin {
+public class Insect {
 
     private final @NotNull String id;
     private final @NotNull String name;
@@ -12,7 +12,7 @@ public class Vermin {
 
     private final double chance;
 
-    public Vermin(@NotNull String id, @NotNull String name, @NotNull String entity, double chance) {
+    public Insect(@NotNull String id, @NotNull String name, @NotNull String entity, double chance) {
         this.id = id;
         this.name = name;
         this.entity = entity;

@@ -12,7 +12,7 @@ import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.api.scarecrow.Scarecrow;
 import me.alpho320.fabulous.farm.api.scarecrow.ScarecrowHolder;
 import me.alpho320.fabulous.farm.api.season.Season;
-import me.alpho320.fabulous.farm.api.vermin.Vermin;
+import me.alpho320.fabulous.farm.api.insect.Insect;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.hook.Hook;
 import org.bukkit.Bukkit;
@@ -86,7 +86,7 @@ public class BukkitFarmAPI implements FarmAPI {
     }
 
     @Override
-    public @Nullable Vermin findCrow(@NotNull String id) {
+    public @Nullable Insect findCrow(@NotNull String id) {
         return plugin.farmManager().crowManager().find(id);
     }
 

@@ -10,7 +10,7 @@ import me.alpho320.fabulous.farm.api.pot.PotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.ScarecrowManager;
 import me.alpho320.fabulous.farm.api.season.SeasonManager;
 import me.alpho320.fabulous.farm.api.sprinkler.SprinklerManager;
-import me.alpho320.fabulous.farm.api.vermin.VerminManager;
+import me.alpho320.fabulous.farm.api.insect.InsectManager;
 import me.alpho320.fabulous.farm.api.wateringcan.WateringCanManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +20,7 @@ import java.util.List;
 public abstract class FarmManager {
 
     protected CropManager cropManager;
-    protected VerminManager verminManager;
+    protected InsectManager insectManager;
     protected FertilizerManager fertilizerManager;
     protected GreenhouseManager greenhouseManager;
     protected PotManager potManager;
@@ -40,8 +40,8 @@ public abstract class FarmManager {
         return this.cropManager;
     }
 
-    public @NotNull VerminManager crowManager() {
-        return this.verminManager;
+    public @NotNull InsectManager crowManager() {
+        return this.insectManager;
     }
 
     public @NotNull FertilizerManager fertilizerManager() {

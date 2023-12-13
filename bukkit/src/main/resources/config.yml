@@ -10,12 +10,12 @@ Main:
   world-blacklist:
     - 'someworld'
 
-  # scarecrow will scare vermin away from crops.
+  # scarecrow will scare insects away from crops.
   scarecrow:
     enabled: true
 
   # vermin will eat crops and make them grow slower.
-  vermin:
+  insects:
     enabled: true
 
   # bees that around pots will pollinate crops and make them grow faster.

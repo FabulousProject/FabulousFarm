@@ -10,7 +10,7 @@ import me.alpho320.fabulous.farm.api.pots.BukkitPotManager;
 import me.alpho320.fabulous.farm.api.scarecrow.BukkitScarecrowManager;
 import me.alpho320.fabulous.farm.api.season.BukkitSeasonManager;
 import me.alpho320.fabulous.farm.api.sprinkler.BukkitSprinklerManager;
-import me.alpho320.fabulous.farm.api.vermin.BukkitVerminManager;
+import me.alpho320.fabulous.farm.api.insect.BukkitInsectManager;
 import me.alpho320.fabulous.farm.api.wateringcan.BukkitWateringCanManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +29,7 @@ public class BukkitFarmManager extends FarmManager {
         this.scarecrowManager = new BukkitScarecrowManager(plugin);
         this.greenhouseManager = new BukkitGreenhouseManager(plugin);
         this.seasonManager = new BukkitSeasonManager(plugin);
-        this.verminManager = new BukkitVerminManager(plugin);
+        this.insectManager = new BukkitInsectManager(plugin);
         this.sprinklerManager = new BukkitSprinklerManager(plugin);
     }
 
@@ -45,7 +45,7 @@ public class BukkitFarmManager extends FarmManager {
         scarecrowManager.setup();
         greenhouseManager.setup();
         seasonManager.setup();
-        verminManager.setup();
+        insectManager.setup();
         sprinklerManager.setup();
 
         worldBlacklist().clear();

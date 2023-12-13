@@ -10,7 +10,7 @@ import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.api.scarecrow.Scarecrow;
 import me.alpho320.fabulous.farm.api.scarecrow.ScarecrowHolder;
 import me.alpho320.fabulous.farm.api.season.Season;
-import me.alpho320.fabulous.farm.api.vermin.Vermin;
+import me.alpho320.fabulous.farm.api.insect.Insect;
 import me.alpho320.fabulous.farm.data.PlayerData;
 import me.alpho320.fabulous.farm.hook.Hook;
 import org.bukkit.Location;
@@ -31,7 +31,7 @@ public interface FarmAPI {
 
     @Nullable Pot findPot(@NotNull String id);
     @Nullable Crop findCrop(@NotNull String id);
-    @Nullable Vermin findCrow(@NotNull String id);
+    @Nullable Insect findCrow(@NotNull String id);
     @Nullable Season findSeason(@NotNull String id);
     @Nullable Scarecrow findScarecrow(@NotNull String id);
     @Nullable Fertilizer findFertilizer(@NotNull String id);
