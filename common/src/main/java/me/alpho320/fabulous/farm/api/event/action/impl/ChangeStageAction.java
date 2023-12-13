@@ -2,6 +2,8 @@ package me.alpho320.fabulous.farm.api.event.action.impl;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.crop.CropHolder;
+import me.alpho320.fabulous.farm.api.crop.CropManager;
+import me.alpho320.fabulous.farm.api.crop.CropStage;
 import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -37,19 +39,22 @@ public class ChangeStageAction extends EventAction {
     }
 
     @Override
-    public void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo) {
-        CropHolder cropHolder = null;
-        if (location != null) {
-            cropHolder = plugin.farmManager().cropManager().findHolder(location);
-        } else {
-            Location loc = tryToGetLocation(event);
-            if (loc != null) cropHolder = plugin.farmManager().cropManager().findHolder(loc);
-        }
+    public void execute(@NotNull Location location, @Nullable Event event, @Nullable Entity entity, @Nullable String extraInfo) {
+        final CropManager cropManager = plugin.farmManager().cropManager();
+        CropHolder cropHolder = cropManager.findHolder(location);
 
         if (cropHolder != null) {
-            cropHolder.setGrowStage(stage); //todo: call event, checks, etc.
-        }
 
+            cropHolder.setGrowStage(stage); //todo: call event, checks, etc.
+            CropStage cropStage = cropHolder.crop().stages().getOrDefault(cropHolder.growStage(), null);
+
+            if (cropStage == null) {
+                plugin.logger().severe("ChangeStageAction | CropStage of '" + cropHolder.growStage() + "' is not found.");
+                return;
+            }
+
+            cropManager.updateCropModel(cropHolder, cropStage.model());
+        }
     }
 
 }

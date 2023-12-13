@@ -36,19 +36,16 @@ public class ReplantAction extends EventAction {
     }
 
     @Override
-    public void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo) {
-        Location cropLocation = null;
+    public void execute(@NotNull Location location, @Nullable Event event, @Nullable Entity entity, @Nullable String extraInfo) {
+        Location finalLocation = location.clone();
 
-        if (location != null) {
-            cropLocation = location.clone();
-        } else {
-            Location loc = tryToGetLocation(event);
-            if (loc != null) cropLocation = loc.clone();
+        if (entity != null) {
+            finalLocation = entity.getLocation().clone();
+        } else if (tryToGetLocation(event) != null) {
+            finalLocation = tryToGetLocation(event).clone();
         }
 
-        if (cropLocation != null) {
-            plugin.farmManager().cropManager().plant(cropId, cropLocation);
-        }
+        plugin.farmManager().cropManager().plant(cropId, finalLocation);
     }
 
 }

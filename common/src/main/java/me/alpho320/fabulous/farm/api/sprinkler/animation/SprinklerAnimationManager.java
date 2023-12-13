@@ -31,7 +31,11 @@ public abstract class SprinklerAnimationManager extends TypedManager<String, Cla
                 plugin().logger().severe("   | Available animations: " + Arrays.toString(map().keySet().toArray()));
                 return null;
             }
-            return (SprinklerAnimation) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+
+            SprinklerAnimation animation = (SprinklerAnimation) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+            animation.register();
+
+            return animation;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

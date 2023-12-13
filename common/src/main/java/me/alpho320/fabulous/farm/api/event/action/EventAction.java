@@ -37,18 +37,18 @@ public abstract class EventAction {
     }
 
     public abstract boolean register();
-    public abstract void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo);
+    public abstract void execute(@NotNull Location location, @Nullable Event event, @Nullable Entity entity, @Nullable String extraInfo);
 
-    public void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location) {
-        execute(event, entity, location, null);
+    public void execute(@NotNull Location location, @Nullable Event event, @Nullable Entity entity) {
+        execute(location, event, entity, null);
     }
 
-    public void execute(@NotNull Event event, @Nullable Entity entity) {
-        execute(event, entity, null, null);
+    public void execute(@NotNull Location location, @Nullable Event event) {
+        execute(location, event, null, null);
     }
 
-    public void execute(@NotNull Event event) {
-        execute(event, null, null, null);
+    public void execute(@NotNull Location location) {
+        execute(location, null, null, null);
     }
 
     public void printExecuteError(@NotNull String reason, @NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo) {

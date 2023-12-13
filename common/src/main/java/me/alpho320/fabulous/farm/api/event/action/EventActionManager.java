@@ -3,7 +3,10 @@ package me.alpho320.fabulous.farm.api.event.action;
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.TypedManager;
 import me.alpho320.fabulous.farm.api.event.EventType;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,6 +17,25 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class EventActionManager extends TypedManager<String, Class<?>> {
+
+    public void checkActions(@NotNull Map<EventType, List<EventAction>> map, @NotNull EventType eventType, @NotNull Location location, @Nullable Event event, @Nullable Entity entity, @Nullable String extraInfo) {
+        List<EventAction> actions = map.getOrDefault(eventType, new ArrayList<>());
+        for (EventAction action : actions) {
+            action.execute(location, event, entity, extraInfo);
+        }
+    }
+
+    public void checkActions(@NotNull Map<EventType, List<EventAction>> map, @NotNull EventType eventType, @NotNull Location location, @Nullable Event event, @Nullable Entity entity) {
+        checkActions(map, eventType, location, event, entity, null);
+    }
+
+    public void checkActions(@NotNull Map<EventType, List<EventAction>> map, @NotNull EventType eventType, @NotNull Location location, @Nullable Event event) {
+        checkActions(map, eventType, location, event, null, null);
+    }
+
+    public void checkActions(@NotNull Map<EventType, List<EventAction>> map, @NotNull EventType eventType, @NotNull Location location) {
+        checkActions(map, eventType, location, null, null, null);
+    }
 
     public @NotNull Map<EventType, List<EventAction>> actionMapFromSection(ConfigurationSection section) {
         Map<EventType, List<EventAction>> map = new HashMap<>();
@@ -51,7 +73,11 @@ public abstract class EventActionManager extends TypedManager<String, Class<?>> 
                 plugin().logger().severe("   | Available actions: " + Arrays.toString(map().keySet().toArray()));
                 return null;
             }
-            return (EventAction) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+
+            EventAction action = (EventAction) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+            action.register();
+
+            return action;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

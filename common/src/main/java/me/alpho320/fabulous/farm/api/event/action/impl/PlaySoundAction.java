@@ -36,21 +36,16 @@ public class PlaySoundAction extends EventAction {
     }
 
     @Override
-    public void execute(@NotNull Event event, @Nullable Entity entity, @Nullable Location location, @Nullable String extraInfo) {
-        Location finalLocation = null;
-        if (location != null) {
-            finalLocation = location.clone();
-        } else if (entity != null) {
+    public void execute(@NotNull Location location, @Nullable Event event, @Nullable Entity entity, @Nullable String extraInfo) {
+        Location finalLocation = location.clone();
+
+        if (entity != null) {
             finalLocation = entity.getLocation().clone();
         } else if (tryToGetLocation(event) != null) {
             finalLocation = tryToGetLocation(event).clone();
-        } else {
-            printExecuteError("Location not found.", event, entity, location, extraInfo);
-            return;
         }
 
-        finalLocation.getWorld().playSound(location, sound, volume, pitch);
-
+        finalLocation.getWorld().playSound(finalLocation, sound, volume, pitch);
     }
 
 

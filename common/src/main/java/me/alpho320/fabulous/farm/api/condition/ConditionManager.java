@@ -38,7 +38,11 @@ public abstract class ConditionManager extends TypedManager<String, Class<?>> {
                 plugin().logger().severe("   | Available conditions: " + Arrays.toString(map().keySet().toArray()));
                 return null;
             }
-            return (Condition) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+
+            Condition condition = (Condition) clazz.getConstructor(FarmPlugin.class, ConfigurationSection.class).newInstance(plugin(), section);
+            condition.register();
+
+            return condition;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

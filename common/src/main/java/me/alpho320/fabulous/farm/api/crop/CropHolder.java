@@ -2,6 +2,7 @@ package me.alpho320.fabulous.farm.api.crop;
 
 import me.alpho320.fabulous.farm.FarmPlugin;
 import me.alpho320.fabulous.farm.api.FarmManager;
+import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.jetbrains.annotations.NotNull;
@@ -58,11 +59,15 @@ public class CropHolder {
         if (!conditions && !force) return false;
 
         if (growStage() < crop.maxGrowStage()) {
+            final CropStage prevStage = crop.stages().get(growStage());
+
             setGrowStage(growStage() + 1);
             CropStage stage = crop.stages().get(growStage());
 
             farmManager.cropManager().updateCropModel(this, stage.model());
             crop.growConditions().forEach(condition -> condition.remove(location(), pot, 1));
+
+            farmManager.eventActionManager().checkActions(prevStage.events(), EventType.ON_GROW, location().loc());
 
             return true;
         } // todo: else increase insect chance.
