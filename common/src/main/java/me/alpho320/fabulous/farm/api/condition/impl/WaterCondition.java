@@ -53,11 +53,16 @@ public class WaterCondition extends Condition {
         if (object != null) {
             if (object instanceof SprinklerHolder) {
                 SprinklerHolder sprinklerHolder = (SprinklerHolder) object;
-                sprinklerHolder.setWater(sprinklerHolder.water() - waterLevel);
+                sprinklerHolder.setWater(Math.max(0, sprinklerHolder.water() - waterLevel));
                 return true;
             } else if (object instanceof PotHolder) {
                 PotHolder potHolder = (PotHolder) object;
-                potHolder.setWater(potHolder.water() - waterLevel);
+                potHolder.setWater(Math.max(0, potHolder.water() - waterLevel));
+
+                if (potHolder.water() == 0) {
+                    plugin.farmManager().potManager().updatePotModel(potHolder, potHolder.pot().dryModel());
+                }
+
                 return true;
             }
         }

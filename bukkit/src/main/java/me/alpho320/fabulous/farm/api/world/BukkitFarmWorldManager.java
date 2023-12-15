@@ -30,6 +30,8 @@ public class BukkitFarmWorldManager extends FarmWorldManager {
         for (Map.Entry<String, FarmWorld> entry : map().entrySet()) {
             FarmWorld world = entry.getValue();
             if (world.world() == null && !validateWorld(world)) continue;
+            else if (!world.readyToNextDay()) continue;
+            else if (world.world().getTime() < plugin.schedulerManager().checkTime()) continue;
 
             world.checks();
         }
