@@ -60,7 +60,7 @@ public class SprinklerHolder {
 
         for (int i = -range; i <= range; i++) {
             for (int j = -range; j <= range; j++) {
-                Location potLoc = loc.add(i, -1, j);
+                Location potLoc = loc.add(i, -1, j); // -1 because of pot is on 1 block below.
                 PotHolder pot = plugin.farmManager().potManager().findHolder(potLoc);
 
                 if (pot == null) continue;
@@ -68,12 +68,12 @@ public class SprinklerHolder {
                     plugin.farmManager().potManager().updatePotModel(pot, pot.pot().wetModel());
                     pot.setCurrentModel(pot.pot().wetModel());
                 }
-                pot.setWater(pot.water() + sprinkler().fillAmount());
+                pot.setWater(Math.min(pot.water() + sprinkler().fillAmount(), pot.pot().maxWater()));
 
             }
         }
 
-        setWater(water() - 1);
+        setWater(Math.max(water() - 1, 0));
         if (sprinkler.animation() == null) setState(Sprinkler.State.IDLE);
     }
 

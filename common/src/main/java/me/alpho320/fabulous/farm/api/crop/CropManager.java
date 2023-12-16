@@ -48,6 +48,9 @@ public abstract class CropManager extends TypedManager<String, Crop> {
 
             CanChangeCropModel canRemoveCrop = (CanChangeCropModel) hook;
             if (canRemoveCrop.removeCropModel(cropHolder)) {
+                CROP_HOLDERS.remove(cropHolder.location().loc());
+                CROP_HOLDERS_BY_WORLD.computeIfAbsent(new WeakReference<>(cropHolder.location().loc().getWorld()), world -> new ArrayList<>())
+                        .removeIf(holder -> holder.location().loc().equals(cropHolder.location().loc()));
                 return true;
             }
         }

@@ -60,11 +60,16 @@ public class CropHolder {
 
         if (growStage() < crop.maxGrowStage()) {
             final CropStage prevStage = crop.stages().get(growStage());
+            final CropStage nextStage = crop.stages().getOrDefault(growStage()+1, null);
 
+            if (nextStage == null) {
+                plugin.logger().severe(" | Crop stage of '" + growStage() + "' not found for '" + crop.id() + "'!");
+                plugin.logger().severe(" | Please check your crop stages. Add amount of " + crop.maxGrowStage() + " stages or decrease max grow stage.");
+                return false;
+            }
             setGrowStage(growStage() + 1);
-            CropStage stage = crop.stages().get(growStage());
 
-            farmManager.cropManager().updateCropModel(this, stage.model());
+            farmManager.cropManager().updateCropModel(this, nextStage.model());
             crop.growConditions().forEach(condition -> condition.remove(location(), pot, 1));
 
             farmManager.eventActionManager().checkActions(prevStage.events(), EventType.ON_GROW, location().loc());
