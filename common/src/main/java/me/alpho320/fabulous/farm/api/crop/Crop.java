@@ -6,10 +6,12 @@ import me.alpho320.fabulous.farm.api.event.action.EventAction;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Crop {
 
@@ -60,12 +62,6 @@ public class Crop {
         return this.actions.getOrDefault(eventType, new ArrayList<>());
     }
 
-    public void doAction(@NotNull EventType eventType, @NotNull Event event) {
-        for (EventAction action : actions(eventType)) {
-            action.execute(event);
-        }
-    }
-
     public @NotNull List<Condition> growConditions() {
         return this.growConditions;
     }
@@ -76,6 +72,15 @@ public class Crop {
 
     public @NotNull Map<Integer, CropStar> stars() {
         return this.stars;
+    }
+
+    public @Nullable CropStar star() {
+        for (CropStar star : stars.values()) {
+            if (ThreadLocalRandom.current().nextDouble(100) <= star.chance()) {
+                return star;
+            }
+        }
+        return null;
     }
 
 }

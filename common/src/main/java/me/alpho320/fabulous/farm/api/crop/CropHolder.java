@@ -6,6 +6,7 @@ import me.alpho320.fabulous.farm.api.event.EventType;
 import me.alpho320.fabulous.farm.api.pot.PotHolder;
 import me.alpho320.fabulous.farm.util.serializable.SerializableLocation;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CropHolder {
 
@@ -40,6 +41,10 @@ public class CropHolder {
 
     public int growStage() {
         return this.growStage;
+    }
+
+    public @Nullable CropStage currentStage() {
+        return crop.stages().get(growStage());
     }
 
     public void setGrowStage(int growStage) {
